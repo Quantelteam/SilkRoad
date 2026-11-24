@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from app import db
+from app.config import settings
 from app.filters import PLAIN_TEXT
 from app.keyboards import join_team_kb, main_menu, program_kb
 from app.states import Registration
@@ -11,9 +12,11 @@ from app.states import Registration
 router = Router()
 
 WELCOME = (
-    "<b>FTC KZ Parts Exchange</b>\n\n"
-    "Post parts you have or need. Listings show up on the website, "
-    "where other teams can find them and write to you in Telegram.\n\n"
+    "<b>SilkRoad Exchange</b>\n"
+    "Buy. Sell. Exchange.\n\n"
+    "Post parts you have or need. Listings show up on the website"
+    + (f" ({settings.site_url})" if settings.site_url else "")
+    + ", where other teams can find them and write to you in Telegram.\n\n"
     "First, register your team."
 )
 

@@ -14,6 +14,13 @@ class Settings:
     site_url: str
 
 
+def _site_url() -> str:
+    value = os.getenv("SITE_URL", "").strip().rstrip("/")
+    if value and not value.startswith("https://"):
+        raise RuntimeError("SITE_URL must start with https://, for example https://silkroad.example")
+    return value
+
+
 def _required(name: str) -> str:
     value = os.getenv(name, "").strip()
     if not value:
@@ -25,7 +32,7 @@ settings = Settings(
     bot_token=_required("BOT_TOKEN"),
     supabase_url=_required("SUPABASE_URL"),
     supabase_service_key=_required("SUPABASE_SERVICE_KEY"),
-    site_url=os.getenv("SITE_URL", "").strip(),
+    site_url=_site_url(),
 )
 
 PHOTO_BUCKET = "listings"

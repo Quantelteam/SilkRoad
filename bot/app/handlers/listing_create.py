@@ -5,10 +5,10 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from app import db
-from app.config import MAX_PHOTOS, settings
+from app.config import MAX_PHOTOS
 from app.filters import PLAIN_TEXT
 from app.handlers.parts_picker import RESOLVERS, ask_part
-from app.keyboards import (NEW_LISTING, condition_kb, confirm_kb, listing_type_kb,
+from app.keyboards import (NEW_LISTING, website_kb, condition_kb, confirm_kb, listing_type_kb,
                            main_menu, note_kb, photos_kb, price_kb)
 from app.photos import upload_telegram_photos
 from app.states import NewListing
@@ -212,6 +212,7 @@ async def publish(call: CallbackQuery, state: FSMContext, bot: Bot, user: dict) 
     await state.clear()
 
     text = f"Published.\n\n{format_listing({**listing, 'have_part': have_part, 'want_part': want_part})}"
-    if settings.site_url:
-        text += f"\n\n{settings.site_url}"
     await call.message.answer(text, reply_markup=main_menu)
+    kb = website_kb("🌐 View on the website", listing["id"])
+    if kb:
+        await call.message.answer("It's live on the website now:", reply_markup=kb)
