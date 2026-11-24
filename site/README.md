@@ -1,5 +1,7 @@
 # SilkRoad Exchange website
 
+Live at **https://silkroadexchange.vercel.app** (Vercel project `silkroad-exchange`).
+
 Plain HTML, CSS and JavaScript modules with no build step and no npm dependencies (see `../docs/adr-001-website-stack.md` for why). It reads the bot's `listings_public` view from Supabase with the public key and shows active listings with search and filters. Each listing links to the poster's Telegram chat.
 
 ## Run it

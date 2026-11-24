@@ -8,6 +8,7 @@ website lists them and deals happen in Telegram private messages.
 This repository contains the **bot** (the only way to post a listing), the
 **database schema**, and the **website** in `site/` that reads from it.
 
+- Website: https://silkroadexchange.vercel.app
 - Bot: [@ftc_silkroad_bot](https://t.me/ftc_silkroad_bot)
 - Stack: Python + aiogram 3, Supabase (PostgreSQL + file storage)
 
