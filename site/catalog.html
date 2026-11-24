@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.supabase.co https://cdn11.bigcommerce.com https://andymark.com https://www.pitsco.com https://limelightvision.io https://resource.logitech.com https://resource.logitechg.com https://gmedia.playstation.com; connect-src 'self' https://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
   <title>Parts catalog, SilkRoad Exchange</title>
-  <meta name="description" content="Standard names and part numbers for common FTC parts from goBILDA, REV Robotics, Studica and others, with the listings for each part.">
+  <meta name="description" content="Standard names and part numbers for common FTC parts (goBILDA, REV Robotics, Studica and others) and FLL parts (LEGO Education SPIKE), with the listings for each part.">
   <meta name="theme-color" content="#E9EDF0" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F171D" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -43,6 +43,11 @@
   </header>
 
   <main class="catalog" id="catalog" tabindex="-1">
+    <div class="program-switch" role="group" aria-label="Program">
+      <button type="button" class="program-btn" data-program="" aria-pressed="true">All</button>
+      <button type="button" class="program-btn" data-program="FTC" aria-pressed="false">FTC parts</button>
+      <button type="button" class="program-btn" data-program="FLL" aria-pressed="false">FLL parts (LEGO)</button>
+    </div>
     <nav class="brand-nav" aria-label="Brands" id="brand-nav"></nav>
     <p class="results-count" id="catalog-count" aria-live="polite">Loading catalog…</p>
     <div id="brands"></div>
@@ -56,7 +61,7 @@
   <footer class="footer">
     <p>Part numbers are copied from the vendors’ sites. If one is wrong or a part is missing, tell the channel admins.</p>
     <p>Product photos load from each maker’s own website and belong to that maker. Each part name links to its product page.</p>
-    <p>A community project by FTC teams in Kazakhstan. Not affiliated with <i>FIRST</i>®, goBILDA, REV Robotics or Studica.</p>
+    <p>A community project by FTC teams in Kazakhstan. Not affiliated with <i>FIRST</i>®, LEGO®, goBILDA, REV Robotics or Studica.</p>
   </footer>
 </body>
 </html>

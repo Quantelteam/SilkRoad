@@ -5,14 +5,14 @@
 
 /**
  * @typedef {{
- *   q: string, city: string, types: string[], brand: string, category: string,
+ *   q: string, program: ''|'FTC'|'FLL', city: string, types: string[], brand: string, category: string,
  *   condition: string, team: string, part: string, sort: 'newest'|'price'
  * }} FilterState
  */
 
 /** @returns {FilterState} */
 export function emptyState() {
-  return { q: '', city: '', types: [], brand: '', category: '', condition: '', team: '', part: '', sort: 'newest' };
+  return { q: '', program: '', city: '', types: [], brand: '', category: '', condition: '', team: '', part: '', sort: 'newest' };
 }
 
 // Filters that live in the URL, so a filtered view can be shared as a link.
@@ -26,6 +26,8 @@ export function stateFromParams(params) {
   for (const key of PARAM_KEYS) state[key] = (params.get(key) ?? '').slice(0, MAX_PARAM_LENGTH);
   state.types = (params.get('type') ?? '').split(',').filter(Boolean);
   state.sort = params.get('sort') === 'price' ? 'price' : 'newest';
+  const program = (params.get('program') ?? '').toUpperCase();
+  state.program = program === 'FTC' || program === 'FLL' ? program : '';
   return state;
 }
 
@@ -35,10 +37,16 @@ export function paramsFromState(state) {
   for (const key of PARAM_KEYS) if (state[key]) params.set(key, state[key]);
   if (state.types.length) params.set('type', state.types.join(','));
   if (state.sort !== 'newest') params.set('sort', state.sort);
+  if (state.program) params.set('program', state.program);
   return params;
 }
 
-/** Number of narrowing filters in use (search and sort excluded). */
+/** Which program a listing belongs to: its team's, else its part's, else FTC. */
+export function listingProgram(listing) {
+  return listing.team.program ?? listing.have?.part?.program ?? listing.want?.part?.program ?? 'FTC';
+}
+
+/** Number of narrowing filters in use (search, sort and the FTC / FLL switch excluded). */
 export function activeFilterCount(state) {
   return ['city', 'brand', 'category', 'condition', 'team', 'part'].filter((k) => state[k]).length + (state.types.length ? 1 : 0);
 }
@@ -65,6 +73,7 @@ export const CATEGORY_KEYWORDS = {
   linear: 'slide rail слайдер направляющая',
   hardware: 'screw nut винт гайка болт',
   cables: 'cable wire кабель провод',
+  sets: 'set kit набор комплект lego spike',
   other: '',
 };
 
@@ -101,6 +110,7 @@ function listingParts(listing) {
 export function applyFilters(listings, state, textIndex) {
   const tokens = fold(state.q).split(/\s+/).filter(Boolean);
   const result = listings.filter((l) => {
+    if (state.program && listingProgram(l) !== state.program) return false;
     if (state.city && l.city !== state.city) return false;
     if (state.types.length && !state.types.includes(l.type)) return false;
     if (state.condition && l.condition !== state.condition) return false;

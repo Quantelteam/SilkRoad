@@ -1022,3 +1022,34 @@ a.part-count { display: inline-flex; align-items: center; min-height: 44px; marg
     scroll-behavior: auto !important;
   }
 }
+
+/* ---- FTC / FLL switch ---------------------------------------------------- */
+
+/* A segmented control: one program at a time, or All. */
+.program-switch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 16px;
+  padding: 4px;
+  background: var(--plate);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.program-btn {
+  min-height: 40px;
+  padding: 0 18px;
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  color: var(--ink-2);
+  font-weight: 600;
+  cursor: pointer;
+}
+.program-btn:hover { color: var(--ink); }
+.program-btn[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), inset 0 0 0 1px var(--line);
+}
+.catalog .program-switch { margin-bottom: 20px; }

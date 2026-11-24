@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.supabase.co https://cdn11.bigcommerce.com https://andymark.com https://www.pitsco.com https://limelightvision.io https://resource.logitech.com https://resource.logitechg.com https://gmedia.playstation.com; connect-src 'self' https://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
-  <title>SilkRoad Exchange: spare FTC parts in Kazakhstan</title>
-  <meta name="description" content="Find spare FTC robot parts from teams across Kazakhstan: goBILDA, REV, Studica and more. Message the team on Telegram to trade, buy or pick up for free.">
+  <title>SilkRoad Exchange: spare FTC and FLL parts in Kazakhstan</title>
+  <meta name="description" content="Find spare robot parts from FTC and FLL teams across Kazakhstan: goBILDA, REV, Studica, LEGO SPIKE and more. Message the team on Telegram to trade, buy or pick up for free.">
   <meta property="og:title" content="SilkRoad Exchange">
   <meta property="og:description" content="Spare FTC parts from teams across Kazakhstan. Search by part, city or team, then message the team on Telegram.">
   <meta name="theme-color" content="#E9EDF0" media="(prefers-color-scheme: light)">
@@ -34,13 +34,13 @@
 
       <div class="hero-row">
         <div class="hero">
-          <h1>Spare FTC parts from teams across Kazakhstan</h1>
+          <h1>Spare robot parts from FTC and FLL teams across Kazakhstan</h1>
           <p class="hero-sub">Find the part, then message the team on Telegram. Trade, buy, or pick it up for free.</p>
           <form class="search" role="search" id="search-form">
             <label for="q">Search by part, SKU, team or city</label>
             <div class="search-field">
               <span class="search-icon" data-icon="search"></span>
-              <input id="q" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Core Hex, 5203-2402-0019, мотор">
+              <input id="q" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Core Hex, SPIKE hub, 5203-2402-0019, мотор">
             </div>
           </form>
           <button type="button" class="intro-open" id="intro-open" hidden>
@@ -99,6 +99,11 @@
     </aside>
 
     <section class="results" id="results" aria-labelledby="results-count" tabindex="-1">
+      <div class="program-switch" role="group" aria-label="Program">
+        <button type="button" class="program-btn" data-program="" aria-pressed="true">All</button>
+        <button type="button" class="program-btn" data-program="FTC" aria-pressed="false">FTC</button>
+        <button type="button" class="program-btn" data-program="FLL" aria-pressed="false">FLL</button>
+      </div>
       <div class="results-head">
         <p class="results-count" id="results-count" aria-live="polite">Loading listings…</p>
         <div class="results-tools">
@@ -147,7 +152,7 @@
   <footer class="footer">
     <p>SilkRoad Exchange doesn’t handle payments or delivery. Teams agree on both in Telegram.</p>
     <p>Pictures marked “Catalog photo” load from the part maker’s website and belong to that maker. They show the product, not the team’s actual part.</p>
-    <p>A community project by FTC teams in Kazakhstan. Not affiliated with <i>FIRST</i>®, goBILDA, REV Robotics or Studica.</p>
+    <p>A community project by FTC teams in Kazakhstan. Not affiliated with <i>FIRST</i>®, LEGO®, goBILDA, REV Robotics or Studica.</p>
   </footer>
 
   <dialog class="detail" id="detail" aria-labelledby="detail-title"></dialog>
