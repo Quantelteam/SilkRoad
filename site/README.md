@@ -30,7 +30,7 @@ npm test           # Node 22+, built-in test runner, no dependencies
 
 ## Deploy
 
-Vercel, framework "Other", root directory `site`, no build command, no output directory. Then set the bot's `SITE_URL` to the site's https address so its Website buttons work.
+`scripts/deploy-vercel.sh` uploads `site/` to Vercel production with only `curl` (set `VERCEL_TOKEN`). Or connect the repo in the Vercel dashboard: framework "Other", root directory `site`, no build command, no output directory. Then set the bot's `SITE_URL` to the site's https address so its Website buttons work.
 
 ## Product photos
 
