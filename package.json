@@ -1,0 +1,11 @@
+{
+  "name": "silkroad-exchange",
+  "private": true,
+  "description": "SilkRoad Exchange website: static pages that read the bot's listings_public view.",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "serve": "python3 -m http.server 8080 --directory site"
+  }
+}
