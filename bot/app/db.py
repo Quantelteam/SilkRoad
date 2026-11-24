@@ -27,14 +27,88 @@ async def find_team(program: str, number: int) -> dict | None:
     return await asyncio.to_thread(run)
 
 
-async def create_team(program: str, number: int, name: str, city: str) -> dict:
+async def create_approved_team(program: str, number: int, name: str, city: str) -> dict:
+    """A team a moderator approved. If it exists by now, return that one."""
     def run():
         res = (_client.table("teams")
-               .insert({"program": program, "number": number, "name": name, "city": city})
+               .upsert({"program": program, "number": number, "name": name, "city": city,
+                        "source": "request"},
+                       on_conflict="program,number", ignore_duplicates=True)
                .execute())
+        if res.data:
+            return res.data[0]
+        found = (_client.table("teams").select("*")
+                 .eq("program", program).eq("number", number).limit(1).execute())
+        return found.data[0]
+
+    return await asyncio.to_thread(run)
+
+
+# --- team requests (teams that are not on the USTEM Connect list) ----------
+
+async def pending_request_for_user(tg_id: int) -> dict | None:
+    def run():
+        res = (_client.table("team_requests").select("*")
+               .eq("tg_id", tg_id).eq("status", "pending").limit(1).execute())
+        return res.data[0] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
+async def pending_request_for_team(program: str, number: int) -> dict | None:
+    def run():
+        res = (_client.table("team_requests").select("*")
+               .eq("program", program).eq("number", number).eq("status", "pending")
+               .limit(1).execute())
+        return res.data[0] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
+async def create_team_request(data: dict) -> dict | None:
+    """Stores a request. None if this user or this team already has one open."""
+    def run():
+        try:
+            res = _client.table("team_requests").insert(data).execute()
+        except Exception as exc:  # unique index: an open request already exists
+            if "duplicate key" in str(exc) or "23505" in str(exc):
+                return None
+            raise
         return res.data[0]
 
     return await asyncio.to_thread(run)
+
+
+async def decide_team_request(request_id: int, status: str, reviewer_id: int) -> dict | None:
+    """Approves or rejects a pending request. The update only matches while the
+    request is still pending, so if two moderators press at once only one wins;
+    the other gets None."""
+    def run():
+        res = (_client.table("team_requests")
+               .update({"status": status, "reviewed_by": reviewer_id,
+                        "reviewed_at": datetime.now(timezone.utc).isoformat()})
+               .eq("id", request_id).eq("status", "pending")
+               .execute())
+        return res.data[0] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
+async def get_team_request(request_id: int) -> dict | None:
+    def run():
+        res = _client.table("team_requests").select("*").eq("id", request_id).limit(1).execute()
+        return res.data[0] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
+async def moderator_ids() -> set[int]:
+    """ADMIN_IDS from the config plus users marked admin in the database."""
+    def run():
+        res = _client.table("users").select("tg_id").eq("role", "admin").execute()
+        return {row["tg_id"] for row in res.data}
+
+    return set(settings.admin_ids) | await asyncio.to_thread(run)
 
 
 async def get_user(tg_id: int) -> dict | None:

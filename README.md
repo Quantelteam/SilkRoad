@@ -16,7 +16,7 @@ This repository contains the **bot** (the only way to post a listing), the
 
 | Step | Flow |
 | --- | --- |
-| `/start` | Registers the team: program (FTC/FLL), team number, team name, city. Telegram @username is taken automatically. If the team number is already registered, the user joins that team. |
+| `/start` | Registers the user with a team: program (FTC/FLL) and team number. Teams on the [USTEM Connect](https://connect.ustem.kz/teams) list are found straight away. A team that isn't on it sends its name and city to the moderators, who approve or reject it with one tap; the user can post once it's approved. Telegram @username is taken automatically. |
 | ➕ New listing | Type (trade / sell / wanted / give away) → part from the catalog or free text → what you want in return or the price → condition → up to 3 photos → optional note → preview → publish. |
 | 📋 My listings | Shows active listings with Edit (part, price, condition, note, photos) and Close. |
 | `/cancel`, `/help` | Stop the current step, short explanation. |
@@ -29,11 +29,14 @@ from the database. A closed listing disappears from the site.
 
 1. **Database.** In the Supabase SQL editor run `supabase/schema.sql`, then
    `supabase/seed_parts.sql` (≈170 standard REV, goBILDA, Studica and
-   electronics parts). Both are safe to re-run.
+   electronics parts) and `supabase/seed_teams.sql` (733 teams from USTEM
+   Connect). All three are safe to re-run.
 2. **Config.** Copy `bot/.env.example` to `bot/.env` and fill in:
    - `BOT_TOKEN` — from @BotFather
    - `SUPABASE_URL` and `SUPABASE_SERVICE_KEY` — Supabase → Project settings → API
      (the `service_role` key; it is secret, `.env` is git-ignored)
+   - `ADMIN_IDS` — Telegram user IDs of moderators, comma separated. They get
+     requests from teams that aren't on the USTEM Connect list.
    - `SITE_URL` — optional, the website (https). When set, the menu gets a 🌐 Website
      button and a `/site` command, and every published listing and every entry in
      📋 My listings gets a button that opens that listing on the site (`/?listing=<id>`).
@@ -61,3 +64,11 @@ Filter it by `status = 'active'`. The `parts` table is also readable with the
 anon key for the category and part filters.
 
 The anon key can only read those two things; every write goes through the bot.
+
+## Team list
+
+`supabase/seed_teams.sql` holds the FTC and FLL teams from the public
+[USTEM Connect catalog](https://connect.ustem.kz/teams): program, number, name
+and city, nothing else. Refresh it with `python scripts/ustem_teams.py`, then
+run the file again in the SQL editor; existing teams keep their names and
+are only marked as on the list.
