@@ -36,6 +36,7 @@ export const PART_IMAGE_HOSTS = [
   'resource.logitech.com',
   'resource.logitechg.com',
   'gmedia.playstation.com',
+  'assets.education.lego.com', // LEGO Education (SPIKE)
 ];
 
 // Self-hosted copies live in site/photos/. Use them only for makers who gave written
