@@ -65,11 +65,18 @@ function buildFilters() {
   }
   const { cities, teams } = filterOptions(listings);
   addOptions('f-city', cities.map((c) => [c, c]));
-  const usedBrands = new Set(catalog.parts.map((p) => p.brand));
-  addOptions('f-brand', catalog.brands.filter((b) => usedBrands.has(b)).map((b) => [b, b]));
+  fillBrands();
   addOptions('f-category', catalog.categories.map((c) => [c.id, c.name]));
   addOptions('f-condition', CONDITIONS.map((c) => [c, CONDITION_LABELS[c]]));
   addOptions('f-team', teams.map((t) => [t.key, t.label]));
+}
+
+/** Brand options follow the FTC / FLL switch: LEGO for FLL, FTC vendors for FTC. */
+function fillBrands() {
+  const select = /** @type {HTMLSelectElement} */ ($('f-brand'));
+  const used = new Set(catalog.parts.filter((p) => !state.program || p.program === state.program).map((p) => p.brand));
+  select.replaceChildren(h('option', { value: '' }, 'Any brand'));
+  addOptions('f-brand', catalog.brands.filter((b) => used.has(b)).map((b) => [b, b]));
 }
 
 function addOptions(selectId, pairs) {
@@ -93,6 +100,9 @@ function syncControls() {
   state.types = state.types.filter((t) => LISTING_TYPES.includes(t));
   if (state.part && !catalog.partsById.has(state.part)) state.part = '';
   /** @type {HTMLSelectElement} */ ($('sort')).value = state.sort;
+  for (const btn of document.querySelectorAll('.program-btn')) {
+    btn.setAttribute('aria-pressed', String(/** @type {HTMLElement} */ (btn).dataset.program === state.program));
+  }
 }
 
 function bindEvents() {
@@ -118,6 +128,16 @@ function bindEvents() {
     update({ types: on ? [...state.types, type] : state.types.filter((t) => t !== type) });
   });
   $('sort').addEventListener('change', (e) => update({ sort: /** @type {HTMLSelectElement} */ (e.target).value === 'price' ? 'price' : 'newest' }));
+  document.querySelector('.program-switch').addEventListener('click', (e) => {
+    const btn = /** @type {HTMLElement} */ (e.target).closest('.program-btn');
+    if (!btn) return;
+    const program = /** @type {HTMLElement} */ (btn).dataset.program;
+    state = { ...state, program: program === 'FTC' || program === 'FLL' ? program : '' };
+    fillBrands();
+    syncControls();
+    setUrl();
+    render();
+  });
   $('clear-filters').addEventListener('click', clearFilters);
   $('empty-clear').addEventListener('click', clearFilters);
   $('filters-toggle').addEventListener('click', () => {
@@ -135,13 +155,14 @@ function bindEvents() {
   });
   window.addEventListener('popstate', () => {
     state = stateFromParams(new URLSearchParams(location.search));
+    fillBrands();
     syncControls();
     render();
   });
 }
 
 function clearFilters() {
-  state = { ...emptyState(), sort: state.sort };
+  state = { ...emptyState(), sort: state.sort, program: state.program };
   syncControls();
   setUrl();
   render();

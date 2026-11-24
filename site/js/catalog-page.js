@@ -22,21 +22,44 @@ async function init() {
   }
   const counts = await loadListingCounts(catalog);
   const rows = searchableRows(catalog);
-  const brands = catalog.brands.filter((b) => rows.some((r) => r.part.brand === b));
-
-  $('brand-nav').replaceChildren(
-    h('ul', null, brands.map((b) => h('li', null, h('a', { href: `#${slug(b)}` }, b)))),
-  );
+  const params = new URLSearchParams(location.search);
+  const fromUrl = (params.get('program') ?? '').toUpperCase();
+  let program = fromUrl === 'FTC' || fromUrl === 'FLL' ? fromUrl : '';
 
   const input = /** @type {HTMLInputElement} */ ($('cq'));
-  const render = () => renderCatalog({ rows, brands, categories: catalog.categories, counts, query: input.value });
-
-  input.value = new URLSearchParams(location.search).get('q') ?? '';
-  input.addEventListener('input', debounce(() => {
+  // The FTC / FLL switch narrows rows and brands; the search box narrows within them.
+  const render = () => {
+    const shownRows = rows.filter((r) => !program || r.part.program === program);
+    const brands = catalog.brands.filter((b) => shownRows.some((r) => r.part.brand === b));
+    $('brand-nav').replaceChildren(
+      h('ul', null, brands.map((b) => h('li', null, h('a', { href: `#${slug(b)}` }, b)))),
+    );
+    for (const btn of document.querySelectorAll('.program-btn')) {
+      btn.setAttribute('aria-pressed', String(/** @type {HTMLElement} */ (btn).dataset.program === program));
+    }
+    renderCatalog({ rows: shownRows, brands, categories: catalog.categories, counts, query: input.value });
+  };
+  const syncUrl = () => {
     const q = input.value.trim();
-    replaceUrl(new URLSearchParams(q ? { q } : {}));
+    const next = new URLSearchParams();
+    if (q) next.set('q', q);
+    if (program) next.set('program', program);
+    replaceUrl(next);
+  };
+
+  input.value = params.get('q') ?? '';
+  input.addEventListener('input', debounce(() => {
+    syncUrl();
     render();
   }, SEARCH_DEBOUNCE_MS));
+  document.querySelector('.program-switch').addEventListener('click', (e) => {
+    const btn = /** @type {HTMLElement} */ (e.target).closest('.program-btn');
+    if (!btn) return;
+    const next = /** @type {HTMLElement} */ (btn).dataset.program;
+    program = next === 'FTC' || next === 'FLL' ? next : '';
+    syncUrl();
+    render();
+  });
   $('catalog-search').addEventListener('submit', (e) => {
     e.preventDefault();
     $('catalog').focus();

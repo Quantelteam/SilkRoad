@@ -119,6 +119,26 @@ test('bot rows from listings_public translate to site listings', () => {
   assert.equal(normalizeBotRow(botRow({ username: 'x y' }), {}).username, null);
 });
 
+test('catalog parts carry a program; bot parts matching a catalog name get its photo', () => {
+  const c = normalizeCatalog({ parts: [
+    { id: 'lego-45601', name: 'SPIKE Prime Large Hub', brand: 'LEGO Education', sku: '45601', category: 'control', program: 'FLL' },
+    { id: 'gb-1', name: 'Grid plate', brand: 'goBILDA', category: 'structure' },
+  ] });
+  assert.deepEqual(c.parts.map((p) => p.program), ['FLL', 'FTC']);
+  const row = {
+    id: 9, type: 'sell', status: 'active', price_kzt: 40000, created_at: '2026-11-24T08:00:00Z',
+    have: 'SPIKE Prime  Large Hub', have_brand: 'LEGO Education', have_category: 'Hubs',
+    team_program: 'FLL', team_number: 310169, team_name: 'Spikers', city: 'Астана', username: 'spikers_team',
+  };
+  const l = normalizeBotRow(row, { partsByKey: c.partsByKey });
+  assert.equal(l.have.part.id, 'lego-45601');
+  assert.equal(l.have.part.sku, '45601');
+  assert.equal(l.team.program, 'FLL');
+  const unknown = normalizeBotRow({ ...row, have: 'Some other hub' }, { partsByKey: c.partsByKey });
+  assert.equal(unknown.have.part.id, null);
+  assert.equal(unknown.category, 'control');
+});
+
 test('catalog loader skips malformed parts', () => {
   const c = normalizeCatalog({ brands: ['A', 3], categories: [{ id: 'x' }], parts: [{ id: 'p' }, { id: 'q', name: 'Q', brand: 'A' }] });
   assert.deepEqual(c.brands, ['A']);

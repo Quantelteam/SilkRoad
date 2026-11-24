@@ -7,9 +7,14 @@
     "AndyMark",
     "Axon",
     "TETRIX",
-    "Other"
+    "Other",
+    "LEGO Education"
   ],
   "categories": [
+    {
+      "id": "sets",
+      "name": "Complete sets"
+    },
     {
       "id": "motors",
       "name": "Motors"
@@ -2950,6 +2955,347 @@
       ],
       "url": null,
       "image": "https://gmedia.playstation.com/is/image/SIEPDC/dualshock-controller-product-thumbnail-01-en-14sep21?wid=640&fmt=png-alpha"
+    },
+    {
+      "id": "lego-5007438",
+      "brand": "LEGO Education",
+      "name": "SPIKE Essential Class Pack",
+      "sku": "5007438",
+      "category": "sets",
+      "aliases": [
+        "class pack",
+        "classroom pack"
+      ],
+      "url": "https://education.lego.com/en-us/products/spike-essential-class-pack/5007438/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt0a097919ea9a159c/64589c40e0268d33a4eb6d70/2000481_45345_combo_01.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45345",
+      "brand": "LEGO Education",
+      "name": "SPIKE Essential Set",
+      "sku": "45345",
+      "category": "sets",
+      "aliases": [
+        "spike essential",
+        "базовый набор spike essential",
+        "набор spike essential"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-education-spike-essential-set/45345/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt0cc16b7f84a5b72f/6271184b5d936230ca8eaf12/45345_Prod_01.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-5007439",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Class Pack",
+      "sku": "5007439",
+      "category": "sets",
+      "aliases": [
+        "class pack",
+        "classroom pack"
+      ],
+      "url": "https://education.lego.com/en-us/products/spike-prime-class-pack/5007439/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blta59a89e6e9215cda/63763a1f411e3c10e4600455/45678_Storage_01.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-5008796",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Combo Pack",
+      "sku": "5008796",
+      "category": "sets",
+      "aliases": [
+        "combo pack",
+        "class pack"
+      ],
+      "url": "https://education.lego.com/en-us/products/spike-prime-combo-pack/5008796/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt55d80d3344fa43c8/65bb4be7c025ee0458b892ff/SPIKE_Prime_Combo_Pack_option_2.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45681",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Expansion Set",
+      "sku": "45681",
+      "category": "sets",
+      "aliases": [
+        "expansion set",
+        "ресурсный набор spike prime",
+        "дополнительный набор",
+        "maker plate"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-education-spike-prime-expansion-set/45681/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt3f6ee2d5b90e22c0/616cfbe2c2e3d711716aa5fb/45681_Prod_(2).jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45680",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Expansion Set (original 2019 version)",
+      "sku": "45680",
+      "category": "sets",
+      "aliases": [
+        "expansion set",
+        "old expansion set",
+        "ресурсный набор spike prime"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45678",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Set",
+      "sku": "45678",
+      "category": "sets",
+      "aliases": [
+        "spike prime core set",
+        "базовый набор spike prime",
+        "набор spike prime",
+        "core set"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-education-spike-prime-set/45678/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt96801dfdfb5b7521/627118b9941a2939d3d00593/45678_prod_packaging_SPIKE_PRIME_Set_01.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45607",
+      "brand": "LEGO Education",
+      "name": "SPIKE Essential Small Angular Motor",
+      "sku": "45607",
+      "category": "motors",
+      "aliases": [
+        "small motor",
+        "small angular motor",
+        "малый мотор",
+        "мотор"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-small-angular-motor/45607/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt8820b8d0307ef97e/62711ddf9dad2234e4d024fc/45607_Prod_01.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45602",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Large Angular Motor",
+      "sku": "45602",
+      "category": "motors",
+      "aliases": [
+        "large motor",
+        "large angular motor",
+        "большой мотор",
+        "мотор"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-large-angular-motor/45602/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt25e3d763563cb2eb/5f50d06934442224ff578812/45602_prod_01.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45603",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Medium Angular Motor",
+      "sku": "45603",
+      "category": "motors",
+      "aliases": [
+        "medium motor",
+        "medium angular motor",
+        "средний мотор",
+        "мотор"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-medium-angular-motor/45603/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltb7eba43bc8023481/5f50d075cf564d26dc847389/45603_prod_01.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45609",
+      "brand": "LEGO Education",
+      "name": "SPIKE Essential Small Hub",
+      "sku": "45609",
+      "category": "control",
+      "aliases": [
+        "small hub",
+        "technic small hub",
+        "2-port hub",
+        "малый хаб"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-small-hub/45609/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt266196dd2a45c72b/62711afafbd1dd35f419cef4/45609_Prod_04.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45601",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Large Hub",
+      "sku": "45601",
+      "category": "control",
+      "aliases": [
+        "hub",
+        "large hub",
+        "technic large hub",
+        "хаб"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-large-hub-for-spike-prime-/45601/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltdb8e255e1055c806/5f50d05af4190e239fa233aa/45601_prod_02.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45605",
+      "brand": "LEGO Education",
+      "name": "SPIKE Color Sensor",
+      "sku": "45605",
+      "category": "sensors",
+      "aliases": [
+        "color sensor",
+        "colour sensor",
+        "датчик цвета",
+        "датчик"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-color-sensor/45605/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltbdb22e70c71a317b/5f50d0911b7e447a7df9447f/45605_prod_01.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45604",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Distance Sensor",
+      "sku": "45604",
+      "category": "sensors",
+      "aliases": [
+        "distance sensor",
+        "ultrasonic sensor",
+        "датчик расстояния",
+        "датчик"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-distance-sensor/45604/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt1f69092ad97aafc2/5f50d08090c20c26dd8802a6/45604_prod_01.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45606",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Force Sensor",
+      "sku": "45606",
+      "category": "sensors",
+      "aliases": [
+        "force sensor",
+        "touch sensor",
+        "датчик силы",
+        "датчик касания"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-force-sensor/45606/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt24a67f95af119b6e/62711ac06ed4423afc98da94/45606_prod_TECHNIC_Force_Sensor_01.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45612",
+      "brand": "LEGO Education",
+      "name": "SPIKE Essential Small Hub Battery",
+      "sku": "45612",
+      "category": "batteries",
+      "aliases": [
+        "small hub battery",
+        "аккумулятор",
+        "батарея"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-small-hub-battery/45612/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltf9da1153b1695950/610105a461f38746a5779eee/smallHubBattery.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45610",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Large Hub Battery",
+      "sku": "45610",
+      "category": "batteries",
+      "aliases": [
+        "hub battery",
+        "large hub battery",
+        "аккумулятор",
+        "батарея"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-large-hub-battery/45610/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt5b6a25e8b5eb391d/5f50d0afc8fa977ffe579e5b/45610_prod_01.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45611",
+      "brand": "LEGO Education",
+      "name": "SPIKE Micro USB Connector Cable",
+      "sku": "45611",
+      "category": "cables",
+      "aliases": [
+        "usb cable",
+        "micro usb cable",
+        "кабель",
+        "зарядка"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-micro-usb-connector-cable/45611/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltbea9886ff4b89fa2/5f50d0b890c20c26dd8802aa/45611_prod_01.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45608",
+      "brand": "LEGO Education",
+      "name": "SPIKE Essential 3x3 Color Light Matrix",
+      "sku": "45608",
+      "category": "other",
+      "aliases": [
+        "light matrix",
+        "color light matrix",
+        "световая матрица",
+        "матрица"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-technic-color-light-matrix/45608/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt0be1a0b82605bf17/62711db56ed4423afc98da9e/45608_Prod_01.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-2000722",
+      "brand": "LEGO Education",
+      "name": "SPIKE Essential Replacement Pack 1",
+      "sku": "2000722",
+      "category": "other",
+      "aliases": [
+        "replacement pack",
+        "spare parts",
+        "запчасти"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-education-spike-essential-replacement-pack-1/2000722/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltb66ff826623cda48/610a6699be3cec3a86c11ade/2000722_prod_01.png?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-2000723",
+      "brand": "LEGO Education",
+      "name": "SPIKE Essential Replacement Pack 2",
+      "sku": "2000723",
+      "category": "other",
+      "aliases": [
+        "replacement pack",
+        "spare parts",
+        "запчасти"
+      ],
+      "url": "https://education.lego.com/en-us/product-resources/45345-spike-essential-resource-page/troubleshooting/spike-essential-faqs/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-2000719",
+      "brand": "LEGO Education",
+      "name": "SPIKE Prime Replacement Pack",
+      "sku": "2000719",
+      "category": "other",
+      "aliases": [
+        "replacement pack",
+        "spare parts",
+        "запчасти",
+        "детали"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-education-spike-prime-replacement-pack-/2000719/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/blt8c4a7b664de199f1/5f50cdb690c20c26dd880282/2000719_prod_01.jpg?locale=en-us&width=640",
+      "program": "FLL"
     }
   ]
 }

@@ -140,13 +140,14 @@ async def update_username(tg_id: int, username: str | None) -> None:
 
 # --- parts catalog ---------------------------------------------------------
 
-async def search_parts(query: str, limit: int = 10) -> list[dict]:
+async def search_parts(query: str, program: str = "FTC", limit: int = 10) -> list[dict]:
+    """Catalog parts for one program: FTC parts for FTC teams, LEGO for FLL."""
     term = _UNSAFE.sub(" ", query).strip()
     if not term:
         return []
 
     def run():
-        res = (_client.table("parts").select("*")
+        res = (_client.table("parts").select("*").eq("program", program)
                .or_(f"name.ilike.%{term}%,sku.ilike.%{term}%,brand.ilike.%{term}%")
                .order("name").limit(limit).execute())
         return res.data
@@ -154,17 +155,17 @@ async def search_parts(query: str, limit: int = 10) -> list[dict]:
     return await asyncio.to_thread(run)
 
 
-async def list_categories() -> list[str]:
+async def list_categories(program: str = "FTC") -> list[str]:
     def run():
-        res = _client.table("parts").select("category").execute()
+        res = _client.table("parts").select("category").eq("program", program).execute()
         return sorted({row["category"] for row in res.data})
 
     return await asyncio.to_thread(run)
 
 
-async def parts_in_category(category: str, limit: int = 40) -> list[dict]:
+async def parts_in_category(category: str, program: str = "FTC", limit: int = 40) -> list[dict]:
     def run():
-        res = (_client.table("parts").select("*")
+        res = (_client.table("parts").select("*").eq("program", program)
                .eq("category", category).order("name").limit(limit).execute())
         return res.data
 

@@ -83,3 +83,17 @@ test('catalog counts count each listing once per part', () => {
   assert.equal(counts.get('rev-corehex'), 2);
   assert.equal(counts.get('gb-312'), 1);
 });
+
+test('the FTC / FLL switch filters by team program and lives in the URL', () => {
+  const fll = L('f', { team: { number: 310169, name: 'Spikers', program: 'FLL' } });
+  const ftc = L('t', { team: { number: 24881, name: 'Quattuor', program: 'FTC' } });
+  const legacy = L('x', {}); // no program: counts as FTC
+  const all = [fll, ftc, legacy];
+  assert.deepEqual(ids(applyFilters(all, { ...emptyState(), program: 'FLL' })), ['f']);
+  assert.deepEqual(ids(applyFilters(all, { ...emptyState(), program: 'FTC' })).sort(), ['t', 'x']);
+  assert.equal(applyFilters(all, emptyState()).length, 3);
+  assert.equal(stateFromParams(new URLSearchParams('program=fll')).program, 'FLL');
+  assert.equal(stateFromParams(new URLSearchParams('program=vex')).program, '');
+  assert.equal(paramsFromState({ ...emptyState(), program: 'FTC' }).toString(), 'program=FTC');
+  assert.equal(activeFilterCount({ ...emptyState(), program: 'FLL' }), 0);
+});
