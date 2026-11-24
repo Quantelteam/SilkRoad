@@ -37,7 +37,8 @@ async def main() -> None:
             await message.answer("Something broke on our side. Try again or send /cancel.")
         return True
 
-    await bot.set_my_commands(COMMANDS)
+    commands = COMMANDS + ([BotCommand(command="site", description="Open the website")] if settings.site_url else [])
+    await bot.set_my_commands(commands)
     await bot.delete_webhook(drop_pending_updates=True)
     logging.info("bot started")
     await dp.start_polling(bot)
