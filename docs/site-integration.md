@@ -1,3 +1,6 @@
+> **The website now lives in [`site/`](../site/README.md).** It is a static site that
+> reads `listings_public` directly; the Next.js snippets below were the original plan.
+
 # Connecting the website to the data
 
 The bot and the website never call each other. The bot writes listings into
