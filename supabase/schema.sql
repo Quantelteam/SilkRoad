@@ -103,3 +103,38 @@ grant select on listings_public to anon, authenticated;
 insert into storage.buckets (id, name, public)
 values ('listings', 'listings', true)
 on conflict (id) do nothing;
+
+-- ---------------------------------------------------------------------------
+-- Team list from USTEM Connect, and moderation for teams that are not on it.
+-- Safe to re-run on an existing database.
+
+-- Where a team came from: the USTEM Connect catalog (seed_teams.sql), a request
+-- a moderator approved in the bot, or the bot before this list existed.
+alter table teams add column if not exists source text not null default 'bot'
+    check (source in ('ustem', 'request', 'bot'));
+
+-- A team that is not on the USTEM list asks to be added; a moderator decides.
+create table if not exists team_requests (
+    id          bigserial primary key,
+    program     text        not null check (program in ('FTC', 'FLL')),
+    number      integer     not null check (number > 0),
+    name        text        not null,
+    city        text        not null,
+    tg_id       bigint      not null,
+    username    text,
+    full_name   text,
+    status      text        not null default 'pending'
+                            check (status in ('pending', 'approved', 'rejected')),
+    reviewed_by bigint,
+    reviewed_at timestamptz,
+    created_at  timestamptz not null default now()
+);
+
+-- One open request per Telegram user, and one per team.
+create unique index if not exists team_requests_pending_user
+    on team_requests (tg_id) where status = 'pending';
+create unique index if not exists team_requests_pending_team
+    on team_requests (program, number) where status = 'pending';
+
+-- Only the bot (service key) reads or writes requests.
+alter table team_requests enable row level security;

@@ -1,4 +1,6 @@
-from aiogram import F, Router
+from html import escape
+
+from aiogram import Bot, F, Router
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
@@ -7,6 +9,7 @@ from app import db
 from app.config import settings
 from app.filters import PLAIN_TEXT
 from app.keyboards import join_team_kb, main_menu, program_kb
+from app.handlers.moderation import USTEM_TEAMS, notify_moderators
 from app.states import Registration
 
 router = Router()
@@ -28,8 +31,15 @@ async def start(message: Message, state: FSMContext, user: dict | None) -> None:
         team = user["team"]
         await message.answer(
             f"You are registered with {team['program']} #{team['number']} "
-            f"{team['name']} ({team['city']}).",
+            f"{escape(team['name'])} ({escape(team['city'])}).",
             reply_markup=main_menu,
+        )
+        return
+    pending = await db.pending_request_for_user(message.from_user.id)
+    if pending:
+        await message.answer(
+            f"Your request to add {pending['program']} #{pending['number']} {escape(pending['name'])} "
+            "is with the moderators. You'll get a message here when they decide."
         )
         return
     if not message.from_user.username:
@@ -64,15 +74,27 @@ async def set_number(message: Message, state: FSMContext) -> None:
         await state.update_data(team_id=existing["id"])
         await state.set_state(Registration.join)
         await message.answer(
-            f"{existing['program']} #{existing['number']} {existing['name']} "
-            f"({existing['city']}) is already registered. Join it?",
+            f"Found {existing['program']} #{existing['number']} {escape(existing['name'])} "
+            f"({escape(existing['city'])}). Is this your team?",
             reply_markup=join_team_kb(),
+        )
+        return
+
+    waiting = await db.pending_request_for_team(data["program"], number)
+    if waiting:
+        await state.clear()
+        await message.answer(
+            f"{data['program']} #{number} is already waiting for a moderator. "
+            "When it's approved, send /start and join it."
         )
         return
 
     await state.update_data(number=number)
     await state.set_state(Registration.name)
-    await message.answer("Send your team name.")
+    await message.answer(
+        f"{data['program']} #{number} isn't on the USTEM Connect team list ({USTEM_TEAMS}). "
+        "Check the number there. If it's right, send your team name and a moderator will add the team."
+    )
 
 
 @router.callback_query(Registration.join, F.data == "join:yes")
@@ -110,22 +132,38 @@ async def set_name(message: Message, state: FSMContext) -> None:
 
 
 @router.message(Registration.city, PLAIN_TEXT)
-async def set_city(message: Message, state: FSMContext) -> None:
+async def set_city(message: Message, state: FSMContext, bot: Bot) -> None:
     city = message.text.strip()
     if len(city) < 2 or len(city) > 40:
         await message.answer("City must be 2–40 characters.")
         return
 
     data = await state.get_data()
-    team = await db.find_team(data["program"], data["number"])
-    if team is None:
-        team = await db.create_team(data["program"], data["number"], data["name"], city)
-    await db.save_user(
-        message.from_user.id, message.from_user.username,
-        message.from_user.full_name, team["id"],
-    )
     await state.clear()
-    await message.answer(
-        f"Registered: {team['program']} #{team['number']} {team['name']} ({team['city']}).",
-        reply_markup=main_menu,
-    )
+    # The team may have been added while this user was typing.
+    team = await db.find_team(data["program"], data["number"])
+    if team:
+        await db.save_user(message.from_user.id, message.from_user.username,
+                           message.from_user.full_name, team["id"])
+        await message.answer(f"Registered: {team['program']} #{team['number']} {escape(team['name'])}.",
+                             reply_markup=main_menu)
+        return
+
+    req = await db.create_team_request({
+        "program": data["program"], "number": data["number"], "name": data["name"], "city": city,
+        "tg_id": message.from_user.id, "username": message.from_user.username,
+        "full_name": message.from_user.full_name,
+    })
+    if req is None:
+        await message.answer("There's already an open request for you or for this team. "
+                             "You'll get a message here when a moderator decides.")
+        return
+    sent = await notify_moderators(bot, req)
+    if sent:
+        await message.answer(
+            f"Sent to the moderators: {req['program']} #{req['number']} {escape(req['name'])} ({escape(city)}). "
+            "You'll get a message here when they decide."
+        )
+    else:
+        await message.answer("Your request is saved, but no moderator could be reached yet. "
+                             "Ask in the FIRST Kazakhstan channel to have it reviewed.")
