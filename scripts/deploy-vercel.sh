@@ -14,7 +14,9 @@ TEAM=""
 if [ -n "${VERCEL_TEAM_ID:-}" ]; then TEAM="?teamId=${VERCEL_TEAM_ID}"; fi
 auth=(-H "Authorization: Bearer ${VERCEL_TOKEN}")
 
-cd "$(dirname "$0")/../site"
+# Paths keep their site/ prefix: the Vercel project's Root Directory is "site",
+# the same setting a Git-connected deploy uses.
+cd "$(dirname "$0")/.."
 files="["
 count=0
 # Upload every file once; Vercel skips ones it already has (same SHA-1).
@@ -27,7 +29,7 @@ while IFS= read -r -d '' path; do
     --data-binary @"$path" > /dev/null
   files+="{\"file\":\"${rel}\",\"sha\":\"${sha}\",\"size\":${size}},"
   count=$((count + 1))
-done < <(find . -type f ! -name README.md -print0)
+done < <(find site -type f ! -name README.md -print0)
 files="${files%,}]"
 echo "Uploaded ${count} files"
 
