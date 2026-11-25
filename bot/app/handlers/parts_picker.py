@@ -28,7 +28,9 @@ RESOLVERS: dict[str, Resolver] = {}
 PICK_STATES = StateFilter(NewListing.part, EditListing.part)
 MAX_FREE_TEXT = 80
 
-HINT = "\n\nType a part name to search the catalog, or browse the categories."
+HINT = ("\n\nType a part name to search the catalog, browse the categories, "
+        "or tap Other to write your own.")
+OTHER = ("✏️ Other: write my own", "pk:other")
 
 
 def _program(user: dict | None) -> str:
@@ -39,10 +41,10 @@ def _program(user: dict | None) -> str:
 
 async def ask_part(message: Message, state: FSMContext, prompt: str,
                    flow: str, pick_state: State) -> None:
-    await state.update_data(pick_flow=flow, pick_query=None)
+    await state.update_data(pick_flow=flow, pick_query=None, pick_free=False)
     await state.set_state(pick_state)
     await message.answer(prompt + HINT,
-                         reply_markup=inline([[("📂 Categories", "pk:cats")]]))
+                         reply_markup=inline([[("📂 Categories", "pk:cats")], [OTHER]]))
 
 
 async def _resolve(message: Message, state: FSMContext,
@@ -61,11 +63,19 @@ async def search(message: Message, state: FSMContext, user: dict | None) -> None
         await message.answer(f"Too long, keep it under {MAX_FREE_TEXT} characters.")
         return
 
+    data = await state.get_data()
+    if data.get("pick_free"):
+        await state.update_data(pick_free=False)
+        await message.answer(f"Selected: <b>{escape(query)}</b>")
+        await _resolve(message, state, None, query)
+        return
+
     await state.update_data(pick_query=query)
     parts = await db.search_parts(query, _program(user))
     rows = [[(part_label(p), f"pk:id:{p['id']}")] for p in parts]
     rows.append([(f'✍️ Use "{query}" as typed', "pk:raw")])
     rows.append([("📂 Categories", "pk:cats")])
+    rows.append([OTHER])
     header = "Catalog matches:" if parts else "Nothing in the catalog matches that."
     await message.answer(header, reply_markup=inline(rows))
 
@@ -73,9 +83,11 @@ async def search(message: Message, state: FSMContext, user: dict | None) -> None
 @router.callback_query(PICK_STATES, F.data == "pk:cats")
 async def show_categories(call: CallbackQuery, state: FSMContext, user: dict | None) -> None:
     categories = await db.list_categories(_program(user))
-    await state.update_data(pick_cats=categories)
+    await state.update_data(pick_cats=categories, pick_free=False)
     rows = [[(name, f"pk:cat:{i}")] for i, name in enumerate(categories)]
-    await call.message.edit_text("Pick a category:", reply_markup=inline(rows))
+    rows.append([OTHER])
+    await call.message.edit_text("Pick a category, or tap Other if your part isn't listed:",
+                                 reply_markup=inline(rows))
     await call.answer()
 
 
@@ -91,6 +103,7 @@ async def show_category(call: CallbackQuery, state: FSMContext, user: dict | Non
     parts = await db.parts_in_category(categories[index], _program(user))
     rows = [[(part_label(p), f"pk:id:{p['id']}")] for p in parts]
     rows.append([("⬅️ Categories", "pk:cats")])
+    rows.append([OTHER])
     await call.message.edit_text(f"<b>{categories[index]}</b>", reply_markup=inline(rows))
     await call.answer()
 
@@ -116,3 +129,14 @@ async def choose_free_text(call: CallbackQuery, state: FSMContext) -> None:
     await call.message.edit_text(f"Selected: <b>{escape(text)}</b>")
     await call.answer()
     await _resolve(call.message, state, None, text)
+
+
+@router.callback_query(PICK_STATES, F.data == "pk:other")
+async def choose_other(call: CallbackQuery, state: FSMContext) -> None:
+    """The part isn't in the catalog: the next message is its name, as written."""
+    await state.update_data(pick_free=True)
+    await call.message.edit_text(
+        f"Write the part as you want it to appear, up to {MAX_FREE_TEXT} characters. "
+        "For example: LEGO Technic beam 15, grey, 20 pcs."
+    )
+    await call.answer()
