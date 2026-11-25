@@ -21,8 +21,8 @@ def site_link(listing_id: int | None = None) -> str | None:
     if not settings.site_url:
         return None
     if listing_id is None:
-        return settings.site_url + "/"
-    return settings.site_url + "/?" + urlencode({"listing": listing_id})
+        return settings.site_url + "/listings.html"
+    return settings.site_url + "/listings.html?" + urlencode({"listing": listing_id})
 
 
 def website_kb(text: str = "🌐 Open the website", listing_id: int | None = None) -> InlineKeyboardMarkup | None:

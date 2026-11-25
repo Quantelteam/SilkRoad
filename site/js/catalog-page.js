@@ -130,7 +130,7 @@ function partRow(part, count) {
       part.url ? h('a', { href: part.url, target: '_blank', rel: 'noopener noreferrer', title: 'Product page on the maker’s site' }, part.name) : part.name),
     h('span', { class: 'part-sku' }, part.sku ?? ''),
     count
-      ? h('a', { class: 'part-count', href: `./?part=${encodeURIComponent(part.id)}` }, plural(count, 'listing', 'listings'))
+      ? h('a', { class: 'part-count', href: `listings.html?part=${encodeURIComponent(part.id)}` }, plural(count, 'listing', 'listings'))
       : h('span', { class: 'part-count is-zero' }, 'No listings'),
   );
 }
