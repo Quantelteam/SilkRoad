@@ -63,9 +63,12 @@ def price_kb() -> InlineKeyboardMarkup:
     return inline([[("Negotiable", "price:any")]])
 
 
-def photos_kb(count: int) -> InlineKeyboardMarkup:
+def photos_kb(count: int, catalog_photo: bool = False) -> InlineKeyboardMarkup:
     label = "Done" if count else "Skip photos"
-    return inline([[(label, "photos:done")]])
+    rows = [[(label, "photos:done")]]
+    if catalog_photo and not count:
+        rows.insert(0, [("🖼 Use the catalog photo", "photos:default")])
+    return inline(rows)
 
 
 def note_kb() -> InlineKeyboardMarkup:

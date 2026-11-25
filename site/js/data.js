@@ -218,12 +218,18 @@ export function normalizeBotRow(row, ctx) {
   const photos = Array.isArray(row.photos)
     ? row.photos.map((p) => safePhotoUrl(p, ctx.supabaseUrl)).filter(Boolean).slice(0, MAX_PHOTOS)
     : [];
+  // The bot's "Use the catalog photo" button stores the vendor's photo URL. It is kept
+  // apart from team photos so the page can label it as the maker's picture.
+  const catalogImage = !photos.length && Array.isArray(row.photos)
+    ? row.photos.map(safePartImage).find(Boolean) ?? null
+    : null;
 
   return {
     id,
     type,
     have,
     want,
+    catalogImage,
     condition: BOT_CONDITIONS[/** @type {string} */ (row.condition)] ?? null,
     category,
     notes: cleanText(row.note, 500),
@@ -313,6 +319,6 @@ export async function loadListings(catalog, config) {
  *   want: { part: Part|null, text: string|null, priceKzt: number|null } | null,
  *   condition: Condition|null, category: string|null, notes: string|null, city: string,
  *   team: { number: number|null, name: string, program?: 'FTC'|'FLL' }, username: string|null,
- *   photos: string[], createdAt: string
+ *   photos: string[], catalogImage?: string | null, createdAt: string
  * }} Listing
  */
