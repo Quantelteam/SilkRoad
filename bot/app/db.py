@@ -163,7 +163,7 @@ async def list_categories(program: str = "FTC") -> list[str]:
     return await asyncio.to_thread(run)
 
 
-async def parts_in_category(category: str, program: str = "FTC", limit: int = 40) -> list[dict]:
+async def parts_in_category(category: str, program: str = "FTC", limit: int = 60) -> list[dict]:
     def run():
         res = (_client.table("parts").select("*").eq("program", program)
                .eq("category", category).order("name").limit(limit).execute())
