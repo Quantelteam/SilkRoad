@@ -1,7 +1,7 @@
 from html import escape
 
 from aiogram import Bot, F, Router
-from aiogram.filters import CommandStart
+from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, User
 
@@ -9,8 +9,8 @@ from app import db
 from app.config import settings
 from app.filters import PLAIN_TEXT
 from app.i18n import LANG_NAMES, LANG_PICKER_TEXT, LANGS, t
-from app.keyboards import join_team_kb, language_kb, main_menu, program_kb
-from app.handlers.moderation import USTEM_TEAMS, notify_moderators, notify_new_member
+from app.keyboards import TEAM, join_team_kb, language_kb, main_menu, program_kb, switch_confirm_kb, team_kb
+from app.handlers.moderation import USTEM_TEAMS, notify_moderators, notify_new_member, team_label
 from app.states import Registration
 
 router = Router()
@@ -187,3 +187,50 @@ async def set_city(message: Message, state: FSMContext, bot: Bot, lang: str) -> 
                                city=escape(city)))
     else:
         await message.answer(t("request_saved_no_mods", lang))
+
+
+# ---- My team: see it, or leave it and register with another ---------------------
+
+@router.message(Command("team"))
+@router.message(F.text.in_(TEAM))
+async def my_team(message: Message, state: FSMContext, user: dict | None, lang: str) -> None:
+    if not user:
+        await message.answer(t("send_start", lang))
+        return
+    await state.clear()
+    team = user["team"]
+    await message.answer(t("team_info", lang, team=team_label(team), city=escape(team["city"])),
+                         reply_markup=team_kb(lang))
+
+
+@router.callback_query(F.data == "team:switch")
+async def ask_switch(call: CallbackQuery, user: dict | None, lang: str) -> None:
+    if not user:
+        await call.answer(t("send_start", lang), show_alert=True)
+        return
+    active = await db.user_listings(call.from_user.id)
+    await call.message.edit_text(t("switch_confirm", lang, team=team_label(user["team"]), count=len(active)),
+                                 reply_markup=switch_confirm_kb(lang))
+    await call.answer()
+
+
+@router.callback_query(F.data == "team:stay")
+async def stay(call: CallbackQuery, user: dict | None, lang: str) -> None:
+    await call.message.edit_reply_markup(reply_markup=None)
+    if user:
+        await call.message.answer(t("switch_stay", lang, team=team_label(user["team"])), reply_markup=main_menu(lang))
+    await call.answer()
+
+
+@router.callback_query(F.data == "team:leave")
+async def leave(call: CallbackQuery, state: FSMContext, user: dict | None, lang: str) -> None:
+    if not user:  # already left (double tap) or never registered
+        await call.answer(t("send_start", lang), show_alert=True)
+        return
+    old = team_label(user["team"])
+    await db.leave_team(call.from_user.id)
+    await call.message.edit_text(t("switch_done", lang, team=old))
+    await state.clear()
+    await state.set_state(Registration.program)
+    await call.message.answer(t("which_program", lang), reply_markup=program_kb())
+    await call.answer()

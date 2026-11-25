@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 520" role="img" aria-label="Quattuor">
+  <defs>
+    <linearGradient id="qt" gradientUnits="userSpaceOnUse" x1="40" y1="30" x2="380" y2="480">
+      <stop offset="0" stop-color="#F57EF9"/>
+      <stop offset="1" stop-color="#7B80FF"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#qt)" stroke-width="46" stroke-linejoin="miter" stroke-miterlimit="4">
+    <path d="M162 276H92L43 227V87L92 38H222L283 99V158"/>
+    <path d="M283 170V417L330 466H378"/>
+    <path d="M188 276H378"/>
+  </g>
+</svg>

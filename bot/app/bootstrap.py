@@ -24,6 +24,7 @@ def commands(lang: str = "en") -> list[BotCommand]:
     items = [
         BotCommand(command="start", description=t("cmd_start", lang)),
         BotCommand(command="help", description=t("cmd_help", lang)),
+        BotCommand(command="team", description=t("cmd_team", lang)),
         BotCommand(command="lang", description=t("cmd_lang", lang)),
         BotCommand(command="cancel", description=t("cmd_cancel", lang)),
     ]

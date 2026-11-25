@@ -1000,7 +1000,39 @@ select {
 }
 .footer p { max-width: var(--page); margin: 0 auto; }
 .footer p + p { margin-top: 6px; }
-.footer .footer-credit { margin-top: 16px; color: var(--ink); font-weight: 600; }
+/* The team credit, in Quattuor's colours: their mark on near-black, pink to violet. */
+.quattuor {
+  margin: 24px calc(-1 * var(--gutter)) -32px;
+  padding: 18px var(--gutter) calc(18px + env(safe-area-inset-bottom));
+  background: #1b1b1d;
+}
+.quattuor-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: var(--page);
+  margin: 0 auto;
+}
+.quattuor-mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #111113;
+  box-shadow: 0 0 0 1px rgb(245 126 249 / 0.25), 0 0 24px rgb(123 128 255 / 0.25);
+}
+.footer .quattuor .footer-credit {
+  margin: 0;
+  font-family: var(--font-latin, var(--font-display));
+  font-size: var(--step-0);
+  letter-spacing: 0.04em;
+  background: linear-gradient(100deg, #f57ef9, #7b80ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
 /* ---- Catalog page ------------------------------------------------------- */
 
@@ -1387,3 +1419,5 @@ a.band-link:hover { text-decoration: underline; }
   .topbar .nav-links { order: 3; flex: 1 0 100%; }
   .lang-switch { order: 2; }
 }
+:root:lang(ru) .footer .quattuor .footer-credit,
+:root:lang(kk) .footer .quattuor .footer-credit { font-family: var(--font-body); font-weight: 600; letter-spacing: 0; }
