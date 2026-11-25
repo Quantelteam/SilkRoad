@@ -75,7 +75,7 @@ def main() -> None:
     if len(sys.argv) > 1:
         page = Path(sys.argv[1]).read_text(encoding="utf-8")
     else:
-        req = urllib.request.Request(URL, headers={"User-Agent": "SilkRoadExchange-team-sync"})
+        req = urllib.request.Request(URL, headers={"User-Agent": "Almasu-team-sync"})
         with urllib.request.urlopen(req, timeout=60) as res:
             page = res.read().decode("utf-8")
     teams = parse(page)

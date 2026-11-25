@@ -15,7 +15,7 @@ from app.states import Registration
 router = Router()
 
 WELCOME = (
-    "<b>SilkRoad Exchange</b>\n"
+    "<b>Almasu</b>\n"
     "Buy. Sell. Exchange.\n\n"
     "Post parts you have or need. Listings show up on the website"
     + (f" ({settings.site_url})" if settings.site_url else "")

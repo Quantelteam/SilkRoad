@@ -2,7 +2,7 @@
 
 **Status:** Accepted
 **Date:** 2026-11-24
-**Deciders:** SilkRoad Exchange maintainers
+**Deciders:** Almasu maintainers
 
 ## Context
 

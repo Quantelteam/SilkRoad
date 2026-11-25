@@ -1,7 +1,7 @@
 {
-  "name": "silkroad-exchange",
+  "name": "almasu",
   "private": true,
-  "description": "SilkRoad Exchange website: static pages that read the bot's listings_public view.",
+  "description": "Almasu website: static pages that read the bot's listings_public view.",
   "type": "module",
   "engines": { "node": ">=22" },
   "scripts": {
