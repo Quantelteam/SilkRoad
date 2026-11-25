@@ -21,6 +21,15 @@ from app.bootstrap import commands, make_bot  # noqa: E402
 
 SECRET = os.environ.get("WEBHOOK_SECRET", "")
 
+# What Telegram shows on the bot's profile and on its empty chat screen.
+BOT_NAME = "Almasu"
+SHORT_DESCRIPTION = "Buy. Sell. Exchange. Spare FTC and FLL parts between teams in Kazakhstan."
+DESCRIPTION = (
+    "Almasu: buy, sell and exchange spare FTC and FLL parts between teams in Kazakhstan.\n\n"
+    "Post what your team has or needs here. Every listing also appears on the website, "
+    "and deals happen in Telegram private messages."
+)
+
 
 async def _setup(host: str, check_only: bool) -> dict:
     bot = make_bot()
@@ -32,9 +41,12 @@ async def _setup(host: str, check_only: bool) -> dict:
                 allowed_updates=["message", "callback_query"],
             )
             await bot.set_my_commands(commands())
+            await bot.set_my_name(BOT_NAME)
+            await bot.set_my_short_description(SHORT_DESCRIPTION)
+            await bot.set_my_description(DESCRIPTION)
         info = await bot.get_webhook_info()
         me = await bot.get_me()
-        return {"bot": me.username, "webhook": info.url, "pending": info.pending_update_count,
+        return {"bot": me.username, "name": me.first_name, "webhook": info.url, "pending": info.pending_update_count,
                 "last_error": info.last_error_message}
     finally:
         await bot.session.close()
