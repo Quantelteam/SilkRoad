@@ -1000,38 +1000,28 @@ select {
 }
 .footer p { max-width: var(--page); margin: 0 auto; }
 .footer p + p { margin-top: 6px; }
-/* The team credit, in Quattuor's colours: their mark on near-black, pink to violet. */
-.quattuor {
-  margin: 24px calc(-1 * var(--gutter)) -32px;
-  padding: 18px var(--gutter) calc(18px + env(safe-area-inset-bottom));
-  background: #1b1b1d;
-}
+/* The team credit, lit up in Quattuor's colours: their small Qt mark and the
+   line in their pink-to-violet gradient, on the footer itself. */
+.quattuor { margin-top: 18px; }
 .quattuor-inner {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   max-width: var(--page);
   margin: 0 auto;
 }
-.quattuor-mark {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: #111113;
-  box-shadow: 0 0 0 1px rgb(245 126 249 / 0.25), 0 0 24px rgb(123 128 255 / 0.25);
-}
+.quattuor-mark { display: inline-grid; flex: none; filter: drop-shadow(0 0 6px rgb(245 126 249 / 0.45)); }
+.quattuor-mark img { width: 20px; height: auto; }
 .footer .quattuor .footer-credit {
   margin: 0;
   font-family: var(--font-latin, var(--font-display));
   font-size: var(--step-0);
   letter-spacing: 0.04em;
-  background: linear-gradient(100deg, #f57ef9, #7b80ff);
+  background: linear-gradient(100deg, #e45bf0, #6d72ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  filter: drop-shadow(0 0 10px rgb(168 120 255 / 0.35));
 }
 
 /* ---- Catalog page ------------------------------------------------------- */
