@@ -28,8 +28,9 @@ from the database. A closed listing disappears from the site.
 ## Setup
 
 1. **Database.** In the Supabase SQL editor run `supabase/schema.sql`, then
-   `supabase/seed_parts.sql` (≈170 standard REV, goBILDA, Studica and
-   electronics parts) and `supabase/seed_teams.sql` (733 teams from USTEM
+   `supabase/seed_parts.sql` (266 FTC parts: verified REV, goBILDA,
+   Studica, AndyMark, Axon and TETRIX parts with photos, plus generic items),
+   `supabase/seed_parts_fll.sql` (LEGO parts for FLL) and `supabase/seed_teams.sql` (733 teams from USTEM
    Connect). All three are safe to re-run.
 2. **Config.** Copy `bot/.env.example` to `bot/.env` and fill in:
    - `BOT_TOKEN` — from @BotFather

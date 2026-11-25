@@ -160,7 +160,7 @@ const BOT_CONDITIONS = { new: 'new', used: 'used', broken: 'for_parts' };
 const BOT_CATEGORIES = {
   Motors: 'motors', Servos: 'servos', 'Control & Electronics': 'control', Sensors: 'sensors',
   Power: 'batteries', Structure: 'structure', Motion: 'motion', Wheels: 'wheels', Hardware: 'hardware',
-  'Game & Field': 'other',
+  'Game & Field': 'other', 'Linear Motion': 'linear',
   // FLL (LEGO) categories from seed_parts_fll.sql
   Hubs: 'control', Sets: 'sets', Cables: 'cables', Other: 'other',
   'Field & Missions': 'field', 'Beams & Frames': 'structure', 'Axles & Gears': 'motion',
