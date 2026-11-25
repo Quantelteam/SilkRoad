@@ -100,11 +100,15 @@ test('bot rows from listings_public translate to site listings', () => {
   assert.equal(g.want, null);
   assert.equal(g.photos.length, 1);
   assert.equal(g.team.program, 'FTC');
+  assert.equal(g.team.verified, false);
+  assert.equal(normalizeBotRow(botRow({ team_verified: true }), {}).team.verified, true);
+  assert.equal(normalizeBotRow(botRow({ team_verified: 'yes' }), {}).team.verified, false);
 
   const sell = normalizeBotRow(botRow({ type: 'sell', price_kzt: 25000 }), { supabaseUrl: SUPA });
   assert.equal(sell.want.priceKzt, 25000);
-  assert.equal(normalizeBotRow(botRow({ type: 'sell' }), {}).want.text, 'Price negotiable');
-  assert.equal(normalizeBotRow(botRow({ type: 'trade' }), {}).want.text, 'Any offer');
+  // No price, no want: the page words these ("Price negotiable", "Open to offers"), so no text is stored.
+  assert.deepEqual(normalizeBotRow(botRow({ type: 'sell' }), {}).want, { part: null, text: null, priceKzt: null });
+  assert.equal(normalizeBotRow(botRow({ type: 'trade' }), {}).want, null);
 
   const wanted = normalizeBotRow(botRow({ type: 'wanted', have: null, have_brand: null, want: 'Expansion Hub', want_brand: 'REV Robotics', want_category: 'Control & Electronics' }), {});
   assert.equal(wanted.have, null);

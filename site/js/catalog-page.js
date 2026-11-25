@@ -5,8 +5,11 @@ import {
 } from './dom.js';
 import { iconForCategory, UI_ICONS } from './icons.js';
 import { fold, listingCountsByPart, CATEGORY_KEYWORDS } from './filter.js';
-import { plural } from './format.js';
+import { categoryLabel, brandLabel } from './format.js';
+import { t, applyStatic, bindLangSwitch } from './i18n.js';
 
+applyStatic();
+bindLangSwitch();
 drawIconPlaceholders(UI_ICONS);
 init();
 
@@ -17,7 +20,7 @@ async function init() {
   } catch (err) {
     console.error(err);
     $('catalog-count').textContent = '';
-    showError('catalog-error', 'The catalog didn’t load. Check your connection and reload the page.');
+    showError('catalog-error', t('error.catalog'));
     return;
   }
   const counts = await loadListingCounts(catalog);
@@ -32,7 +35,7 @@ async function init() {
     const shownRows = rows.filter((r) => !program || r.part.program === program);
     const brands = catalog.brands.filter((b) => shownRows.some((r) => r.part.brand === b));
     $('brand-nav').replaceChildren(
-      h('ul', null, brands.map((b) => h('li', null, h('a', { href: `#${slug(b)}` }, b)))),
+      h('ul', null, brands.map((b) => h('li', null, h('a', { href: `#${slug(b)}` }, brandLabel(b))))),
     );
     for (const btn of document.querySelectorAll('.program-btn')) {
       btn.setAttribute('aria-pressed', String(/** @type {HTMLElement} */ (btn).dataset.program === program));
@@ -80,7 +83,8 @@ async function loadListingCounts(catalog) {
 
 /** Each part with the folded text a catalog search matches against. */
 function searchableRows(catalog) {
-  const categoryName = new Map(catalog.categories.map((c) => [c.id, c.name]));
+  // The English category name and the one on screen both match.
+  const categoryName = new Map(catalog.categories.map((c) => [c.id, `${c.name} ${categoryLabel(c)}`]));
   return catalog.parts.map((part) => ({
     part,
     text: fold([
@@ -94,8 +98,8 @@ function renderCatalog({ rows, brands, categories, counts, query }) {
   const tokens = fold(query.trim()).split(/\s+/).filter(Boolean);
   const shown = rows.filter((r) => tokens.every((t) => r.text.includes(t))).map((r) => r.part);
   $('catalog-count').textContent = shown.length === rows.length
-    ? `${plural(rows.length, 'part', 'parts')} from ${plural(brands.length, 'brand', 'brands')}`
-    : `${shown.length} of ${plural(rows.length, 'part', 'parts')}`;
+    ? t('catalog.total', { parts: t('count.parts', { n: rows.length }), brands: t('count.brands', { n: brands.length }) })
+    : t('catalog.someOf', { shown: shown.length, n: rows.length });
   $('brands').replaceChildren(...brands.map((b) => brandSection(b, shown, categories, counts)).filter(Boolean));
   $('catalog-empty').hidden = shown.length > 0;
 }
@@ -109,10 +113,10 @@ function brandSection(brand, parts, categories, counts) {
   const id = slug(brand);
 
   return h('section', { class: 'brand', id, 'aria-labelledby': `${id}-title` },
-    h('h2', { id: `${id}-title` }, brand, h('span', { class: 'brand-count' }, plural(brandParts.length, 'part', 'parts'))),
+    h('h2', { id: `${id}-title` }, brandLabel(brand), h('span', { class: 'brand-count' }, t('count.parts', { n: brandParts.length }))),
     groups.map(({ category, parts: groupParts }) =>
       h('div', { class: 'cat-group' },
-        h('h3', null, svg(iconForCategory(category.id), { size: 22 }), category.name),
+        h('h3', null, svg(iconForCategory(category.id), { size: 22 }), categoryLabel(category)),
         h('ul', { class: 'part-rows' }, groupParts.map((p) => partRow(p, counts.get(p.id) ?? 0))),
       )),
   );
@@ -127,11 +131,11 @@ function partRow(part, count) {
   return h('li', { class: 'part-row' },
     thumb,
     h('span', { class: 'part-name' },
-      part.url ? h('a', { href: part.url, target: '_blank', rel: 'noopener noreferrer', title: 'Product page on the maker’s site' }, part.name) : part.name),
+      part.url ? h('a', { href: part.url, target: '_blank', rel: 'noopener noreferrer', title: t('catalog.productPage') }, part.name) : part.name),
     h('span', { class: 'part-sku' }, part.sku ?? ''),
     count
-      ? h('a', { class: 'part-count', href: `listings.html?part=${encodeURIComponent(part.id)}` }, plural(count, 'listing', 'listings'))
-      : h('span', { class: 'part-count is-zero' }, 'No listings'),
+      ? h('a', { class: 'part-count', href: `listings.html?part=${encodeURIComponent(part.id)}` }, t('count.listings', { n: count }))
+      : h('span', { class: 'part-count is-zero' }, t('catalog.noListings')),
   );
 }
 

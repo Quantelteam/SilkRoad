@@ -20,7 +20,8 @@ npm test           # Node 22+, built-in test runner, no dependencies
 | `js/config.js` | Supabase URL, publishable key, bot username |
 | `js/data.js` | Loads and validates listings; `normalizeBotRow()` maps the bot's fields |
 | `js/filter.js` | Search, filters, sorting and URL state (pure, unit-tested in `../tests`) |
-| `js/format.js` | Interface wording for listings, in one place for translation |
+| `js/i18n.js` | Kazakh, Russian and English wording; picks the language (`?lang=`, saved choice, browser) and fills `data-i18n` attributes |
+| `js/format.js` | Labels, prices, dates and part names for listings, in the page language |
 | `js/intro.js` | Header video; hidden until `assets/intro.mp4` exists |
 | `data/parts-catalog.json` | 213 parts with part numbers checked on the vendors' sites |
 | `data/demo-listings.json` | Example listings, used only when no Supabase key is set |

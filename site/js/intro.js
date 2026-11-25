@@ -2,6 +2,7 @@
 // actually loads, so the page looks finished before the video is exported.
 // It plays muted while on screen, at every width, with its own Pause and Sound buttons.
 import { byId } from './dom.js';
+import { t } from './i18n.js';
 
 const SRC = 'assets/intro.mp4';
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -41,9 +42,9 @@ function playIfAllowed(visible) {
 
 function sync() {
   const playing = !video.paused;
-  toggle.textContent = playing ? 'Pause' : 'Play';
+  toggle.textContent = playing ? t('intro.pause') : t('intro.play');
   toggle.setAttribute('aria-pressed', String(!playing));
-  sound.textContent = video.muted ? 'Sound on' : 'Sound off';
+  sound.textContent = video.muted ? t('intro.soundOn') : t('intro.soundOff');
   sound.setAttribute('aria-pressed', String(!video.muted));
 }
 

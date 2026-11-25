@@ -4,60 +4,64 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from app.config import settings
-from app.keyboards import WEBSITE, main_menu, website_kb
+from app.i18n import LANG_PICKER_TEXT, t
+from app.keyboards import LANGUAGE, WEBSITE, language_kb, main_menu, website_kb
 
 # Commands work inside any step, so this router is included before the flows.
 commands = Router()
 # Everything the flows did not handle ends up here, so it is included last.
 fallback = Router()
 
-HELP = (
-    "<b>Almasu</b>\n\n"
-    "➕ New listing — post a part you have, need, sell or give away.\n"
-    "📋 My listings — edit or close your listings.\n"
-    + ("🌐 Website — search every team's listings: " + settings.site_url + "\n" if settings.site_url else "")
-    + "\nDeals happen in Telegram: teams see your @username on the website and write to you.\n"
-    "/cancel — stop what you are doing."
-)
+
+def help_text(lang: str) -> str:
+    site_line = t("help_site_line", lang, url=settings.site_url) if settings.site_url else ""
+    return t("help", lang, site_line=site_line)
 
 
 @commands.message(Command("help"))
-async def help_command(message: Message) -> None:
-    await message.answer(HELP, reply_markup=main_menu)
+async def help_command(message: Message, lang: str) -> None:
+    await message.answer(help_text(lang), reply_markup=main_menu(lang))
+
+
+@commands.message(Command("lang"))
+@commands.message(F.text.in_(LANGUAGE))
+async def language_command(message: Message) -> None:
+    # The choice is handled in handlers/registration.py (callback lang:<code>).
+    await message.answer(LANG_PICKER_TEXT, reply_markup=language_kb())
 
 
 @commands.message(Command("site"))
-@commands.message(F.text == WEBSITE)
-async def website(message: Message) -> None:
-    kb = website_kb()
+@commands.message(F.text.in_(WEBSITE))
+async def website(message: Message, lang: str) -> None:
+    kb = website_kb(lang)
     if kb is None:
-        await message.answer("The website isn't online yet.", reply_markup=main_menu)
+        await message.answer(t("site_offline", lang), reply_markup=main_menu(lang))
         return
-    await message.answer("Search every team's listings by part, city or team:", reply_markup=kb)
+    await message.answer(t("site_intro", lang), reply_markup=kb)
 
 
 @commands.message(Command("cancel"))
-async def cancel_command(message: Message, state: FSMContext) -> None:
+async def cancel_command(message: Message, state: FSMContext, lang: str) -> None:
     await state.clear()
-    await message.answer("Cancelled.", reply_markup=main_menu)
+    await message.answer(t("cancelled", lang), reply_markup=main_menu(lang))
 
 
 @commands.callback_query(F.data == "cancel")
-async def cancel_callback(call: CallbackQuery, state: FSMContext) -> None:
+async def cancel_callback(call: CallbackQuery, state: FSMContext, lang: str) -> None:
     await state.clear()
-    await call.message.edit_text("Cancelled.")
-    await call.message.answer("What next?", reply_markup=main_menu)
+    await call.message.edit_text(t("cancelled", lang))
+    await call.message.answer(t("what_next", lang), reply_markup=main_menu(lang))
     await call.answer()
 
 
 @fallback.message()
-async def unknown_message(message: Message, user: dict | None) -> None:
+async def unknown_message(message: Message, user: dict | None, lang: str) -> None:
     if not user:
-        await message.answer("Send /start to register your team.")
+        await message.answer(t("send_start", lang))
         return
-    await message.answer("Use the menu below or /help.", reply_markup=main_menu)
+    await message.answer(t("use_menu", lang), reply_markup=main_menu(lang))
 
 
 @fallback.callback_query()
-async def stale_callback(call: CallbackQuery) -> None:
-    await call.answer("That step is over, start again from the menu.", show_alert=True)
+async def stale_callback(call: CallbackQuery, lang: str) -> None:
+    await call.answer(t("stale_step", lang), show_alert=True)

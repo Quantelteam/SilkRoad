@@ -10,7 +10,7 @@ import logging
 
 from aiogram.fsm.storage.memory import MemoryStorage
 
-from app.bootstrap import commands, make_bot, make_dispatcher
+from app.bootstrap import make_bot, make_dispatcher, set_commands
 
 
 async def main() -> None:
@@ -18,7 +18,7 @@ async def main() -> None:
                         format="%(asctime)s %(levelname)s %(name)s %(message)s")
     bot = make_bot()
     dp = make_dispatcher(MemoryStorage())
-    await bot.set_my_commands(commands())
+    await set_commands(bot)
     await bot.delete_webhook(drop_pending_updates=True)
     logging.info("bot started (long polling)")
     await dp.start_polling(bot)

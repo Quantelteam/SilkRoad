@@ -1,5 +1,6 @@
 // Tiny element builder. Text is always set with textContent, never innerHTML, so
 // listing text from the database can't inject markup.
+import { t } from './i18n.js';
 
 /**
  * @param {string} tag
@@ -112,4 +113,11 @@ export function svg(paths, { size = 24, label = null, className = 'icon' } = {})
     el.append(p);
   }
   return el;
+}
+
+/** A team's name with a ✓ when an admin has verified the team. */
+export function teamNode(team, label) {
+  return team.verified
+    ? h('span', { class: 'team-name' }, label, ' ', h('span', { class: 'verified', role: 'img', title: t('verified.title'), 'aria-label': t('verified.label') }, '✓'))
+    : h('span', { class: 'team-name' }, label);
 }

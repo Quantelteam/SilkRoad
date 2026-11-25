@@ -1,7 +1,7 @@
 import { config } from './config.js';
 import { loadCatalog, loadListings, LISTING_TYPES, CONDITIONS, telegramLink } from './data.js';
 import {
-  h, svg, byId as $, debounce, showError, drawIconPlaceholders, imageOrFallback, replaceUrl, SEARCH_DEBOUNCE_MS,
+  h, svg, byId as $, debounce, showError, drawIconPlaceholders, imageOrFallback, replaceUrl, teamNode, SEARCH_DEBOUNCE_MS,
 } from './dom.js';
 import { iconForCategory, UI_ICONS } from './icons.js';
 import {
@@ -9,8 +9,10 @@ import {
   searchText, activeFilterCount,
 } from './filter.js';
 import {
-  TYPE_LABELS, CONDITION_LABELS, formatAge, formatPrice, haveLabel, wantLabel, budgetLabel, teamLabel, partLabel, plural,
+  TYPE_LABELS, CONDITION_LABELS, formatAge, formatPrice, haveLabel, wantLabel, budgetLabel, teamLabel, partLabel,
+  categoryLabel, brandLabel,
 } from './format.js';
+import { t, applyStatic, bindLangSwitch } from './i18n.js';
 
 /** @type {import('./data.js').Catalog} */
 let catalog;
@@ -20,6 +22,8 @@ let demo = false;
 let state = stateFromParams(new URLSearchParams(location.search));
 const textIndex = new Map();
 
+applyStatic();
+bindLangSwitch();
 drawIconPlaceholders(UI_ICONS);
 renderBotCta();
 init();
@@ -31,7 +35,7 @@ async function init() {
   } catch (err) {
     console.error(err);
     $('results-count').textContent = '';
-    showError('error', 'Listings didn’t load. Check your connection and reload the page.');
+    showError('error', t('error.listings'));
     return;
   }
   for (const l of listings) textIndex.set(l.id, searchText(l));
@@ -47,11 +51,11 @@ async function init() {
 function renderBotCta() {
   const el = $('bot-cta');
   if (!config.botUsername) {
-    el.textContent = 'The posting bot isn’t public yet. Ask in the FTC Kazakhstan parts channel for the link.';
+    el.textContent = t('bot.missing');
     return;
   }
   const href = telegramLink(config.botUsername);
-  el.append('To post a part, open ', h('a', { href, rel: 'noopener' }, `@${config.botUsername}`), ' in Telegram.');
+  el.append(t('bot.ctaBefore'), h('a', { href, rel: 'noopener' }, `@${config.botUsername}`), t('bot.ctaAfter'));
 }
 
 // ---- Filters -------------------------------------------------------------
@@ -66,7 +70,7 @@ function buildFilters() {
   const { cities, teams } = filterOptions(listings);
   addOptions('f-city', cities.map((c) => [c, c]));
   fillBrands();
-  addOptions('f-category', catalog.categories.map((c) => [c.id, c.name]));
+  addOptions('f-category', catalog.categories.map((c) => [c.id, categoryLabel(c)]));
   addOptions('f-condition', CONDITIONS.map((c) => [c, CONDITION_LABELS[c]]));
   addOptions('f-team', teams.map((t) => [t.key, t.label]));
 }
@@ -75,8 +79,8 @@ function buildFilters() {
 function fillBrands() {
   const select = /** @type {HTMLSelectElement} */ ($('f-brand'));
   const used = new Set(catalog.parts.filter((p) => !state.program || p.program === state.program).map((p) => p.brand));
-  select.replaceChildren(h('option', { value: '' }, 'Any brand'));
-  addOptions('f-brand', catalog.brands.filter((b) => used.has(b)).map((b) => [b, b]));
+  select.replaceChildren(h('option', { value: '' }, t('filters.anyBrand')));
+  addOptions('f-brand', catalog.brands.filter((b) => used.has(b)).map((b) => [b, brandLabel(b)]));
 }
 
 function addOptions(selectId, pairs) {
@@ -202,13 +206,13 @@ function render() {
   const shown = applyFilters(listings, state, textIndex);
   const total = listings.length;
   $('results-count').textContent = shown.length === total
-    ? plural(total, 'listing', 'listings')
-    : `${shown.length} of ${plural(total, 'listing', 'listings')}`;
+    ? t('count.listings', { n: total })
+    : t('results.someOf', { shown: shown.length, n: total });
 
   const active = activeFilterCount(state);
   $('clear-filters').hidden = active === 0;
-  $('filters-toggle-label').textContent = active ? `Filters (${active})` : 'Filters';
-  $('filters-done').textContent = shown.length ? `Show ${plural(shown.length, 'listing', 'listings')}` : 'No listings match';
+  $('filters-toggle-label').textContent = active ? t('filters.withCount', { n: active }) : t('filters.label');
+  $('filters-done').textContent = shown.length ? t('filters.show', { n: shown.length }) : t('filters.noMatch');
   renderActivePart();
 
   $('cards').replaceChildren(...shown.map(card));
@@ -221,8 +225,8 @@ function renderActivePart() {
   box.hidden = !part;
   if (!part) return box.replaceChildren();
   box.replaceChildren(
-    h('p', null, 'Listings with ', h('strong', null, partLabel(part)), part.sku ? ` (${part.sku})` : ''),
-    h('button', { type: 'button', class: 'link-button', onclick: () => update({ part: '' }) }, 'Show all parts'),
+    h('p', null, t('activePart.before'), h('strong', null, partLabel(part)), part.sku ? ` (${part.sku})` : '', t('activePart.after')),
+    h('button', { type: 'button', class: 'link-button', onclick: () => update({ part: '' }) }, t('activePart.showAll')),
   );
 }
 
@@ -242,19 +246,19 @@ function media(listing, { large = false } = {}) {
   const glyph = () => h('div', { class: 'glyph' }, svg(iconForCategory(listing.category ?? 'other'), { size: large ? 96 : 64 }));
   if (listing.photos.length) {
     return imageOrFallback(
-      { src: listing.photos[0], alt: haveLabel(listing) ?? wantLabel(listing) ?? 'Listing photo', loading, width: 400, height: 300 },
+      { src: listing.photos[0], alt: haveLabel(listing) ?? wantLabel(listing) ?? t('photo.listing'), loading, width: 400, height: 300 },
       h('div', { class: 'team-photo' }), glyph);
   }
   const part = mainPart(listing);
   if (part?.image) {
     return imageOrFallback(
-      { src: part.image, alt: `${partLabel(part)}, catalog photo`, loading, width: 400, height: 300 },
-      h('figure', { class: 'catalog-photo' }, h('figcaption', null, `Catalog photo, ${photoSource(part)}`)), glyph);
+      { src: part.image, alt: t('photo.catalogAlt', { part: partLabel(part) }), loading, width: 400, height: 300 },
+      h('figure', { class: 'catalog-photo' }, h('figcaption', null, t('photo.catalogCaption', { source: photoSource(part) }))), glyph);
   }
   if (listing.catalogImage) {
     return imageOrFallback(
-      { src: listing.catalogImage, alt: `${haveLabel(listing) ?? wantLabel(listing) ?? 'Part'}, catalog photo`, loading, width: 400, height: 300 },
-      h('figure', { class: 'catalog-photo' }, h('figcaption', null, `Catalog photo, ${hostLabel(listing.catalogImage)}`)), glyph);
+      { src: listing.catalogImage, alt: t('photo.catalogAlt', { part: haveLabel(listing) ?? wantLabel(listing) ?? t('part.fallback') }), loading, width: 400, height: 300 },
+      h('figure', { class: 'catalog-photo' }, h('figcaption', null, t('photo.catalogCaption', { source: hostLabel(listing.catalogImage) }))), glyph);
   }
   return glyph();
 }
@@ -274,20 +278,25 @@ function terms(listing) {
   const want = wantLabel(listing);
   const budget = budgetLabel(listing);
   const row = (label, value) => h('div', { class: 'ex-row' }, h('dt', null, label), h('dd', null, value));
-  const rows = isWanted
-    ? [want && have ? row('Can trade', have) : null, budget ? row('Budget', budget) : null]
-    : [have && want ? row(listing.type === 'sell' && !listing.want?.part && !listing.want?.text ? 'Price' : 'Wants', want) : null];
+  const priceOnly = listing.type === 'sell' && !listing.want?.part && !listing.want?.text;
+  let rows;
+  if (isWanted) rows = [want && have ? row(t('detail.canTrade'), have) : null, budget ? row(t('detail.budget'), budget) : null];
+  else if (!have) rows = [];
+  else if (priceOnly) rows = [row(t('detail.price'), want ?? t('price.negotiable'))];
+  else if (want) rows = [row(t('detail.wants'), want)];
+  else if (listing.type === 'trade') rows = [row(t('detail.wants'), t('price.openToOffers'))];
+  else rows = [];
   return rows.some(Boolean) ? h('dl', { class: 'exchange' }, rows) : null;
 }
 
 function contact(listing) {
   const href = demo ? null : telegramLink(listing.username);
   if (!href) {
-    return h('span', { class: 'contact is-disabled' }, demo ? 'Example listing' : 'No Telegram username');
+    return h('span', { class: 'contact is-disabled' }, demo ? t('contact.example') : t('contact.noUsername'));
   }
   // The button names the team; the link still opens the poster's own Telegram chat.
   return h('a', { class: 'contact', href, target: '_blank', rel: 'noopener noreferrer', title: `Telegram: @${listing.username}` },
-    svg(UI_ICONS.telegram, { size: 18 }), `Message ${listing.team.name}`);
+    svg(UI_ICONS.telegram, { size: 18 }), t('contact.message', { team: listing.team.name }));
 }
 
 /**
@@ -300,12 +309,12 @@ function contact(listing) {
  */
 function priceLine(listing) {
   switch (listing.type) {
-    case 'sell': return listing.want?.priceKzt != null ? formatPrice(listing.want.priceKzt) : 'Price negotiable';
-    case 'giveaway': return 'Free';
-    case 'wanted': return budgetLabel(listing) ? `Budget ${budgetLabel(listing)}` : 'Wanted';
+    case 'sell': return listing.want?.priceKzt != null ? formatPrice(listing.want.priceKzt) : t('price.negotiable');
+    case 'giveaway': return t('price.free');
+    case 'wanted': return budgetLabel(listing) ? t('price.budget', { price: budgetLabel(listing) }) : TYPE_LABELS.wanted;
     default: {
       const want = haveLabel(listing) ? wantLabel(listing) : null;
-      return want ? `For ${want}` : 'Open to offers';
+      return want ? t('price.for', { want }) : t('price.openToOffers');
     }
   }
 }
@@ -323,7 +332,7 @@ function card(listing) {
       listing.condition ? h('span', { class: 'card-cond' }, CONDITION_LABELS[listing.condition]) : null,
       h('p', { class: 'card-meta' },
         h('span', null, `${listing.city} · ${formatAge(listing.createdAt)}`),
-        h('span', { class: 'team' }, teamLabel(listing.team))),
+        h('span', { class: 'team' }, teamNode(listing.team, teamLabel(listing.team)))),
     ),
     h('div', { class: 'card-foot' }, contact(listing)),
   );
@@ -344,7 +353,7 @@ function openDetail(id, { fromUrl = false } = {}) {
   const part = mainPart(listing);
   const photos = listing.photos.length > 1
     ? h('div', { class: 'detail-thumbs' }, listing.photos.slice(1).map((src, i) =>
-        h('img', { src, alt: `${title}, photo ${i + 2}`, loading: 'lazy', width: 160, height: 120 })))
+        h('img', { src, alt: t('photo.nth', { title, n: i + 2 }), loading: 'lazy', width: 160, height: 120 })))
     : null;
 
   // Everything sits in one wrapper so a click on the dialog element itself can only be the backdrop.
@@ -353,23 +362,23 @@ function openDetail(id, { fromUrl = false } = {}) {
     photos,
     h('div', { class: 'detail-body' },
       h('div', null,
-        h('p', { class: 'card-kicker' }, listing.type === 'wanted' ? 'Looking for' : 'Has'),
+        h('p', { class: 'card-kicker' }, listing.type === 'wanted' ? t('detail.lookingFor') : t('detail.has')),
         h('h2', { id: 'detail-title' }, title)),
       terms(listing),
       listing.notes ? h('p', { class: 'detail-notes' }, listing.notes) : null,
       h('dl', { class: 'facts' },
-        fact('Team', teamLabel(listing.team)),
-        fact('City', listing.city),
-        listing.condition ? fact('Condition', CONDITION_LABELS[listing.condition]) : null,
-        part?.sku ? fact('Part number', part.sku) : null,
-        fact('Posted', formatAge(listing.createdAt))),
+        fact(t('detail.team'), teamNode(listing.team, teamLabel(listing.team))),
+        fact(t('detail.city'), listing.city),
+        listing.condition ? fact(t('detail.condition'), CONDITION_LABELS[listing.condition]) : null,
+        part?.sku ? fact(t('detail.partNumber'), part.sku) : null,
+        fact(t('detail.posted'), formatAge(listing.createdAt))),
       photoCredit(listing, part),
       h('div', { class: 'detail-actions' },
         contact(listing),
-        part?.id ? h('a', { class: 'link-button', href: `?part=${encodeURIComponent(part.id)}` }, 'Other listings with this part') : null),
+        part?.id ? h('a', { class: 'link-button', href: `?part=${encodeURIComponent(part.id)}` }, t('detail.otherListings')) : null),
     ),
     // autofocus keeps the dialog scrolled to the top instead of jumping to the first link.
-    h('button', { type: 'button', class: 'detail-close', 'aria-label': 'Close', autofocus: true, onclick: () => dialog.close() },
+    h('button', { type: 'button', class: 'detail-close', 'aria-label': t('common.close'), autofocus: true, onclick: () => dialog.close() },
       svg(UI_ICONS.close, { size: 20 })),
   ));
   if (!dialog.open) dialog.showModal();
@@ -390,14 +399,13 @@ function hostLabel(src) {
 function photoCredit(listing, part) {
   if (listing.photos.length) return null;
   if (!part?.image && listing.catalogImage) {
-    return h('p', { class: 'photo-credit' },
-      'The photo is the maker’s catalog picture, not this team’s part. Source: ', hostLabel(listing.catalogImage), '.');
+    return h('p', { class: 'photo-credit' }, t('photo.creditBefore'), hostLabel(listing.catalogImage), t('photo.creditAfter'));
   }
   if (!part?.image) return null;
   const source = photoSource(part);
   return h('p', { class: 'photo-credit' },
-    'The photo is the maker’s catalog picture, not this team’s part. Source: ',
-    part.url ? h('a', { href: part.url, target: '_blank', rel: 'noopener noreferrer' }, source) : source, '.');
+    t('photo.creditBefore'),
+    part.url ? h('a', { href: part.url, target: '_blank', rel: 'noopener noreferrer' }, source) : source, t('photo.creditAfter'));
 }
 
 function fact(label, value) {

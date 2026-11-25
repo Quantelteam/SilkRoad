@@ -102,6 +102,26 @@ async def get_team_request(request_id: int) -> dict | None:
     return await asyncio.to_thread(run)
 
 
+async def set_team_checked(team_id: int, checked: bool, by: int) -> dict | None:
+    """Puts the ✓ on a team, or takes it off. Returns the team, or None if it doesn't exist."""
+    fields = {"checked_at": datetime.now(timezone.utc).isoformat(), "checked_by": by} if checked \
+        else {"checked_at": None, "checked_by": None}
+
+    def run():
+        res = _client.table("teams").update(fields).eq("id", team_id).execute()
+        return res.data[0] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
+async def get_team(team_id: int) -> dict | None:
+    def run():
+        res = _client.table("teams").select("*").eq("id", team_id).limit(1).execute()
+        return res.data[0] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
 async def moderator_ids() -> set[int]:
     """ADMIN_IDS from the config plus users marked admin in the database."""
     def run():
@@ -134,6 +154,41 @@ async def save_user(tg_id: int, username: str | None, full_name: str, team_id: i
 async def update_username(tg_id: int, username: str | None) -> None:
     def run():
         _client.table("users").update({"username": username}).eq("tg_id", tg_id).execute()
+
+    await asyncio.to_thread(run)
+
+
+# --- language preference (table user_prefs, see supabase/user_prefs.sql) ----
+# Kept apart from `users`: those rows only exist after team registration and
+# are deleted when data is wiped, but the language is chosen before that.
+
+async def get_lang(tg_id: int) -> str | None:
+    """The language this user picked, or None if they never picked one."""
+    def run():
+        res = _client.table("user_prefs").select("lang").eq("tg_id", tg_id).limit(1).execute()
+        return res.data[0]["lang"] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
+async def get_langs(tg_ids: list[int]) -> dict[int, str]:
+    """Picked languages for several users at once (for messages to moderators)."""
+    ids = list(tg_ids)
+    if not ids:
+        return {}
+
+    def run():
+        res = _client.table("user_prefs").select("tg_id, lang").in_("tg_id", ids).execute()
+        return {row["tg_id"]: row["lang"] for row in res.data}
+
+    return await asyncio.to_thread(run)
+
+
+async def set_lang(tg_id: int, lang: str) -> None:
+    now = datetime.now(timezone.utc).isoformat()
+
+    def run():
+        _client.table("user_prefs").upsert({"tg_id": tg_id, "lang": lang, "updated_at": now}).execute()
 
     await asyncio.to_thread(run)
 

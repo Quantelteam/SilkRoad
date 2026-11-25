@@ -24,47 +24,52 @@
   <script type="module" src="js/landing-page.js"></script>
   <script type="module" src="js/intro.js"></script>
 </head>
-<body class="landing">
-  <a class="skip-link" href="#main">Skip to content</a>
+<body class="landing" data-page="landing">
+  <a class="skip-link" href="#main" data-i18n="skip.content">Skip to content</a>
 
   <header class="plate landing-plate">
     <div class="plate-inner">
-      <nav class="topbar" aria-label="Main">
+      <nav class="topbar" aria-label="Main" data-i18n-aria-label="nav.main">
         <a class="wordmark" href="./" aria-current="page">ALMASU</a>
         <ul class="nav-links">
-          <li><a href="listings.html">Listings</a></li>
-          <li><a href="catalog.html">Parts catalog</a></li>
-          <li><a href="#how">How it works</a></li>
+          <li><a href="listings.html" data-i18n="nav.listings">Listings</a></li>
+          <li><a href="catalog.html" data-i18n="nav.catalog">Parts catalog</a></li>
+          <li><a href="#how" data-i18n="nav.how">How it works</a></li>
         </ul>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria-label="lang.group">
+          <button type="button" class="lang-btn" data-lang="kk" lang="kk" title="Қазақша" aria-pressed="false">KZ</button>
+          <button type="button" class="lang-btn" data-lang="ru" lang="ru" title="Русский" aria-pressed="false">RU</button>
+          <button type="button" class="lang-btn" data-lang="en" lang="en" title="English" aria-pressed="true">EN</button>
+        </div>
       </nav>
 
       <div class="hero-row">
         <div class="hero landing-hero">
-          <p class="eyebrow">FTC · FLL · Kazakhstan</p>
-          <h1>Buy. Sell. Exchange.</h1>
-          <p class="hero-sub">Spare robot parts between FTC and FLL teams across Kazakhstan. Find the part here, then settle it with the team in a Telegram chat.</p>
+          <p class="eyebrow" data-i18n="landing.eyebrow">FTC · FLL · Kazakhstan</p>
+          <h1 data-i18n="landing.slogan">Buy. Sell. Exchange.</h1>
+          <p class="hero-sub" data-i18n="landing.sub">Spare robot parts between FTC and FLL teams across Kazakhstan. Find the part here, then settle it with the team in a Telegram chat.</p>
           <div class="cta-row">
-            <a class="cta cta-primary" href="listings.html">Browse listings</a>
-            <a class="cta cta-ghost bot-link" href="#how" rel="noopener">Post through the bot</a>
+            <a class="cta cta-primary" href="listings.html" data-i18n="landing.browse">Browse listings</a>
+            <a class="cta cta-ghost bot-link" href="#how" rel="noopener" data-i18n="landing.post">Post through the bot</a>
           </div>
           <form class="search landing-search" role="search" action="listings.html" method="get">
-            <label for="lq">Looking for something?</label>
+            <label for="lq" data-i18n="landing.searchLabel">Looking for something?</label>
             <div class="search-field">
               <span class="search-icon" data-icon="search"></span>
               <input id="lq" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Core Hex, SPIKE hub, Viper-Slide">
             </div>
           </form>
           <button type="button" class="intro-open" id="intro-open" hidden>
-            <span class="intro-open-icon" aria-hidden="true"></span>Watch the 30-second intro
+            <span class="intro-open-icon" aria-hidden="true"></span><span data-i18n="intro.open">Watch the 30-second intro</span>
           </button>
         </div>
 
         <!-- Intro video: shown only once assets/intro.mp4 loads (export it from the Motion film). -->
         <figure class="intro" id="intro" hidden>
-          <video class="intro-video" id="intro-video" poster="assets/intro-poster.jpg" muted loop playsinline preload="metadata" aria-label="Almasu intro video"></video>
+          <video class="intro-video" id="intro-video" poster="assets/intro-poster.jpg" muted loop playsinline preload="metadata" aria-label="Almasu intro video" data-i18n-aria-label="intro.label"></video>
           <div class="intro-controls">
-            <button type="button" class="intro-btn" id="intro-toggle" aria-pressed="false">Pause</button>
-            <button type="button" class="intro-btn" id="intro-sound" aria-pressed="false">Sound on</button>
+            <button type="button" class="intro-btn" id="intro-toggle" aria-pressed="false" data-i18n="intro.pause">Pause</button>
+            <button type="button" class="intro-btn" id="intro-sound" aria-pressed="false" data-i18n="intro.soundOn">Sound on</button>
           </div>
         </figure>
       </div>
@@ -72,76 +77,76 @@
   </header>
 
   <main id="main">
-    <section class="stats" aria-label="Almasu in numbers">
-      <div class="stat"><span class="stat-num" id="stat-listings">–</span><span class="stat-label">listings live now</span></div>
-      <div class="stat"><span class="stat-num" id="stat-parts">–</span><span class="stat-label">parts in the catalog</span></div>
-      <div class="stat"><span class="stat-num" id="stat-brands">–</span><span class="stat-label">brands, from goBILDA to LEGO</span></div>
-      <div class="stat"><span class="stat-num">0&nbsp;₸</span><span class="stat-label">fees: teams deal directly</span></div>
+    <section class="stats" aria-label="Almasu in numbers" data-i18n-aria-label="stats.label">
+      <div class="stat"><span class="stat-num" id="stat-listings">–</span><span class="stat-label" id="stat-listings-label" data-i18n="stats.listings">listings live now</span></div>
+      <div class="stat"><span class="stat-num" id="stat-parts">–</span><span class="stat-label" id="stat-parts-label" data-i18n="stats.parts">parts in the catalog</span></div>
+      <div class="stat"><span class="stat-num" id="stat-brands">–</span><span class="stat-label" id="stat-brands-label" data-i18n="stats.brands">brands, from goBILDA to LEGO</span></div>
+      <div class="stat"><span class="stat-num">0&nbsp;₸</span><span class="stat-label" data-i18n="stats.fees">fees: teams deal directly</span></div>
     </section>
 
     <section class="band latest" aria-labelledby="latest-title">
       <div class="band-head">
-        <h2 id="latest-title">Fresh on the exchange</h2>
-        <a class="band-link" href="listings.html">All listings →</a>
+        <h2 id="latest-title" data-i18n="latest.title">Fresh on the exchange</h2>
+        <a class="band-link" href="listings.html" data-i18n="latest.all">All listings →</a>
       </div>
       <ul class="latest-list" id="latest"></ul>
-      <p class="latest-empty" id="latest-empty" hidden>No listings yet. Be the first: post a part through the bot.</p>
+      <p class="latest-empty" id="latest-empty" hidden data-i18n="latest.empty">No listings yet. Be the first: post a part through the bot.</p>
     </section>
 
     <section class="how" id="how" aria-labelledby="how-title">
-      <h2 id="how-title">How it works</h2>
+      <h2 id="how-title" data-i18n="how.title">How it works</h2>
       <ol class="steps">
         <li>
-          <h3>Post in the Telegram bot</h3>
-          <p>The bot asks what you have, what you want for it, and for a photo. No photo? Use the official catalog one. Your team name and city come from your team’s registration.</p>
+          <h3 data-i18n="how.step1.title">Post in the Telegram bot</h3>
+          <p data-i18n="how.step1.landing">The bot asks what you have, what you want for it, and for a photo. No photo? Use the official catalog one. Your team name and city come from your team’s registration.</p>
         </li>
         <li>
-          <h3>Teams find it here</h3>
-          <p>Every active listing shows on this site. Anyone can search by part, city or team, without an account.</p>
+          <h3 data-i18n="how.step2.title">Teams find it here</h3>
+          <p data-i18n="how.step2.text">Every active listing shows on this site. Anyone can search by part, city or team, without an account.</p>
         </li>
         <li>
-          <h3>Agree in a private chat</h3>
-          <p>Tap Message on a listing to open a Telegram chat with that team. You agree on the price and the hand-over between yourselves.</p>
+          <h3 data-i18n="how.step3.title">Agree in a private chat</h3>
+          <p data-i18n="how.step3.text">Tap Message on a listing to open a Telegram chat with that team. You agree on the price and the hand-over between yourselves.</p>
         </li>
       </ol>
       <p class="bot-cta" id="bot-cta"></p>
     </section>
 
-    <section class="band programs" aria-label="Programs">
+    <section class="band programs" aria-label="Programs" data-i18n-aria-label="programs.label">
       <a class="program-card" href="listings.html?program=FTC">
         <span class="program-tag">FTC</span>
-        <h2>Metal, motors, hubs</h2>
-        <p>goBILDA, REV Robotics, Studica, AndyMark, Axon and TETRIX: channels, Yellow Jackets, Control Hubs, servos, wheels and slides.</p>
-        <span class="band-link">FTC listings →</span>
+        <h2 data-i18n="programs.ftc.title">Metal, motors, hubs</h2>
+        <p data-i18n="programs.ftc.text">goBILDA, REV Robotics, Studica, AndyMark, Axon and TETRIX: channels, Yellow Jackets, Control Hubs, servos, wheels and slides.</p>
+        <span class="band-link" data-i18n="programs.ftc.link">FTC listings →</span>
       </a>
       <a class="program-card" href="listings.html?program=FLL">
         <span class="program-tag program-tag-fll">FLL</span>
-        <h2>LEGO, sets, fields</h2>
-        <p>SPIKE Prime and Essential, EV3, Technic beams, axles and gears, season sets and field mats.</p>
-        <span class="band-link">FLL listings →</span>
+        <h2 data-i18n="programs.fll.title">LEGO, sets, fields</h2>
+        <p data-i18n="programs.fll.text">SPIKE Prime and Essential, EV3, Technic beams, axles and gears, season sets and field mats.</p>
+        <span class="band-link" data-i18n="programs.fll.link">FLL listings →</span>
       </a>
     </section>
 
     <section class="band catalog-teaser" aria-labelledby="teaser-title">
       <div class="band-head">
-        <h2 id="teaser-title">One name for every part</h2>
-        <a class="band-link" href="catalog.html">Open the catalog →</a>
+        <h2 id="teaser-title" data-i18n="teaser.title">One name for every part</h2>
+        <a class="band-link" href="catalog.html" data-i18n="teaser.link">Open the catalog →</a>
       </div>
-      <p class="band-sub">The bot offers parts from a catalog checked against the makers’ sites, so a Yellow Jacket is called the same in every listing. Photos come from the makers.</p>
+      <p class="band-sub" data-i18n="teaser.sub">The bot offers parts from a catalog checked against the makers’ sites, so a Yellow Jacket is called the same in every listing. Photos come from the makers.</p>
       <ul class="teaser-grid" id="teaser"></ul>
     </section>
   </main>
 
   <footer class="footer">
-    <p>Almasu doesn’t handle payments or delivery. Teams agree on both in Telegram.</p>
-    <p>Catalog photos load from the part maker’s website and belong to that maker.</p>
-    <p>A community project by FTC teams in Kazakhstan. Not affiliated with <i>FIRST</i>®, LEGO®, goBILDA, REV Robotics or Studica.</p>
-    <p class="footer-credit">by FTC team Quattuor #24881</p>
+    <p data-i18n="footer.payments">Almasu doesn’t handle payments or delivery. Teams agree on both in Telegram.</p>
+    <p data-i18n="footer.photosLanding">Catalog photos load from the part maker’s website and belong to that maker.</p>
+    <p><span data-i18n="footer.community1">A community project by FTC teams in Kazakhstan. Not affiliated with</span> <i>FIRST</i>®<span data-i18n="footer.community2">, LEGO®, goBILDA, REV Robotics or Studica.</span></p>
+    <p class="footer-credit" data-i18n="footer.credit">by FTC team Quattuor #24881</p>
   </footer>
 
-  <dialog class="intro-dialog" id="intro-dialog" aria-label="Almasu intro video">
+  <dialog class="intro-dialog" id="intro-dialog" aria-label="Almasu intro video" data-i18n-aria-label="intro.label">
     <video class="intro-video" id="intro-dialog-video" poster="assets/intro-poster.jpg" controls playsinline preload="none"></video>
-    <button type="button" class="detail-close" id="intro-close" aria-label="Close">
+    <button type="button" class="detail-close" id="intro-close" aria-label="Close" data-i18n-aria-label="common.close">
       <span data-icon="close"></span>
     </button>
   </dialog>

@@ -17,18 +17,15 @@ from urllib.parse import parse_qs, urlparse
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from app.bootstrap import commands, make_bot  # noqa: E402
+from app.bootstrap import make_bot, set_profile  # noqa: E402
+from app.i18n import BRAND  # noqa: E402
 
 SECRET = os.environ.get("WEBHOOK_SECRET", "")
 
-# What Telegram shows on the bot's profile and on its empty chat screen.
-BOT_NAME = "Almasu"
-SHORT_DESCRIPTION = "Buy. Sell. Exchange. Spare FTC and FLL parts between teams in Kazakhstan."
-DESCRIPTION = (
-    "Almasu: buy, sell and exchange spare FTC and FLL parts between teams in Kazakhstan.\n\n"
-    "Post what your team has or needs here. Every listing also appears on the website, "
-    "and deals happen in Telegram private messages."
-)
+# The bot's name is the brand in every language. The command menu, description
+# and short description (profile and empty chat screen) are set in English,
+# Russian and Kazakh by app.bootstrap.set_profile, texts in app/i18n.py.
+BOT_NAME = BRAND
 
 
 async def _setup(host: str, check_only: bool) -> dict:
@@ -40,10 +37,8 @@ async def _setup(host: str, check_only: bool) -> dict:
                 secret_token=SECRET,
                 allowed_updates=["message", "callback_query"],
             )
-            await bot.set_my_commands(commands())
             await bot.set_my_name(BOT_NAME)
-            await bot.set_my_short_description(SHORT_DESCRIPTION)
-            await bot.set_my_description(DESCRIPTION)
+            await set_profile(bot)
         info = await bot.get_webhook_info()
         me = await bot.get_me()
         return {"bot": me.username, "name": me.first_name, "webhook": info.url, "pending": info.pending_update_count,
