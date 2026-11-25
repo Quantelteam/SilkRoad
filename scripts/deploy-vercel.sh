@@ -1,21 +1,28 @@
 #!/usr/bin/env bash
-# Deploys site/ to Vercel production through the REST API. Needs only curl and
-# sha1sum, so no Vercel CLI or npm install.
+# Deploys site/ or bot/ to Vercel production through the REST API. Needs only
+# curl and sha1sum, so no Vercel CLI or npm install.
 #
-#   VERCEL_TOKEN=...  scripts/deploy-vercel.sh
+#   VERCEL_TOKEN=...  scripts/deploy-vercel.sh          # the website (site/)
+#   VERCEL_TOKEN=...  scripts/deploy-vercel.sh bot      # the Telegram bot (bot/)
 #
 # Optional: VERCEL_TEAM_ID (deploy into a team), VERCEL_PROJECT (default
-# silkroad-exchange, which gives https://silkroad-exchange.vercel.app if free).
+# silkroad-exchange for the site, silkroad-bot for the bot).
 set -euo pipefail
 : "${VERCEL_TOKEN:?Set VERCEL_TOKEN to a Vercel access token}"
-PROJECT="${VERCEL_PROJECT:-silkroad-exchange}"
+TARGET="${1:-site}"
+case "$TARGET" in
+  site) DEFAULT_PROJECT=silkroad-exchange ;;
+  bot)  DEFAULT_PROJECT=silkroad-bot ;;
+  *) echo "Usage: $0 [site|bot]" >&2; exit 2 ;;
+esac
+PROJECT="${VERCEL_PROJECT:-$DEFAULT_PROJECT}"
 API=https://api.vercel.com
 TEAM=""
 if [ -n "${VERCEL_TEAM_ID:-}" ]; then TEAM="?teamId=${VERCEL_TEAM_ID}"; fi
 auth=(-H "Authorization: Bearer ${VERCEL_TOKEN}")
 
-# Paths keep their site/ prefix: the Vercel project's Root Directory is "site",
-# the same setting a Git-connected deploy uses.
+# Paths keep their site/ or bot/ prefix: each Vercel project's Root Directory
+# is that folder, the same setting a Git-connected deploy uses.
 cd "$(dirname "$0")/.."
 files="["
 count=0
@@ -29,7 +36,9 @@ while IFS= read -r -d '' path; do
     --data-binary @"$path" > /dev/null
   files+="{\"file\":\"${rel}\",\"sha\":\"${sha}\",\"size\":${size}},"
   count=$((count + 1))
-done < <(find site -type f ! -name README.md -print0)
+# Never upload local secrets, virtualenvs or caches.
+done < <(find "$TARGET" -type f ! -name README.md ! -name '.env' ! -name '*.pyc' \
+           -not -path '*/.venv/*' -not -path '*/__pycache__/*' -print0)
 files="${files%,}]"
 echo "Uploaded ${count} files"
 

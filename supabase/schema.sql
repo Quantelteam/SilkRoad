@@ -145,3 +145,14 @@ alter table team_requests enable row level security;
 alter table parts add column if not exists program text not null default 'FTC'
     check (program in ('FTC', 'FLL'));
 create index if not exists parts_program_idx on parts (program, category);
+
+-- ---------------------------------------------------------------------------
+-- Conversation state for the Vercel (webhook) bot: which step of a flow each
+-- user is on. Only the bot (service key) reads or writes it.
+create table if not exists bot_fsm (
+    key        text        primary key,
+    state      text,
+    data       jsonb       not null default '{}'::jsonb,
+    updated_at timestamptz not null default now()
+);
+alter table bot_fsm enable row level security;

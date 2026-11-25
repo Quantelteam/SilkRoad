@@ -72,3 +72,22 @@ The anon key can only read those two things; every write goes through the bot.
 and city, nothing else. Refresh it with `python scripts/ustem_teams.py`, then
 run the file again in the SQL editor; existing teams keep their names and
 are only marked as on the list.
+
+## Running on Vercel
+
+The bot runs on Vercel as a webhook (project `silkroad-bot`, https://silkroad-bot.vercel.app):
+
+- `bot/api/telegram.py` receives updates from Telegram and refuses any request
+  without the `WEBHOOK_SECRET` header Telegram was given.
+- Conversation state (which step a user is on) lives in the `bot_fsm` table,
+  because each message may run in a fresh process.
+- Environment variables on the Vercel project: `BOT_TOKEN`, `SUPABASE_URL`,
+  `SUPABASE_SERVICE_KEY`, `SITE_URL`, `WEBHOOK_SECRET`, optional `ADMIN_IDS`.
+- Deploy: `scripts/deploy-vercel.sh bot`. After the first deploy, or a domain
+  change, register the webhook once:
+  `curl -H "X-Setup-Secret: <WEBHOOK_SECRET>" https://silkroad-bot.vercel.app/api/setup`
+  Add `?check` to only read the webhook status (pending updates, last error);
+  Telegram rate-limits setting the webhook, so don't call it repeatedly.
+
+`python -m app.main` (long polling) still works for local testing, but it
+removes the webhook: run one or the other, never both.
