@@ -9,7 +9,7 @@ This repository contains the **bot** (the only way to post a listing), the
 **database schema**, and the **website** in `site/` that reads from it.
 
 - Website: https://almasu.vercel.app
-- Bot: [@ftc_silkroad_bot](https://t.me/ftc_silkroad_bot)
+- Bot: [@almasu_ex_bot](https://t.me/almasu_ex_bot)
 - Stack: Python + aiogram 3, Supabase (PostgreSQL + file storage)
 
 ## What the bot does

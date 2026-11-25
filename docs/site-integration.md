@@ -134,6 +134,6 @@ npm run dev
 
 ## Testing with real data
 
-Post a listing through [@ftc_silkroad_bot](https://t.me/ftc_silkroad_bot) and
+Post a listing through [@almasu_ex_bot](https://t.me/almasu_ex_bot) and
 reload the page — it appears immediately. Close it in the bot and it is gone.
 That is the whole contract between the two halves.

@@ -8,5 +8,5 @@
 export const config = {
   supabaseUrl: 'https://oikyjgdaogqojhcjkrrd.supabase.co',
   supabaseAnonKey: 'sb_publishable_vYAIQYtIKObcfOQsIV4ahg_Gb0wa9fa', // publishable key: read-only by RLS, safe to ship
-  botUsername: 'ftc_silkroad_bot', // Telegram bot that teams post through, without the @
+  botUsername: 'almasu_ex_bot', // Telegram bot that teams post through, without the @
 };
