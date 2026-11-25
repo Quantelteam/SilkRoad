@@ -76,13 +76,24 @@ async def _ask_condition(message: Message, state: FSMContext) -> None:
     await message.answer("What condition is the part in?", reply_markup=condition_kb())
 
 
+def _catalog_photo(data: dict) -> str | None:
+    """Official photo of the chosen catalog part, if the catalog has one."""
+    for key in ("have_part", "want_part"):
+        part = data.get(key)
+        if part and part.get("image"):
+            return part["image"]
+    return None
+
+
 async def _ask_photos(message: Message, state: FSMContext) -> None:
     await state.set_state(NewListing.photos)
-    await state.update_data(photo_ids=[])
-    await message.answer(
-        f"Send up to {MAX_PHOTOS} photos of the part, then tap Done.",
-        reply_markup=photos_kb(0),
-    )
+    await state.update_data(photo_ids=[], default_photo=None)
+    data = await state.get_data()
+    has_default = _catalog_photo(data) is not None
+    text = f"Send up to {MAX_PHOTOS} photos of the part, then tap Done."
+    if has_default:
+        text += "\nNo photo at hand? Use the official catalog photo instead."
+    await message.answer(text, reply_markup=photos_kb(0, has_default))
 
 
 @router.message(NewListing.price, PLAIN_TEXT)
@@ -125,6 +136,22 @@ async def add_photo(message: Message, state: FSMContext) -> None:
                          reply_markup=photos_kb(len(photo_ids)))
 
 
+@router.callback_query(NewListing.photos, F.data == "photos:default")
+async def photos_default(call: CallbackQuery, state: FSMContext) -> None:
+    data = await state.get_data()
+    image = _catalog_photo(data)
+    if not image or data.get("photo_ids"):
+        await call.answer("Not available for this listing.")
+        return
+    await state.update_data(default_photo=image)
+    try:
+        await call.message.answer_photo(image, caption="Catalog photo added.")
+    except Exception:
+        logging.warning("catalog photo preview failed: %s", image)
+        await call.message.answer("Catalog photo added.")
+    await photos_done(call, state)
+
+
 @router.callback_query(NewListing.photos, F.data == "photos:done")
 async def photos_done(call: CallbackQuery, state: FSMContext) -> None:
     await call.message.edit_reply_markup(reply_markup=None)
@@ -164,7 +191,7 @@ def _preview(data: dict) -> dict:
         "price_kzt": data.get("price_kzt"),
         "condition": data.get("condition"),
         "note": data.get("note"),
-        "photos": data.get("photo_ids", []),
+        "photos": data.get("photo_ids") or ([data["default_photo"]] if data.get("default_photo") else []),
     }
 
 
@@ -192,6 +219,8 @@ async def publish(call: CallbackQuery, state: FSMContext, bot: Bot, user: dict) 
         except Exception:
             logging.exception("photo upload failed")
             await call.message.answer("Photos could not be uploaded, publishing without them.")
+    if not photo_urls and data.get("default_photo"):
+        photo_urls = [data["default_photo"]]
 
     have_part = data.get("have_part")
     want_part = data.get("want_part")

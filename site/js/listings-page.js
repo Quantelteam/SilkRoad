@@ -234,6 +234,11 @@ function media(listing, { large = false } = {}) {
       { src: part.image, alt: `${partLabel(part)}, catalog photo`, loading, width: 400, height: 300 },
       h('figure', { class: 'catalog-photo' }, h('figcaption', null, `Catalog photo, ${photoSource(part)}`)), glyph);
   }
+  if (listing.catalogImage) {
+    return imageOrFallback(
+      { src: listing.catalogImage, alt: `${haveLabel(listing) ?? wantLabel(listing) ?? 'Part'}, catalog photo`, loading, width: 400, height: 300 },
+      h('figure', { class: 'catalog-photo' }, h('figcaption', null, `Catalog photo, ${hostLabel(listing.catalogImage)}`)), glyph);
+  }
   return glyph();
 }
 
@@ -354,9 +359,19 @@ function photoSource(part) {
   return part.url ? new URL(part.url).hostname.replace(/^www\./, '') : part.brand;
 }
 
+/** Vendor host of a photo URL, without "www.", for the credit line. */
+function hostLabel(src) {
+  return new URL(src).hostname.replace(/^www\./, '');
+}
+
 /** When the dialog shows the vendor's photo instead of the team's, say whose it is. */
 function photoCredit(listing, part) {
-  if (listing.photos.length || !part?.image) return null;
+  if (listing.photos.length) return null;
+  if (!part?.image && listing.catalogImage) {
+    return h('p', { class: 'photo-credit' },
+      'The photo is the maker’s catalog picture, not this team’s part. Source: ', hostLabel(listing.catalogImage), '.');
+  }
+  if (!part?.image) return null;
   const source = photoSource(part);
   return h('p', { class: 'photo-credit' },
     'The photo is the maker’s catalog picture, not this team’s part. Source: ',

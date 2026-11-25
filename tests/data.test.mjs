@@ -119,6 +119,24 @@ test('bot rows from listings_public translate to site listings', () => {
   assert.equal(normalizeBotRow(botRow({ username: 'x y' }), {}).username, null);
 });
 
+test('a vendor photo from the bot\'s catalog-photo button becomes a labelled catalog image', () => {
+  const row = (photos) => ({
+    id: 21, type: 'sell', status: 'active', price_kzt: 9000, created_at: '2026-11-25T08:00:00Z', photos,
+    have: 'Control Hub', have_brand: 'REV Robotics', have_category: 'Control & Electronics',
+    team_program: 'FTC', team_number: 1, team_name: 'Quattuor', city: 'Almaty', username: null,
+  });
+  const vendor = 'https://www.revrobotics.com/x.jpg';
+  const cdn = 'https://cdn11.bigcommerce.com/s-x/images/hub.jpg';
+  const only = normalizeBotRow(row([cdn]), { supabaseUrl: SUPA });
+  assert.deepEqual(only.photos, []);
+  assert.equal(only.catalogImage, cdn);
+  // unknown hosts are dropped, and a team photo always wins over the catalog one
+  assert.equal(normalizeBotRow(row([vendor]), { supabaseUrl: SUPA }).catalogImage, null);
+  const mixed = normalizeBotRow(row([`${SUPA}/storage/v1/object/public/listings/a.jpg`, cdn]), { supabaseUrl: SUPA });
+  assert.equal(mixed.photos.length, 1);
+  assert.equal(mixed.catalogImage, null);
+});
+
 test('catalog parts carry a program; bot parts matching a catalog name get its photo', () => {
   const c = normalizeCatalog({ parts: [
     { id: 'lego-45601', name: 'SPIKE Prime Large Hub', brand: 'LEGO Education', sku: '45601', category: 'control', program: 'FLL' },

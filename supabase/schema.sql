@@ -28,6 +28,8 @@ create table if not exists parts (
     sku      text,
     category text not null
 );
+-- official catalog photo, offered by the bot when a team has no photo of its own
+alter table parts add column if not exists image text;
 
 -- coalesce so that re-seeding does not duplicate parts without a brand
 create unique index if not exists parts_unique_idx on parts (name, coalesce(brand, ''));
