@@ -1,46 +1,26 @@
+"""Long polling, for running the bot on your own computer.
+
+In production the bot runs on Vercel as a webhook (api/telegram.py). Starting
+this removes that webhook, so the Vercel bot stops getting messages until
+api/setup is called again. Run only one of the two at a time.
+"""
+
 import asyncio
 import logging
 
-from aiogram import Bot, Dispatcher
-from aiogram.client.default import DefaultBotProperties
-from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
-from aiogram.types import BotCommand, ErrorEvent
 
-from app.config import settings
-from app.handlers import build_router
-from app.middleware import UserMiddleware
-
-COMMANDS = [
-    BotCommand(command="start", description="Register or open the menu"),
-    BotCommand(command="help", description="How the exchange works"),
-    BotCommand(command="cancel", description="Cancel the current step"),
-]
+from app.bootstrap import commands, make_bot, make_dispatcher
 
 
 async def main() -> None:
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s %(message)s")
-
-    bot = Bot(settings.bot_token,
-              default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-    dp = Dispatcher(storage=MemoryStorage())
-    dp.update.outer_middleware(UserMiddleware())
-    dp.include_router(build_router())
-
-    @dp.errors()
-    async def on_error(event: ErrorEvent) -> bool:
-        logging.exception("update failed", exc_info=event.exception)
-        message = getattr(event.update, "message", None) or getattr(
-            getattr(event.update, "callback_query", None), "message", None)
-        if message is not None:
-            await message.answer("Something broke on our side. Try again or send /cancel.")
-        return True
-
-    commands = COMMANDS + ([BotCommand(command="site", description="Open the website")] if settings.site_url else [])
-    await bot.set_my_commands(commands)
+    bot = make_bot()
+    dp = make_dispatcher(MemoryStorage())
+    await bot.set_my_commands(commands())
     await bot.delete_webhook(drop_pending_updates=True)
-    logging.info("bot started")
+    logging.info("bot started (long polling)")
     await dp.start_polling(bot)
 
 
