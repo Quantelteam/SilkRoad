@@ -113,3 +113,10 @@ export function svg(paths, { size = 24, label = null, className = 'icon' } = {})
   }
   return el;
 }
+
+/** A team's name with a ✓ when an admin has verified the team. */
+export function teamNode(team, label) {
+  return team.verified
+    ? h('span', { class: 'team-name' }, label, ' ', h('span', { class: 'verified', title: 'Verified team', 'aria-label': 'verified team' }, '✓'))
+    : h('span', { class: 'team-name' }, label);
+}

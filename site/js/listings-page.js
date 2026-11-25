@@ -1,7 +1,7 @@
 import { config } from './config.js';
 import { loadCatalog, loadListings, LISTING_TYPES, CONDITIONS, telegramLink } from './data.js';
 import {
-  h, svg, byId as $, debounce, showError, drawIconPlaceholders, imageOrFallback, replaceUrl, SEARCH_DEBOUNCE_MS,
+  h, svg, byId as $, debounce, showError, drawIconPlaceholders, imageOrFallback, replaceUrl, teamNode, SEARCH_DEBOUNCE_MS,
 } from './dom.js';
 import { iconForCategory, UI_ICONS } from './icons.js';
 import {
@@ -323,7 +323,7 @@ function card(listing) {
       listing.condition ? h('span', { class: 'card-cond' }, CONDITION_LABELS[listing.condition]) : null,
       h('p', { class: 'card-meta' },
         h('span', null, `${listing.city} · ${formatAge(listing.createdAt)}`),
-        h('span', { class: 'team' }, teamLabel(listing.team))),
+        h('span', { class: 'team' }, teamNode(listing.team, teamLabel(listing.team)))),
     ),
     h('div', { class: 'card-foot' }, contact(listing)),
   );
@@ -358,7 +358,7 @@ function openDetail(id, { fromUrl = false } = {}) {
       terms(listing),
       listing.notes ? h('p', { class: 'detail-notes' }, listing.notes) : null,
       h('dl', { class: 'facts' },
-        fact('Team', teamLabel(listing.team)),
+        fact('Team', teamNode(listing.team, teamLabel(listing.team))),
         fact('City', listing.city),
         listing.condition ? fact('Condition', CONDITION_LABELS[listing.condition]) : null,
         part?.sku ? fact('Part number', part.sku) : null,

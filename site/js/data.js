@@ -234,7 +234,7 @@ export function normalizeBotRow(row, ctx) {
     category,
     notes: cleanText(row.note, 500),
     city,
-    team: { number: teamNumber, name: teamName, program: row.team_program === 'FLL' ? 'FLL' : 'FTC' },
+    team: { number: teamNumber, name: teamName, program: row.team_program === 'FLL' ? 'FLL' : 'FTC', verified: row.team_verified === true },
     username: safeUsername(row.username),
     photos: /** @type {string[]} */ (photos),
     createdAt,
@@ -318,7 +318,7 @@ export async function loadListings(catalog, config) {
  *   have: { part: Part|null, text: string|null } | null,
  *   want: { part: Part|null, text: string|null, priceKzt: number|null } | null,
  *   condition: Condition|null, category: string|null, notes: string|null, city: string,
- *   team: { number: number|null, name: string, program?: 'FTC'|'FLL' }, username: string|null,
+ *   team: { number: number|null, name: string, program?: 'FTC'|'FLL', verified?: boolean }, username: string|null,
  *   photos: string[], catalogImage?: string | null, createdAt: string
  * }} Listing
  */

@@ -1315,3 +1315,18 @@ a.band-link:hover { text-decoration: underline; }
   .stats { transform: translateY(-20px); }
   .stat { padding: 16px; }
 }
+
+/* The ✓ next to a team an admin has verified. */
+.verified {
+  display: inline-grid;
+  place-items: center;
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: 50%;
+  background: var(--tile);
+  color: var(--tile-ink);
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: 0.05em;
+}

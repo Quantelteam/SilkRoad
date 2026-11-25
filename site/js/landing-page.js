@@ -3,7 +3,7 @@
 // (the bot's "?listing=17", shared searches) are sent there unchanged.
 import { config } from './config.js';
 import { loadCatalog, loadListings, telegramLink } from './data.js';
-import { h, byId as $, drawIconPlaceholders, imageOrFallback, svg } from './dom.js';
+import { h, byId as $, drawIconPlaceholders, imageOrFallback, svg, teamNode } from './dom.js';
 import { iconForCategory, UI_ICONS } from './icons.js';
 import { TYPE_LABELS, formatAge, haveLabel, wantLabel, budgetLabel, teamLabel, partLabel } from './format.js';
 
@@ -58,7 +58,7 @@ function renderLatest(listings) {
       h('span', { class: `chip type-${l.type}` }, TYPE_LABELS[l.type]),
       h('span', { class: 'latest-title' }, title ?? 'Part'),
       want && l.type !== 'wanted' ? h('span', { class: 'latest-want' }, want) : null,
-      h('span', { class: 'latest-meta' }, `${teamLabel(l.team)} · ${l.city} · ${formatAge(l.createdAt)}`)));
+      h('span', { class: 'latest-meta' }, teamNode(l.team, teamLabel(l.team)), ` · ${l.city} · ${formatAge(l.createdAt)}`)));
   }));
 }
 

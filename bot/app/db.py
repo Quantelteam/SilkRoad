@@ -102,6 +102,26 @@ async def get_team_request(request_id: int) -> dict | None:
     return await asyncio.to_thread(run)
 
 
+async def set_team_checked(team_id: int, checked: bool, by: int) -> dict | None:
+    """Puts the ✓ on a team, or takes it off. Returns the team, or None if it doesn't exist."""
+    fields = {"checked_at": datetime.now(timezone.utc).isoformat(), "checked_by": by} if checked \
+        else {"checked_at": None, "checked_by": None}
+
+    def run():
+        res = _client.table("teams").update(fields).eq("id", team_id).execute()
+        return res.data[0] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
+async def get_team(team_id: int) -> dict | None:
+    def run():
+        res = _client.table("teams").select("*").eq("id", team_id).limit(1).execute()
+        return res.data[0] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
 async def moderator_ids() -> set[int]:
     """ADMIN_IDS from the config plus users marked admin in the database."""
     def run():

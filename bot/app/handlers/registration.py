@@ -9,7 +9,7 @@ from app import db
 from app.config import settings
 from app.filters import PLAIN_TEXT
 from app.keyboards import join_team_kb, main_menu, program_kb
-from app.handlers.moderation import USTEM_TEAMS, notify_moderators
+from app.handlers.moderation import USTEM_TEAMS, notify_moderators, notify_new_member
 from app.states import Registration
 
 router = Router()
@@ -98,7 +98,7 @@ async def set_number(message: Message, state: FSMContext) -> None:
 
 
 @router.callback_query(Registration.join, F.data == "join:yes")
-async def join_team(call: CallbackQuery, state: FSMContext) -> None:
+async def join_team(call: CallbackQuery, state: FSMContext, bot: Bot) -> None:
     data = await state.get_data()
     await db.save_user(
         call.from_user.id,
@@ -110,6 +110,9 @@ async def join_team(call: CallbackQuery, state: FSMContext) -> None:
     await call.message.edit_text("You joined the team.")
     await call.message.answer("Ready. Post your first listing.", reply_markup=main_menu)
     await call.answer()
+    team = await db.get_team(data["team_id"])
+    if team:
+        await notify_new_member(bot, team, call.from_user)
 
 
 @router.callback_query(Registration.join, F.data == "join:no")
@@ -147,6 +150,7 @@ async def set_city(message: Message, state: FSMContext, bot: Bot) -> None:
                            message.from_user.full_name, team["id"])
         await message.answer(f"Registered: {team['program']} #{team['number']} {escape(team['name'])}.",
                              reply_markup=main_menu)
+        await notify_new_member(bot, team, message.from_user)
         return
 
     req = await db.create_team_request({

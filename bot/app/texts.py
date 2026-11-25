@@ -60,7 +60,8 @@ def format_listing(listing: dict, team: dict | None = None, username: str | None
         lines.append(f"Note: {escape(listing['note'])}")
 
     if team:
-        lines.append(f"Team: {team['program']} #{team['number']} {escape(team['name'])} · {escape(team['city'])}")
+        mark = " ✓" if team.get("checked_at") else ""
+        lines.append(f"Team: {team['program']} #{team['number']} {escape(team['name'])}{mark} · {escape(team['city'])}")
     elif listing.get("city"):
         lines.append(f"City: {escape(listing['city'])}")
     if username:

@@ -100,6 +100,9 @@ test('bot rows from listings_public translate to site listings', () => {
   assert.equal(g.want, null);
   assert.equal(g.photos.length, 1);
   assert.equal(g.team.program, 'FTC');
+  assert.equal(g.team.verified, false);
+  assert.equal(normalizeBotRow(botRow({ team_verified: true }), {}).team.verified, true);
+  assert.equal(normalizeBotRow(botRow({ team_verified: 'yes' }), {}).team.verified, false);
 
   const sell = normalizeBotRow(botRow({ type: 'sell', price_kzt: 25000 }), { supabaseUrl: SUPA });
   assert.equal(sell.want.priceKzt, 25000);

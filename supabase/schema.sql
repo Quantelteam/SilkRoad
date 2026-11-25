@@ -79,7 +79,7 @@ select l.id,
        t.program                      as team_program,
        t.number                       as team_number,
        t.name                         as team_name,
-       t.verified                     as team_verified,
+       t.checked_at is not null       as team_verified,
        l.city,
        u.username
 from listings l
@@ -163,3 +163,8 @@ alter table bot_fsm enable row level security;
 -- A user can exist without a team, e.g. a moderator who isn't on any team.
 -- The bot treats such a user as not registered for posting.
 alter table users alter column team_id drop not null;
+
+-- The ✓ badge: an admin checked that the team's members are who they say. Separate
+-- from teams.verified, which only means the team is on the USTEM Connect list.
+alter table teams add column if not exists checked_at timestamptz;
+alter table teams add column if not exists checked_by bigint;

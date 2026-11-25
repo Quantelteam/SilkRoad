@@ -43,6 +43,10 @@ def moderation_kb(request_id: int) -> InlineKeyboardMarkup:
     return inline([[("✅ Approve", f"mod:ok:{request_id}"), ("✖️ Reject", f"mod:no:{request_id}")]])
 
 
+def verify_team_kb(team_id: int) -> InlineKeyboardMarkup:
+    return inline([[("✓ Verify team", f"vt:on:{team_id}")]])
+
+
 def program_kb() -> InlineKeyboardMarkup:
     return inline([[("FTC", "program:FTC"), ("FLL", "program:FLL")]])
 
