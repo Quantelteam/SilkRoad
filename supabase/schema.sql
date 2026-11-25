@@ -156,3 +156,8 @@ create table if not exists bot_fsm (
     updated_at timestamptz not null default now()
 );
 alter table bot_fsm enable row level security;
+
+-- ---------------------------------------------------------------------------
+-- A user can exist without a team, e.g. a moderator who isn't on any team.
+-- The bot treats such a user as not registered for posting.
+alter table users alter column team_id drop not null;
