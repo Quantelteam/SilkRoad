@@ -86,6 +86,8 @@ The bot runs on Vercel as a webhook (project `silkroad-bot`, https://silkroad-bo
 - Deploy: `scripts/deploy-vercel.sh bot`. After the first deploy, or a domain
   change, register the webhook once:
   `curl -H "X-Setup-Secret: <WEBHOOK_SECRET>" https://silkroad-bot.vercel.app/api/setup`
+  Add `?check` to only read the webhook status (pending updates, last error);
+  Telegram rate-limits setting the webhook, so don't call it repeatedly.
 
 `python -m app.main` (long polling) still works for local testing, but it
 removes the webhook: run one or the other, never both.
