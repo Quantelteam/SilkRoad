@@ -18,7 +18,7 @@ class Settings:
 def _site_url() -> str:
     value = os.getenv("SITE_URL", "").strip().rstrip("/")
     if value and not value.startswith("https://"):
-        raise RuntimeError("SITE_URL must start with https://, for example https://silkroad.example")
+        raise RuntimeError("SITE_URL must start with https://, for example https://almasu.example")
     return value
 
 

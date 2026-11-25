@@ -12,7 +12,7 @@ commands = Router()
 fallback = Router()
 
 HELP = (
-    "<b>SilkRoad Exchange</b>\n\n"
+    "<b>Almasu</b>\n\n"
     "➕ New listing — post a part you have, need, sell or give away.\n"
     "📋 My listings — edit or close your listings.\n"
     + ("🌐 Website — search every team's listings: " + settings.site_url + "\n" if settings.site_url else "")

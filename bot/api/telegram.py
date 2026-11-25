@@ -53,7 +53,7 @@ class handler(BaseHTTPRequestHandler):
         self._reply(200, b"ok")
 
     def do_GET(self) -> None:
-        self._reply(200, b"SilkRoad Exchange bot webhook")
+        self._reply(200, b"Almasu bot webhook")
 
     def _reply(self, code: int, body: bytes) -> None:
         self.send_response(code)

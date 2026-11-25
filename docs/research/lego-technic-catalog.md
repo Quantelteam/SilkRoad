@@ -1,6 +1,6 @@
 # LEGO Technic catalog: sources and notes
 
-Companion to `lego-technic.json` (SilkRoad Exchange spare-parts catalog). Built 2026-11-25.
+Companion to `lego-technic.json` (Almasu spare-parts catalog). Built 2026-11-25.
 
 ## Scope
 
