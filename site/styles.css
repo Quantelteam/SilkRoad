@@ -23,6 +23,9 @@
 
   --font-body: 'Exo 2', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'Michroma', 'Exo 2', system-ui, sans-serif;
+  --display-weight: 400;
+  /* Michroma for Latin-only marks (the wordmark, FTC/FLL tags, big numbers) in every language. */
+  --font-latin: 'Michroma', 'Exo 2', system-ui, sans-serif;
 
   --step--1: 0.875rem;
   --step-0: 1rem;
@@ -167,7 +170,7 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 .wordmark {
-  font-family: var(--font-display);
+  font-family: var(--font-latin);
   font-weight: 400;
   font-size: var(--step-1);
   letter-spacing: 0.12em;
@@ -209,7 +212,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 .hero h1 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: calc(var(--step-3) * 0.8);
   line-height: 1.25;
   letter-spacing: 0;
@@ -898,7 +901,7 @@ select {
 }
 .detail-body h2 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: var(--step-1);
   line-height: 1.25;
 }
@@ -951,7 +954,7 @@ select {
 }
 .how h2 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: var(--step-2);
 }
 
@@ -976,7 +979,7 @@ select {
   content: counter(step);
   display: block;
   margin-bottom: 8px;
-  font-family: var(--font-display);
+  font-family: var(--font-latin);
   font-weight: 400;
   font-size: var(--step-2);
   color: var(--tile);
@@ -1042,7 +1045,7 @@ select {
   padding-bottom: 10px;
   border-bottom: 3px solid var(--ink);
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: var(--step-2);
 }
 .brand-count {
@@ -1204,11 +1207,11 @@ a.part-count { display: inline-flex; align-items: center; min-height: 44px; marg
 }
 .stat:first-child { border-radius: var(--radius-m) 0 0 0; }
 .stat:last-child { border-radius: 0 0 var(--radius-m) 0; }
-.stat-num { font-family: var(--font-display); font-size: var(--step-2); color: var(--tile); }
+.stat-num { font-family: var(--font-latin); font-size: var(--step-2); color: var(--tile); }
 .stat-label { color: var(--ink-2); font-size: var(--step--1); }
 
 .band { max-width: var(--page); margin: 0 auto; padding: 32px var(--gutter) 48px; }
-.band h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); line-height: 1.25; }
+.band h2 { font-family: var(--font-display); font-weight: var(--display-weight); font-size: var(--step-2); line-height: 1.25; }
 .band-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
 .band-link { color: var(--tile); font-weight: 600; text-decoration: none; }
 a.band-link:hover { text-decoration: underline; }
@@ -1257,7 +1260,7 @@ a.band-link:hover { text-decoration: underline; }
   border-radius: 999px;
   background: var(--ink);
   color: var(--bg);
-  font-family: var(--font-display);
+  font-family: var(--font-latin);
   font-size: var(--step--1);
   letter-spacing: 0.12em;
 }
@@ -1329,4 +1332,58 @@ a.band-link:hover { text-decoration: underline; }
   font-weight: 700;
   line-height: 1;
   vertical-align: 0.05em;
+}
+
+/* ---- Languages ---------------------------------------------------------- */
+
+/* Michroma has no Cyrillic. In Russian and Kazakh the display headings switch to
+   Exo 2 Bold (already loaded), tightened a little so they keep the wide-set,
+   engineered feel; the ALMASU wordmark, FTC/FLL tags and numbers stay in Michroma. */
+:root:lang(ru), :root:lang(kk) {
+  --font-display: 'Exo 2', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display-weight: 700;
+}
+:root:lang(ru) .hero h1, :root:lang(kk) .hero h1 { letter-spacing: -0.005em; line-height: 1.15; }
+:root:lang(ru) .eyebrow, :root:lang(kk) .eyebrow { font-weight: 600; letter-spacing: 0.14em; }
+
+/* KZ / RU / EN in the top bar. */
+.lang-switch {
+  display: inline-flex;
+  flex: none;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--radius-s);
+  /* Opaque, so the plate's hole pattern doesn't show through. */
+  background: color-mix(in srgb, var(--ink) 7%, var(--plate));
+}
+.lang-btn {
+  min-width: 36px;
+  min-height: 32px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--ink-2);
+  font-family: var(--font-latin);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.lang-btn:hover { color: var(--ink); }
+.lang-btn[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), inset 0 0 0 1px var(--line);
+}
+
+/* Wide screens: wordmark, links, then the switch at the far right. */
+@media (min-width: 720px) {
+  .topbar .nav-links { margin-left: auto; }
+}
+
+/* Phones: the switch shares the wordmark row, aligned right; the links scroll below. */
+@media (max-width: 719px) {
+  .topbar { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+  .topbar .nav-links { order: 3; flex: 1 0 100%; }
+  .lang-switch { order: 2; }
 }

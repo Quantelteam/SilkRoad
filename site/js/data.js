@@ -208,9 +208,10 @@ export function normalizeBotRow(row, ctx) {
   const have = type === 'wanted' ? null : botSide(row.have, row.have_brand, row.have_category, ctx.partsByKey);
   let want = botSide(row.want, row.want_brand, row.want_category, ctx.partsByKey);
   const price = cleanPrice(row.price_kzt);
-  if (type === 'sell') want = { part: null, text: price === null ? 'Price negotiable' : null, priceKzt: price };
+  // A sale without a price is "price negotiable" and a trade without a want is "open
+  // to offers": the page says so in its own language, so no text is stored here.
+  if (type === 'sell') want = { part: null, text: null, priceKzt: price };
   else if (want) want = { ...want, priceKzt: null };
-  else if (type === 'trade') want = { part: null, text: 'Any offer', priceKzt: null };
   if (!have && !want) return null;
 
   const teamNumber = Number.isInteger(row.team_number) && /** @type {number} */ (row.team_number) > 0 ? /** @type {number} */ (row.team_number) : null;

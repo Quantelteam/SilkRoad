@@ -20,27 +20,32 @@
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="js/catalog-page.js"></script>
 </head>
-<body>
-  <a class="skip-link" href="#catalog">Skip to catalog</a>
+<body data-page="catalog">
+  <a class="skip-link" href="#catalog" data-i18n="skip.catalog">Skip to catalog</a>
 
   <header class="plate plate-short">
     <div class="plate-inner">
-      <nav class="topbar" aria-label="Main">
+      <nav class="topbar" aria-label="Main" data-i18n-aria-label="nav.main">
         <a class="wordmark" href="./">ALMASU</a>
         <ul class="nav-links">
-          <li><a href="listings.html">Listings</a></li>
-          <li><a href="catalog.html" aria-current="page">Parts catalog</a></li>
-          <li><a href="./#how">How it works</a></li>
+          <li><a href="listings.html" data-i18n="nav.listings">Listings</a></li>
+          <li><a href="catalog.html" aria-current="page" data-i18n="nav.catalog">Parts catalog</a></li>
+          <li><a href="./#how" data-i18n="nav.how">How it works</a></li>
         </ul>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria-label="lang.group">
+          <button type="button" class="lang-btn" data-lang="kk" lang="kk" title="Қазақша" aria-pressed="false">KZ</button>
+          <button type="button" class="lang-btn" data-lang="ru" lang="ru" title="Русский" aria-pressed="false">RU</button>
+          <button type="button" class="lang-btn" data-lang="en" lang="en" title="English" aria-pressed="true">EN</button>
+        </div>
       </nav>
       <div class="hero">
-        <h1>Parts catalog</h1>
-        <p class="hero-sub" id="catalog-sub">The bot offers these names when a team posts, so the same motor is called the same thing in every listing. Anything missing can still be posted as free text.</p>
+        <h1 data-i18n="catalog.title">Parts catalog</h1>
+        <p class="hero-sub" id="catalog-sub" data-i18n="catalog.sub">The bot offers these names when a team posts, so the same motor is called the same thing in every listing. Anything missing can still be posted as free text.</p>
         <form class="search" role="search" id="catalog-search">
-          <label for="cq">Filter the catalog</label>
+          <label for="cq" data-i18n="catalog.searchLabel">Filter the catalog</label>
           <div class="search-field">
             <span class="search-icon" data-icon="search"></span>
-            <input id="cq" type="search" autocomplete="off" spellcheck="false" placeholder="Part name, part number or nickname">
+            <input id="cq" type="search" autocomplete="off" spellcheck="false" placeholder="Part name, part number or nickname" data-i18n-placeholder="catalog.placeholder">
           </div>
         </form>
       </div>
@@ -48,26 +53,26 @@
   </header>
 
   <main class="catalog" id="catalog" tabindex="-1">
-    <div class="program-switch" role="group" aria-label="Program">
-      <button type="button" class="program-btn" data-program="" aria-pressed="true">All</button>
-      <button type="button" class="program-btn" data-program="FTC" aria-pressed="false">FTC parts</button>
-      <button type="button" class="program-btn" data-program="FLL" aria-pressed="false">FLL parts (LEGO)</button>
+    <div class="program-switch" role="group" aria-label="Program" data-i18n-aria-label="program.group">
+      <button type="button" class="program-btn" data-program="" aria-pressed="true" data-i18n="common.all">All</button>
+      <button type="button" class="program-btn" data-program="FTC" aria-pressed="false" data-i18n="catalog.ftc">FTC parts</button>
+      <button type="button" class="program-btn" data-program="FLL" aria-pressed="false" data-i18n="catalog.fll">FLL parts (LEGO)</button>
     </div>
-    <nav class="brand-nav" aria-label="Brands" id="brand-nav"></nav>
-    <p class="results-count" id="catalog-count" aria-live="polite">Loading catalog…</p>
+    <nav class="brand-nav" aria-label="Brands" id="brand-nav" data-i18n-aria-label="catalog.brands"></nav>
+    <p class="results-count" id="catalog-count" aria-live="polite" data-i18n="catalog.loading">Loading catalog…</p>
     <div id="brands"></div>
     <div class="empty" id="catalog-empty" hidden>
-      <h2>No parts match</h2>
-      <p>Try the part number from the vendor’s site, or a shorter name. Parts that aren’t in the catalog can still be posted in the bot as free text.</p>
+      <h2 data-i18n="catalog.emptyTitle">No parts match</h2>
+      <p data-i18n="catalog.emptyText">Try the part number from the vendor’s site, or a shorter name. Parts that aren’t in the catalog can still be posted in the bot as free text.</p>
     </div>
     <div class="error" id="catalog-error" role="alert" hidden></div>
   </main>
 
   <footer class="footer">
-    <p>Part numbers are copied from the vendors’ sites. If one is wrong or a part is missing, tell the channel admins.</p>
-    <p>Product photos load from each maker’s own website and belong to that maker. Each part name links to its product page.</p>
-    <p>A community project by FTC teams in Kazakhstan. Not affiliated with <i>FIRST</i>®, LEGO®, goBILDA, REV Robotics or Studica.</p>
-    <p class="footer-credit">by FTC team Quattuor #24881</p>
+    <p data-i18n="footer.partNumbers">Part numbers are copied from the vendors’ sites. If one is wrong or a part is missing, tell the channel admins.</p>
+    <p data-i18n="footer.photosCatalog">Product photos load from each maker’s own website and belong to that maker. Each part name links to its product page.</p>
+    <p><span data-i18n="footer.community1">A community project by FTC teams in Kazakhstan. Not affiliated with</span> <i>FIRST</i>®<span data-i18n="footer.community2">, LEGO®, goBILDA, REV Robotics or Studica.</span></p>
+    <p class="footer-credit" data-i18n="footer.credit">by FTC team Quattuor #24881</p>
   </footer>
 </body>
 </html>

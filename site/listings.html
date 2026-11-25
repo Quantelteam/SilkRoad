@@ -23,26 +23,31 @@
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="js/listings-page.js"></script>
 </head>
-<body>
-  <a class="skip-link" href="#results">Skip to listings</a>
+<body data-page="listings">
+  <a class="skip-link" href="#results" data-i18n="skip.listings">Skip to listings</a>
 
   <header class="plate">
     <div class="plate-inner">
-      <nav class="topbar" aria-label="Main">
+      <nav class="topbar" aria-label="Main" data-i18n-aria-label="nav.main">
         <a class="wordmark" href="./">ALMASU</a>
         <ul class="nav-links">
-          <li><a href="listings.html" aria-current="page">Listings</a></li>
-          <li><a href="catalog.html">Parts catalog</a></li>
-          <li><a href="#how">How it works</a></li>
+          <li><a href="listings.html" aria-current="page" data-i18n="nav.listings">Listings</a></li>
+          <li><a href="catalog.html" data-i18n="nav.catalog">Parts catalog</a></li>
+          <li><a href="#how" data-i18n="nav.how">How it works</a></li>
         </ul>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria-label="lang.group">
+          <button type="button" class="lang-btn" data-lang="kk" lang="kk" title="Қазақша" aria-pressed="false">KZ</button>
+          <button type="button" class="lang-btn" data-lang="ru" lang="ru" title="Русский" aria-pressed="false">RU</button>
+          <button type="button" class="lang-btn" data-lang="en" lang="en" title="English" aria-pressed="true">EN</button>
+        </div>
       </nav>
 
       <div class="hero-row">
         <div class="hero">
-          <h1>Spare robot parts from FTC and FLL teams across Kazakhstan</h1>
-          <p class="hero-sub">Find the part, then message the team on Telegram. Trade, buy, or pick it up for free.</p>
+          <h1 data-i18n="listings.title">Spare robot parts from FTC and FLL teams across Kazakhstan</h1>
+          <p class="hero-sub" data-i18n="listings.sub">Find the part, then message the team on Telegram. Trade, buy, or pick it up for free.</p>
           <form class="search" role="search" id="search-form">
-            <label for="q">Search by part, SKU, team or city</label>
+            <label for="q" data-i18n="listings.searchLabel">Search by part, SKU, team or city</label>
             <div class="search-field">
               <span class="search-icon" data-icon="search"></span>
               <input id="q" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Core Hex, SPIKE hub, 5203-2402-0019, мотор">
@@ -54,65 +59,65 @@
   </header>
 
   <div class="demo-note" id="demo-note" hidden>
-    <p>These are example listings, so the teams and Telegram links are made up. Real listings appear here once teams start posting through the bot.</p>
+    <p data-i18n="listings.demo">These are example listings, so the teams and Telegram links are made up. Real listings appear here once teams start posting through the bot.</p>
   </div>
 
   <main class="browse" id="main">
-    <aside class="filters" id="filters" aria-label="Filters">
+    <aside class="filters" id="filters" aria-label="Filters" data-i18n-aria-label="filters.label">
       <div class="filters-head">
-        <h2>Filters</h2>
-        <button type="button" class="link-button" id="clear-filters" hidden>Clear all</button>
-        <button type="button" class="filters-close" id="filters-close" aria-label="Close filters">×</button>
+        <h2 data-i18n="filters.title">Filters</h2>
+        <button type="button" class="link-button" id="clear-filters" hidden data-i18n="filters.clearAll">Clear all</button>
+        <button type="button" class="filters-close" id="filters-close" aria-label="Close filters" data-i18n-aria-label="filters.close">×</button>
       </div>
 
       <fieldset class="filter-group">
-        <legend>Listing type</legend>
+        <legend data-i18n="filters.type">Listing type</legend>
         <div class="type-toggles" id="type-toggles"></div>
       </fieldset>
 
       <div class="filter-group">
-        <label for="f-city">City</label>
-        <select id="f-city" data-filter="city"><option value="">Any city</option></select>
+        <label for="f-city" data-i18n="filters.city">City</label>
+        <select id="f-city" data-filter="city"><option value="" data-i18n="filters.anyCity">Any city</option></select>
       </div>
       <div class="filter-group">
-        <label for="f-brand">Brand</label>
-        <select id="f-brand" data-filter="brand"><option value="">Any brand</option></select>
+        <label for="f-brand" data-i18n="filters.brand">Brand</label>
+        <select id="f-brand" data-filter="brand"><option value="" data-i18n="filters.anyBrand">Any brand</option></select>
       </div>
       <div class="filter-group">
-        <label for="f-category">Category</label>
-        <select id="f-category" data-filter="category"><option value="">Any category</option></select>
+        <label for="f-category" data-i18n="filters.category">Category</label>
+        <select id="f-category" data-filter="category"><option value="" data-i18n="filters.anyCategory">Any category</option></select>
       </div>
       <div class="filter-group">
-        <label for="f-condition">Condition</label>
-        <select id="f-condition" data-filter="condition"><option value="">Any condition</option></select>
+        <label for="f-condition" data-i18n="filters.condition">Condition</label>
+        <select id="f-condition" data-filter="condition"><option value="" data-i18n="filters.anyCondition">Any condition</option></select>
       </div>
       <div class="filter-group">
-        <label for="f-team">Team</label>
-        <select id="f-team" data-filter="team"><option value="">Any team</option></select>
+        <label for="f-team" data-i18n="filters.team">Team</label>
+        <select id="f-team" data-filter="team"><option value="" data-i18n="filters.anyTeam">Any team</option></select>
       </div>
       <div class="filters-foot">
-        <button type="button" class="button filters-done" id="filters-done">Show listings</button>
+        <button type="button" class="button filters-done" id="filters-done" data-i18n="filters.showListings">Show listings</button>
       </div>
     </aside>
     <div class="filters-backdrop" id="filters-backdrop" hidden></div>
 
     <section class="results" id="results" aria-labelledby="results-count" tabindex="-1">
-      <div class="program-switch" role="group" aria-label="Program">
-        <button type="button" class="program-btn" data-program="" aria-pressed="true">All</button>
+      <div class="program-switch" role="group" aria-label="Program" data-i18n-aria-label="program.group">
+        <button type="button" class="program-btn" data-program="" aria-pressed="true" data-i18n="common.all">All</button>
         <button type="button" class="program-btn" data-program="FTC" aria-pressed="false">FTC</button>
         <button type="button" class="program-btn" data-program="FLL" aria-pressed="false">FLL</button>
       </div>
       <div class="results-head">
-        <p class="results-count" id="results-count" aria-live="polite">Loading listings…</p>
+        <p class="results-count" id="results-count" aria-live="polite" data-i18n="results.loading">Loading listings…</p>
         <div class="results-tools">
           <button type="button" class="filters-toggle" id="filters-toggle" aria-controls="filters" aria-expanded="false">
-            <span data-icon="filter"></span><span id="filters-toggle-label">Filters</span>
+            <span data-icon="filter"></span><span id="filters-toggle-label" data-i18n="filters.label">Filters</span>
           </button>
           <label class="sort">
-            <span>Sort</span>
+            <span data-i18n="sort.label">Sort</span>
             <select id="sort">
-              <option value="newest">Newest first</option>
-              <option value="price">Price, low to high</option>
+              <option value="newest" data-i18n="sort.newest">Newest first</option>
+              <option value="price" data-i18n="sort.price">Price, low to high</option>
             </select>
           </label>
         </div>
@@ -120,38 +125,38 @@
       <div class="active-part" id="active-part" hidden></div>
       <ul class="cards" id="cards"></ul>
       <div class="empty" id="empty" hidden>
-        <h2>No listings match</h2>
-        <p>Try a shorter search or clear a filter. If nobody has the part yet, post a “wanted” listing in the bot so teams who have it can find you.</p>
-        <button type="button" class="button" id="empty-clear">Clear filters</button>
+        <h2 data-i18n="empty.title">No listings match</h2>
+        <p data-i18n="empty.text">Try a shorter search or clear a filter. If nobody has the part yet, post a “wanted” listing in the bot so teams who have it can find you.</p>
+        <button type="button" class="button" id="empty-clear" data-i18n="empty.clear">Clear filters</button>
       </div>
       <div class="error" id="error" role="alert" hidden></div>
     </section>
   </main>
 
   <section class="how" id="how" aria-labelledby="how-title">
-    <h2 id="how-title">How it works</h2>
+    <h2 id="how-title" data-i18n="how.title">How it works</h2>
     <ol class="steps">
       <li>
-        <h3>Post in the Telegram bot</h3>
-        <p>The bot asks what you have, what you want for it, and for a photo. Your team name, city and Telegram username come from your team’s registration.</p>
+        <h3 data-i18n="how.step1.title">Post in the Telegram bot</h3>
+        <p data-i18n="how.step1.listings">The bot asks what you have, what you want for it, and for a photo. Your team name, city and Telegram username come from your team’s registration.</p>
       </li>
       <li>
-        <h3>Teams find it here</h3>
-        <p>Every active listing shows on this site. Anyone can search by part, city or team without an account.</p>
+        <h3 data-i18n="how.step2.title">Teams find it here</h3>
+        <p data-i18n="how.step2.text">Every active listing shows on this site. Anyone can search by part, city or team, without an account.</p>
       </li>
       <li>
-        <h3>Agree in a private chat</h3>
-        <p>Tap Message on a listing to open a Telegram chat with that team. You agree on the price and the hand-over between yourselves.</p>
+        <h3 data-i18n="how.step3.title">Agree in a private chat</h3>
+        <p data-i18n="how.step3.text">Tap Message on a listing to open a Telegram chat with that team. You agree on the price and the hand-over between yourselves.</p>
       </li>
     </ol>
     <p class="bot-cta" id="bot-cta"></p>
   </section>
 
   <footer class="footer">
-    <p>Almasu doesn’t handle payments or delivery. Teams agree on both in Telegram.</p>
-    <p>Pictures marked “Catalog photo” load from the part maker’s website and belong to that maker. They show the product, not the team’s actual part.</p>
-    <p>A community project by FTC teams in Kazakhstan. Not affiliated with <i>FIRST</i>®, LEGO®, goBILDA, REV Robotics or Studica.</p>
-    <p class="footer-credit">by FTC team Quattuor #24881</p>
+    <p data-i18n="footer.payments">Almasu doesn’t handle payments or delivery. Teams agree on both in Telegram.</p>
+    <p data-i18n="footer.photosListings">Pictures marked “Catalog photo” load from the part maker’s website and belong to that maker. They show the product, not the team’s actual part.</p>
+    <p><span data-i18n="footer.community1">A community project by FTC teams in Kazakhstan. Not affiliated with</span> <i>FIRST</i>®<span data-i18n="footer.community2">, LEGO®, goBILDA, REV Robotics or Studica.</span></p>
+    <p class="footer-credit" data-i18n="footer.credit">by FTC team Quattuor #24881</p>
   </footer>
 
   <dialog class="detail" id="detail" aria-labelledby="detail-title"></dialog>
