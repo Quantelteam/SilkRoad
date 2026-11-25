@@ -32,6 +32,8 @@ export const CATEGORY_ICONS = {
   cables: ['M14 18h12v12H14z', 'M26 22h6M26 26h6', 'M14 24H8c-4 0-4 10 4 10h20'],
   // A kit: a storage box with a sorting tray and its lid
   sets: ['M6 18h36v22H6z', 'M4 12h40v6H4z', 'M18 24h12', 'M6 30h36', 'M18 30v10M30 30v10'],
+  // A field mat seen from above, with two mission models on it
+  field: ['M4 12h40v26H4z', 'M10 18h8v8h-8z', 'M28 22l6-6 6 6-6 6z', 'M4 32h40', 'M24 12v26'],
   // Box
   other: ['M8 16l16-8 16 8v18l-16 8-16-8z', 'M8 16l16 8 16-8', 'M24 24v18'],
 };

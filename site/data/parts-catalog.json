@@ -16,6 +16,10 @@
       "name": "Complete sets"
     },
     {
+      "id": "field",
+      "name": "Field and missions"
+    },
+    {
       "id": "motors",
       "name": "Motors"
     },
@@ -670,33 +674,6 @@
       "image": "https://cdn11.bigcommerce.com/s-x56mtydx1w/images/stencil/640w/products/253/1921/1120-0009-0240__70987__37262.1701991434.jpg?c=1"
     },
     {
-      "id": "gobilda-3308-0008-0001",
-      "brand": "goBILDA",
-      "name": "8mm pitch chain connecting link (6 pack)",
-      "sku": "3308-0008-0001",
-      "category": "motion",
-      "aliases": [
-        "master link",
-        "connecting link",
-        "chain link"
-      ],
-      "url": "https://www.gobilda.com/8mm-pitch-steel-chain-connecting-link-6-pack/",
-      "image": "https://cdn11.bigcommerce.com/s-x56mtydx1w/images/stencil/640w/products/541/3415/3308-0008-0001__89447__63051.1701991891.jpg?c=1"
-    },
-    {
-      "id": "gobilda-3308-0008-1000",
-      "brand": "goBILDA",
-      "name": "8mm pitch steel chain, 1 m",
-      "sku": "3308-0008-1000",
-      "category": "motion",
-      "aliases": [
-        "chain",
-        "8mm chain"
-      ],
-      "url": "https://www.gobilda.com/8mm-pitch-steel-chain-1-meter-length/",
-      "image": "https://cdn11.bigcommerce.com/s-x56mtydx1w/images/stencil/640w/products/539/3413/3308-0008-1000__19200__71491.1701991890.jpg?c=1"
-    },
-    {
       "id": "gobilda-2106-4008-0480",
       "brand": "goBILDA",
       "name": "8mm REX shaft with e-clip, 48mm",
@@ -722,6 +699,33 @@
       ],
       "url": "https://www.gobilda.com/8mm-rex-shaft-with-e-clip-stainless-steel-96mm-length/",
       "image": "https://cdn11.bigcommerce.com/s-x56mtydx1w/images/stencil/640w/products/1450/7233/2106-4008-0960__37428__62480.1701993102.jpg?c=1"
+    },
+    {
+      "id": "gobilda-3308-0008-0001",
+      "brand": "goBILDA",
+      "name": "8mm pitch chain connecting link (6 pack)",
+      "sku": "3308-0008-0001",
+      "category": "motion",
+      "aliases": [
+        "master link",
+        "connecting link",
+        "chain link"
+      ],
+      "url": "https://www.gobilda.com/8mm-pitch-steel-chain-connecting-link-6-pack/",
+      "image": "https://cdn11.bigcommerce.com/s-x56mtydx1w/images/stencil/640w/products/541/3415/3308-0008-0001__89447__63051.1701991891.jpg?c=1"
+    },
+    {
+      "id": "gobilda-3308-0008-1000",
+      "brand": "goBILDA",
+      "name": "8mm pitch steel chain, 1 m",
+      "sku": "3308-0008-1000",
+      "category": "motion",
+      "aliases": [
+        "chain",
+        "8mm chain"
+      ],
+      "url": "https://www.gobilda.com/8mm-pitch-steel-chain-1-meter-length/",
+      "image": "https://cdn11.bigcommerce.com/s-x56mtydx1w/images/stencil/640w/products/539/3413/3308-0008-1000__19200__71491.1701991890.jpg?c=1"
     },
     {
       "id": "gobilda-2312-0414-0060",
@@ -1367,6 +1371,20 @@
       "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/594/2931/Lone_HDHex-New_Sticker-noflag__98232.1659470612.png?c=2"
     },
     {
+      "id": "rev-41-1600",
+      "brand": "REV Robotics",
+      "name": "UltraPlanetary Gearbox Kit & HD Hex Motor",
+      "sku": "REV-41-1600",
+      "category": "motors",
+      "aliases": [
+        "ultraplanetary",
+        "hd hex",
+        "planetary kit"
+      ],
+      "url": "https://www.revrobotics.com/rev-41-1600/",
+      "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/479/2739/Ultraplanetary-noflag-FINAL__33728.1650563601.png?c=2"
+    },
+    {
       "id": "rev-41-1601",
       "brand": "REV Robotics",
       "name": "UltraPlanetary cartridge, 3:1",
@@ -1407,20 +1425,6 @@
       ],
       "url": "https://www.revrobotics.com/rev-41-1603/",
       "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/482/1345/UltraPlanetary_Cartridge_Laying_Down__17448.1613072762.png?c=2"
-    },
-    {
-      "id": "rev-41-1600",
-      "brand": "REV Robotics",
-      "name": "UltraPlanetary Gearbox Kit & HD Hex Motor",
-      "sku": "REV-41-1600",
-      "category": "motors",
-      "aliases": [
-        "ultraplanetary",
-        "hd hex",
-        "planetary kit"
-      ],
-      "url": "https://www.revrobotics.com/rev-41-1600/",
-      "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/479/2739/Ultraplanetary-noflag-FINAL__33728.1650563601.png?c=2"
     },
     {
       "id": "rev-41-1097",
@@ -1507,6 +1511,19 @@
       "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/216/2784/Expansion_Hub_One-noflag__63205.1650572103.png?c=2"
     },
     {
+      "id": "rev-31-1108",
+      "brand": "REV Robotics",
+      "name": "SRS Programmer",
+      "sku": "REV-31-1108",
+      "category": "control",
+      "aliases": [
+        "srs programmer",
+        "servo programmer"
+      ],
+      "url": "https://www.revrobotics.com/rev-31-1108/",
+      "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/116/634/REV-31-1108-1__84485.1603470088.JPG?c=2"
+    },
+    {
       "id": "rev-11-1855",
       "brand": "REV Robotics",
       "name": "Servo Hub",
@@ -1530,19 +1547,6 @@
       ],
       "url": "https://www.revrobotics.com/rev-11-1144/",
       "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/209/2764/ServoPowerModuleAngled-800-Web__59220.1650570152.png?c=2"
-    },
-    {
-      "id": "rev-31-1108",
-      "brand": "REV Robotics",
-      "name": "SRS Programmer",
-      "sku": "REV-31-1108",
-      "category": "control",
-      "aliases": [
-        "srs programmer",
-        "servo programmer"
-      ],
-      "url": "https://www.revrobotics.com/rev-31-1108/",
-      "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/116/634/REV-31-1108-1__84485.1603470088.JPG?c=2"
     },
     {
       "id": "rev-31-1387",
@@ -2184,19 +2188,6 @@
       "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/722/2894/M3x10mm_Hex_Cap_Screws_Pack_Photo_From_Bundle_Shot__18790.1614451259.1280.1280__98672.1654289750.png?c=2"
     },
     {
-      "id": "rev-41-1359-pk100",
-      "brand": "REV Robotics",
-      "name": "M3 x 8mm hex cap screws (100 pack)",
-      "sku": "REV-41-1359-PK100",
-      "category": "hardware",
-      "aliases": [
-        "m3 screw",
-        "m3x8"
-      ],
-      "url": "https://www.revrobotics.com/M3-Hex-Cap-Screws/",
-      "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/722/2894/M3x10mm_Hex_Cap_Screws_Pack_Photo_From_Bundle_Shot__18790.1614451259.1280.1280__98672.1654289750.png?c=2"
-    },
-    {
       "id": "rev-41-1907-pk25",
       "brand": "REV Robotics",
       "name": "M3 x 8mm T-slot screw (25 pack)",
@@ -2208,6 +2199,19 @@
       ],
       "url": "https://www.revrobotics.com/rev-41-1907-pk25/",
       "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/536/1624/REV-41-1907_M3_X_8mm_T-Slot_Screw-2__07783.1595265762.png?c=2"
+    },
+    {
+      "id": "rev-41-1359-pk100",
+      "brand": "REV Robotics",
+      "name": "M3 x 8mm hex cap screws (100 pack)",
+      "sku": "REV-41-1359-PK100",
+      "category": "hardware",
+      "aliases": [
+        "m3 screw",
+        "m3x8"
+      ],
+      "url": "https://www.revrobotics.com/M3-Hex-Cap-Screws/",
+      "image": "https://cdn11.bigcommerce.com/s-t3eo8vwp22/images/stencil/640w/products/722/2894/M3x10mm_Hex_Cap_Screws_Pack_Photo_From_Bundle_Shot__18790.1614451259.1280.1280__98672.1654289750.png?c=2"
     },
     {
       "id": "rev-31-1815",
@@ -2782,6 +2786,19 @@
       "image": "https://www.pitsco.com/cdn/shop/files/39057_featured.jpg?v=1718132158&width=640"
     },
     {
+      "id": "tetrix-39376",
+      "brand": "TETRIX",
+      "name": "MAX DC motor mount (37mm)",
+      "sku": "39376",
+      "category": "structure",
+      "aliases": [
+        "motor mount",
+        "tetrix mount"
+      ],
+      "url": "https://www.pitsco.com/products/tetrix-dc-motor-mount",
+      "image": "https://www.pitsco.com/cdn/shop/files/39376_featured.jpg?v=1718132398&width=640"
+    },
+    {
       "id": "tetrix-39067",
       "brand": "TETRIX",
       "name": "MAX channel, 160mm (2 pack)",
@@ -2832,19 +2849,6 @@
       ],
       "url": "https://www.pitsco.com/products/tetrix-channels",
       "image": "https://www.pitsco.com/cdn/shop/files/39066_featured.jpg?v=1718224538&width=640"
-    },
-    {
-      "id": "tetrix-39376",
-      "brand": "TETRIX",
-      "name": "MAX DC motor mount (37mm)",
-      "sku": "39376",
-      "category": "structure",
-      "aliases": [
-        "motor mount",
-        "tetrix mount"
-      ],
-      "url": "https://www.pitsco.com/products/tetrix-dc-motor-mount",
-      "image": "https://www.pitsco.com/cdn/shop/files/39376_featured.jpg?v=1718132398&width=640"
     },
     {
       "id": "tetrix-39073",
@@ -2957,6 +2961,36 @@
       "image": "https://gmedia.playstation.com/is/image/SIEPDC/dualshock-controller-product-thumbnail-01-en-14sep21?wid=640&fmt=png-alpha"
     },
     {
+      "id": "lego-45544",
+      "brand": "LEGO Education",
+      "name": "LEGO MINDSTORMS Education EV3 Core Set",
+      "sku": "45544",
+      "category": "sets",
+      "aliases": [
+        "ev3 core set",
+        "базовый набор ev3",
+        "5003400"
+      ],
+      "url": "https://education.lego.com/en-us/products/lego-mindstorms-education-ev3-core-set/5003400/",
+      "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltb66bc8c585667ccb/5f50d2dc35453c33adce90e5/5003400_1050x1050_1_xx-xx.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45560",
+      "brand": "LEGO Education",
+      "name": "LEGO MINDSTORMS Education EV3 Expansion Set",
+      "sku": "45560",
+      "category": "sets",
+      "aliases": [
+        "ev3 expansion set",
+        "ресурсный набор ev3",
+        "дополнительный набор ev3"
+      ],
+      "url": "https://education.lego.com/en-us/product-resources/mindstorms-ev3/downloads/whats-in-the-box/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
       "id": "lego-5007438",
       "brand": "LEGO Education",
       "name": "SPIKE Essential Class Pack",
@@ -3061,6 +3095,148 @@
       "program": "FLL"
     },
     {
+      "id": "lego-45816",
+      "brand": "LEGO Education",
+      "name": "FLL Challenge CARGO CONNECT set (2021–22)",
+      "sku": "45816",
+      "category": "field",
+      "aliases": [
+        "cargo connect",
+        "fll 2021-22",
+        "поле fll",
+        "миссии fll"
+      ],
+      "url": "https://www.firstinspires.org/resources/library/fll/past-challenges",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45809",
+      "brand": "LEGO Education",
+      "name": "FLL Challenge CITY SHAPER set (2019–20)",
+      "sku": "45809",
+      "category": "field",
+      "aliases": [
+        "city shaper",
+        "fll 2019-20",
+        "поле fll",
+        "миссии fll"
+      ],
+      "url": "https://www.firstinspires.org/resources/library/fll/past-challenges",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45823",
+      "brand": "LEGO Education",
+      "name": "FLL Challenge MASTERPIECE set (2023–24)",
+      "sku": "45823",
+      "category": "field",
+      "aliases": [
+        "masterpiece",
+        "fll 2023-24",
+        "поле fll",
+        "миссии fll"
+      ],
+      "url": "https://www.firstinspires.org/resources/library/fll/past-challenges",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45813",
+      "brand": "LEGO Education",
+      "name": "FLL Challenge RePLAY set (2020–21)",
+      "sku": "45813",
+      "category": "field",
+      "aliases": [
+        "replay",
+        "fll 2020-21",
+        "поле fll",
+        "миссии fll"
+      ],
+      "url": "https://www.firstinspires.org/resources/library/fll/past-challenges",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45826",
+      "brand": "LEGO Education",
+      "name": "FLL Challenge SUBMERGED set (2024–25)",
+      "sku": "45826",
+      "category": "field",
+      "aliases": [
+        "submerged",
+        "fll 2024-25",
+        "поле fll",
+        "миссии fll"
+      ],
+      "url": "https://www.firstinspires.org/resources/library/fll/past-challenges",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45820",
+      "brand": "LEGO Education",
+      "name": "FLL Challenge SUPERPOWERED set (2022–23)",
+      "sku": "45820",
+      "category": "field",
+      "aliases": [
+        "superpowered",
+        "fll 2022-23",
+        "поле fll",
+        "миссии fll"
+      ],
+      "url": "https://www.firstinspires.org/resources/library/fll/past-challenges",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45829",
+      "brand": "LEGO Education",
+      "name": "FLL Challenge UNEARTHED set (2025–26)",
+      "sku": "45829",
+      "category": "field",
+      "aliases": [
+        "unearthed",
+        "fll 2025-26",
+        "поле fll",
+        "миссии fll"
+      ],
+      "url": "https://www.firstinspires.org/resources/library/fll/past-challenges",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45502",
+      "brand": "LEGO Education",
+      "name": "EV3 Large Servo Motor",
+      "sku": "45502",
+      "category": "motors",
+      "aliases": [
+        "ev3 large motor",
+        "большой мотор ev3",
+        "большой сервомотор"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45503",
+      "brand": "LEGO Education",
+      "name": "EV3 Medium Servo Motor",
+      "sku": "45503",
+      "category": "motors",
+      "aliases": [
+        "ev3 medium motor",
+        "средний мотор ev3",
+        "средний сервомотор"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
       "id": "lego-45607",
       "brand": "LEGO Education",
       "name": "SPIKE Essential Small Angular Motor",
@@ -3109,6 +3285,21 @@
       "program": "FLL"
     },
     {
+      "id": "lego-45500",
+      "brand": "LEGO Education",
+      "name": "EV3 Intelligent Brick",
+      "sku": "45500",
+      "category": "control",
+      "aliases": [
+        "ev3 brick",
+        "блок ev3",
+        "микрокомпьютер ev3"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
       "id": "lego-45609",
       "brand": "LEGO Education",
       "name": "SPIKE Essential Small Hub",
@@ -3138,6 +3329,94 @@
       ],
       "url": "https://education.lego.com/en-us/products/lego-technic-large-hub-for-spike-prime-/45601/",
       "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltdb8e255e1055c806/5f50d05af4190e239fa233aa/45601_prod_02.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45506",
+      "brand": "LEGO Education",
+      "name": "EV3 Color Sensor",
+      "sku": "45506",
+      "category": "sensors",
+      "aliases": [
+        "color sensor",
+        "colour sensor",
+        "датчик цвета ev3"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45505",
+      "brand": "LEGO Education",
+      "name": "EV3 Gyro Sensor",
+      "sku": "45505",
+      "category": "sensors",
+      "aliases": [
+        "gyro sensor",
+        "гироскопический датчик ev3",
+        "гироскоп"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45509",
+      "brand": "LEGO Education",
+      "name": "EV3 Infrared Sensor",
+      "sku": "45509",
+      "category": "sensors",
+      "aliases": [
+        "ir sensor",
+        "infrared sensor",
+        "инфракрасный датчик ev3"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-9749",
+      "brand": "LEGO Education",
+      "name": "EV3 Temperature Sensor",
+      "sku": "9749",
+      "category": "sensors",
+      "aliases": [
+        "temperature sensor",
+        "датчик температуры"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45507",
+      "brand": "LEGO Education",
+      "name": "EV3 Touch Sensor",
+      "sku": "45507",
+      "category": "sensors",
+      "aliases": [
+        "touch sensor",
+        "датчик касания ev3"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45504",
+      "brand": "LEGO Education",
+      "name": "EV3 Ultrasonic Sensor",
+      "sku": "45504",
+      "category": "sensors",
+      "aliases": [
+        "ultrasonic sensor",
+        "ультразвуковой датчик ev3",
+        "датчик расстояния"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
       "program": "FLL"
     },
     {
@@ -3189,6 +3468,36 @@
       "program": "FLL"
     },
     {
+      "id": "lego-45501",
+      "brand": "LEGO Education",
+      "name": "EV3 Rechargeable DC Battery",
+      "sku": "45501",
+      "category": "batteries",
+      "aliases": [
+        "ev3 battery",
+        "аккумулятор ev3",
+        "батарея ev3"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45517",
+      "brand": "LEGO Education",
+      "name": "EV3 Transformer 10V DC",
+      "sku": "45517",
+      "category": "batteries",
+      "aliases": [
+        "ev3 charger",
+        "зарядное устройство ev3",
+        "трансформатор ev3"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
       "id": "lego-45612",
       "brand": "LEGO Education",
       "name": "SPIKE Essential Small Hub Battery",
@@ -3220,6 +3529,1278 @@
       "program": "FLL"
     },
     {
+      "id": "lego-14720",
+      "brand": "LEGO Education",
+      "name": "Technic H-shaped liftarm 3×5 (offset centre holes)",
+      "sku": "14720",
+      "category": "structure",
+      "aliases": [
+        "h-beam",
+        "h-frame 3x5",
+        "h-балка"
+      ],
+      "url": "https://brickset.com/parts/design-14720",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32140",
+      "brand": "LEGO Education",
+      "name": "Technic L-shaped liftarm 2×4",
+      "sku": "32140",
+      "category": "structure",
+      "aliases": [
+        "l-beam 2x4",
+        "угловая балка 2×4"
+      ],
+      "url": "https://brickset.com/parts/design-32140",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32526",
+      "brand": "LEGO Education",
+      "name": "Technic L-shaped liftarm 3×5",
+      "sku": "32526",
+      "category": "structure",
+      "aliases": [
+        "l-beam 3x5",
+        "угловая балка 3×5"
+      ],
+      "url": "https://brickset.com/parts/design-32526",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-60484",
+      "brand": "LEGO Education",
+      "name": "Technic T-shaped liftarm 3×3",
+      "sku": "60484",
+      "category": "structure",
+      "aliases": [
+        "t-beam",
+        "t-балка"
+      ],
+      "url": "https://brickset.com/parts/design-60484",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-39369",
+      "brand": "LEGO Education",
+      "name": "Technic base frame 11×19",
+      "sku": "39369",
+      "category": "structure",
+      "aliases": [
+        "base plate 11x19",
+        "big frame",
+        "рама 11×19"
+      ],
+      "url": "https://brickset.com/parts/design-39369",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32348",
+      "brand": "LEGO Education",
+      "name": "Technic bent liftarm 1×7 (4-4)",
+      "sku": "32348",
+      "category": "structure",
+      "aliases": [
+        "bent beam 7",
+        "angled beam 4x4",
+        "изогнутая балка 7"
+      ],
+      "url": "https://brickset.com/parts/design-32348",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32271",
+      "brand": "LEGO Education",
+      "name": "Technic bent liftarm 1×9 (7-3)",
+      "sku": "32271",
+      "category": "structure",
+      "aliases": [
+        "bent beam 9 (7-3)",
+        "angled beam 3x7",
+        "изогнутая балка 9"
+      ],
+      "url": "https://brickset.com/parts/design-32271",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-39793",
+      "brand": "LEGO Education",
+      "name": "Technic connector frame 3×3",
+      "sku": "39793",
+      "category": "structure",
+      "aliases": [
+        "frame 3x3",
+        "рама 3×3"
+      ],
+      "url": "https://brickset.com/parts/design-39793",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-11954",
+      "brand": "LEGO Education",
+      "name": "Technic curved panel 11×3",
+      "sku": "11954",
+      "category": "structure",
+      "aliases": [
+        "panel 11x3 curved",
+        "панель 11×3"
+      ],
+      "url": "https://brickset.com/parts/design-11954",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32009",
+      "brand": "LEGO Education",
+      "name": "Technic double bent liftarm 1×11.5",
+      "sku": "32009",
+      "category": "structure",
+      "aliases": [
+        "double bent beam",
+        "изогнутая балка 11.5"
+      ],
+      "url": "https://brickset.com/parts/design-32009",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-15458",
+      "brand": "LEGO Education",
+      "name": "Technic flat panel 3×11",
+      "sku": "15458",
+      "category": "structure",
+      "aliases": [
+        "panel 3x11",
+        "flat panel",
+        "панель 3×11"
+      ],
+      "url": "https://brickset.com/parts/design-15458",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-39790",
+      "brand": "LEGO Education",
+      "name": "Technic frame 11×15",
+      "sku": "39790",
+      "category": "structure",
+      "aliases": [
+        "frame 11x15",
+        "рама 11×15"
+      ],
+      "url": "https://brickset.com/parts/design-39790",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-64179",
+      "brand": "LEGO Education",
+      "name": "Technic frame 5×7 (3×5 opening)",
+      "sku": "64179",
+      "category": "structure",
+      "aliases": [
+        "frame 5x7",
+        "рама 5×7"
+      ],
+      "url": "https://brickset.com/parts/design-64179",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-39794",
+      "brand": "LEGO Education",
+      "name": "Technic frame 7×11",
+      "sku": "39794",
+      "category": "structure",
+      "aliases": [
+        "frame 7x11",
+        "рама 7×11"
+      ],
+      "url": "https://brickset.com/parts/design-39794",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32525",
+      "brand": "LEGO Education",
+      "name": "Technic liftarm beam 1×11",
+      "sku": "32525",
+      "category": "structure",
+      "aliases": [
+        "beam 11",
+        "балка 11"
+      ],
+      "url": "https://brickset.com/parts/design-32525",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-41239",
+      "brand": "LEGO Education",
+      "name": "Technic liftarm beam 1×13",
+      "sku": "41239",
+      "category": "structure",
+      "aliases": [
+        "beam 13",
+        "балка 13"
+      ],
+      "url": "https://brickset.com/parts/design-41239",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32278",
+      "brand": "LEGO Education",
+      "name": "Technic liftarm beam 1×15",
+      "sku": "32278",
+      "category": "structure",
+      "aliases": [
+        "beam 15",
+        "балка 15"
+      ],
+      "url": "https://brickset.com/parts/design-32278",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-60483",
+      "brand": "LEGO Education",
+      "name": "Technic liftarm beam 1×2 with pin hole and axle hole",
+      "sku": "60483",
+      "category": "structure",
+      "aliases": [
+        "beam 2",
+        "балка 2"
+      ],
+      "url": "https://brickset.com/parts/design-60483",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32523",
+      "brand": "LEGO Education",
+      "name": "Technic liftarm beam 1×3",
+      "sku": "32523",
+      "category": "structure",
+      "aliases": [
+        "beam 3",
+        "балка 3"
+      ],
+      "url": "https://brickset.com/parts/design-32523",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32316",
+      "brand": "LEGO Education",
+      "name": "Technic liftarm beam 1×5",
+      "sku": "32316",
+      "category": "structure",
+      "aliases": [
+        "beam 5",
+        "балка 5"
+      ],
+      "url": "https://brickset.com/parts/design-32316",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32524",
+      "brand": "LEGO Education",
+      "name": "Technic liftarm beam 1×7",
+      "sku": "32524",
+      "category": "structure",
+      "aliases": [
+        "beam 7",
+        "балка 7"
+      ],
+      "url": "https://brickset.com/parts/design-32524",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-40490",
+      "brand": "LEGO Education",
+      "name": "Technic liftarm beam 1×9",
+      "sku": "40490",
+      "category": "structure",
+      "aliases": [
+        "beam 9",
+        "балка 9"
+      ],
+      "url": "https://brickset.com/parts/design-40490",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-65817",
+      "brand": "LEGO Education",
+      "name": "Technic maker plate 11×15 (frame with internal structure)",
+      "sku": "65817",
+      "category": "structure",
+      "aliases": [
+        "maker plate",
+        "рама 11×15 с сеткой"
+      ],
+      "url": "https://brickset.com/parts/design-65817",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-99773",
+      "brand": "LEGO Education",
+      "name": "Technic thin triangle liftarm",
+      "sku": "99773",
+      "category": "structure",
+      "aliases": [
+        "thin triangle",
+        "triangle beam",
+        "треугольник"
+      ],
+      "url": "https://brickset.com/parts/design-99773",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-6589",
+      "brand": "LEGO Education",
+      "name": "Technic 12 tooth bevel gear",
+      "sku": "6589",
+      "category": "motion",
+      "aliases": [
+        "12t bevel",
+        "коническая шестерня 12"
+      ],
+      "url": "https://brickset.com/parts/design-6589",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32270",
+      "brand": "LEGO Education",
+      "name": "Technic 12 tooth double bevel gear",
+      "sku": "32270",
+      "category": "motion",
+      "aliases": [
+        "12t gear",
+        "шестерня 12"
+      ],
+      "url": "https://brickset.com/parts/design-32270",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32198",
+      "brand": "LEGO Education",
+      "name": "Technic 20 tooth bevel gear",
+      "sku": "32198",
+      "category": "motion",
+      "aliases": [
+        "20t bevel",
+        "коническая шестерня 20"
+      ],
+      "url": "https://brickset.com/parts/design-32198",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-18575",
+      "brand": "LEGO Education",
+      "name": "Technic 20 tooth double bevel gear",
+      "sku": "18575",
+      "category": "motion",
+      "aliases": [
+        "20t gear",
+        "шестерня 20"
+      ],
+      "url": "https://brickset.com/parts/design-18575",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-35185",
+      "brand": "LEGO Education",
+      "name": "Technic 20 tooth double bevel gear with clutch",
+      "sku": "35185",
+      "category": "motion",
+      "aliases": [
+        "20t clutch gear",
+        "шестерня 20 с муфтой"
+      ],
+      "url": "https://brickset.com/parts/design-35185",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-46372",
+      "brand": "LEGO Education",
+      "name": "Technic 28 tooth double bevel gear",
+      "sku": "46372",
+      "category": "motion",
+      "aliases": [
+        "28t gear",
+        "шестерня 28"
+      ],
+      "url": "https://brickset.com/parts/design-46372",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32498",
+      "brand": "LEGO Education",
+      "name": "Technic 36 tooth double bevel gear",
+      "sku": "32498",
+      "category": "motion",
+      "aliases": [
+        "36t gear",
+        "шестерня 36"
+      ],
+      "url": "https://brickset.com/parts/design-32498",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-23948",
+      "brand": "LEGO Education",
+      "name": "Technic axle 11",
+      "sku": "23948",
+      "category": "motion",
+      "aliases": [
+        "axle 11",
+        "ось 11"
+      ],
+      "url": "https://brickset.com/parts/design-23948",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-3708",
+      "brand": "LEGO Education",
+      "name": "Technic axle 12",
+      "sku": "3708",
+      "category": "motion",
+      "aliases": [
+        "axle 12",
+        "ось 12"
+      ],
+      "url": "https://brickset.com/parts/design-3708",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32062",
+      "brand": "LEGO Education",
+      "name": "Technic axle 2 (notched)",
+      "sku": "32062",
+      "category": "motion",
+      "aliases": [
+        "axle 2",
+        "ось 2"
+      ],
+      "url": "https://brickset.com/parts/design-32062",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-4519",
+      "brand": "LEGO Education",
+      "name": "Technic axle 3",
+      "sku": "4519",
+      "category": "motion",
+      "aliases": [
+        "axle 3",
+        "ось 3"
+      ],
+      "url": "https://brickset.com/parts/design-4519",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-50450",
+      "brand": "LEGO Education",
+      "name": "Technic axle 32",
+      "sku": "50450",
+      "category": "motion",
+      "aliases": [
+        "axle 32",
+        "ось 32"
+      ],
+      "url": "https://brickset.com/parts/design-50450",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-3705",
+      "brand": "LEGO Education",
+      "name": "Technic axle 4",
+      "sku": "3705",
+      "category": "motion",
+      "aliases": [
+        "axle 4",
+        "ось 4"
+      ],
+      "url": "https://brickset.com/parts/design-3705",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-87083",
+      "brand": "LEGO Education",
+      "name": "Technic axle 4 with stop",
+      "sku": "87083",
+      "category": "motion",
+      "aliases": [
+        "axle 4 with stop",
+        "ось 4 с упором"
+      ],
+      "url": "https://brickset.com/parts/design-87083",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32073",
+      "brand": "LEGO Education",
+      "name": "Technic axle 5",
+      "sku": "32073",
+      "category": "motion",
+      "aliases": [
+        "axle 5",
+        "ось 5"
+      ],
+      "url": "https://brickset.com/parts/design-32073",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-15462",
+      "brand": "LEGO Education",
+      "name": "Technic axle 5 with stop",
+      "sku": "15462",
+      "category": "motion",
+      "aliases": [
+        "axle 5 with stop",
+        "ось 5 с упором"
+      ],
+      "url": "https://brickset.com/parts/design-15462",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-3706",
+      "brand": "LEGO Education",
+      "name": "Technic axle 6",
+      "sku": "3706",
+      "category": "motion",
+      "aliases": [
+        "axle 6",
+        "ось 6"
+      ],
+      "url": "https://brickset.com/parts/design-3706",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-44294",
+      "brand": "LEGO Education",
+      "name": "Technic axle 7",
+      "sku": "44294",
+      "category": "motion",
+      "aliases": [
+        "axle 7",
+        "ось 7"
+      ],
+      "url": "https://brickset.com/parts/design-44294",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-3707",
+      "brand": "LEGO Education",
+      "name": "Technic axle 8",
+      "sku": "3707",
+      "category": "motion",
+      "aliases": [
+        "axle 8",
+        "ось 8"
+      ],
+      "url": "https://brickset.com/parts/design-3707",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-55013",
+      "brand": "LEGO Education",
+      "name": "Technic axle 8 with stop",
+      "sku": "55013",
+      "category": "motion",
+      "aliases": [
+        "axle 8 with stop",
+        "ось 8 с упором"
+      ],
+      "url": "https://brickset.com/parts/design-55013",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-60485",
+      "brand": "LEGO Education",
+      "name": "Technic axle 9",
+      "sku": "60485",
+      "category": "motion",
+      "aliases": [
+        "axle 9",
+        "ось 9"
+      ],
+      "url": "https://brickset.com/parts/design-60485",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-64781",
+      "brand": "LEGO Education",
+      "name": "Technic gear rack 1×13 with axle and pin holes",
+      "sku": "64781",
+      "category": "motion",
+      "aliases": [
+        "rack 13",
+        "зубчатая рейка 13"
+      ],
+      "url": "https://brickset.com/parts/design-64781",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-87761",
+      "brand": "LEGO Education",
+      "name": "Technic gear rack 1×7 with axle and pin holes",
+      "sku": "87761",
+      "category": "motion",
+      "aliases": [
+        "rack 7",
+        "зубчатая рейка 7"
+      ],
+      "url": "https://brickset.com/parts/design-87761",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-24121",
+      "brand": "LEGO Education",
+      "name": "Technic gear rack quarter circle 11×11 (35 tooth)",
+      "sku": "24121",
+      "category": "motion",
+      "aliases": [
+        "curved rack",
+        "quarter circle rack",
+        "дуговая зубчатая рейка"
+      ],
+      "url": "https://brickset.com/parts/design-24121",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-18939",
+      "brand": "LEGO Education",
+      "name": "Technic large turntable, base",
+      "sku": "18939",
+      "category": "motion",
+      "aliases": [
+        "turntable large base",
+        "поворотный круг большой"
+      ],
+      "url": "https://brickset.com/parts/design-18939",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-18938",
+      "brand": "LEGO Education",
+      "name": "Technic large turntable, top (60 tooth)",
+      "sku": "18938",
+      "category": "motion",
+      "aliases": [
+        "turntable large top",
+        "поворотный круг большой"
+      ],
+      "url": "https://brickset.com/parts/design-18938",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-99010",
+      "brand": "LEGO Education",
+      "name": "Technic small turntable, 28 tooth part",
+      "sku": "99010",
+      "category": "motion",
+      "aliases": [
+        "turntable small 28t",
+        "поворотный круг малый"
+      ],
+      "url": "https://brickset.com/parts/design-99010",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-99009",
+      "brand": "LEGO Education",
+      "name": "Technic small turntable, plain part",
+      "sku": "99009",
+      "category": "motion",
+      "aliases": [
+        "turntable small",
+        "поворотный круг малый"
+      ],
+      "url": "https://brickset.com/parts/design-99009",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-52629",
+      "brand": "LEGO Education",
+      "name": "Ball 19 mm (caster ball)",
+      "sku": "52629",
+      "category": "wheels",
+      "aliases": [
+        "caster ball",
+        "шар 19"
+      ],
+      "url": "https://brickset.com/parts/design-52629",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-39370",
+      "brand": "LEGO Education",
+      "name": "Technic beam 3×5 with ball cup (caster holder)",
+      "sku": "39370",
+      "category": "wheels",
+      "aliases": [
+        "caster holder",
+        "ball cup",
+        "держатель шара"
+      ],
+      "url": "https://brickset.com/parts/design-39370",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-4185",
+      "brand": "LEGO Education",
+      "name": "Technic wedge belt wheel (pulley)",
+      "sku": "4185",
+      "category": "wheels",
+      "aliases": [
+        "pulley",
+        "шкив"
+      ],
+      "url": "https://brickset.com/parts/design-4185",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-61254",
+      "brand": "LEGO Education",
+      "name": "Tyre 23×7 (for 18×8 rim)",
+      "sku": "61254",
+      "category": "wheels",
+      "aliases": [
+        "small tyre",
+        "шина 23"
+      ],
+      "url": "https://brickset.com/parts/design-61254",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-2815",
+      "brand": "LEGO Education",
+      "name": "Tyre for wedge belt wheel",
+      "sku": "2815",
+      "category": "wheels",
+      "aliases": [
+        "pulley tyre",
+        "шина для шкива"
+      ],
+      "url": "https://brickset.com/parts/design-2815",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-39367",
+      "brand": "LEGO Education",
+      "name": "Wheel 56 mm (57×14) with integral tyre",
+      "sku": "39367",
+      "category": "wheels",
+      "aliases": [
+        "wheel 56",
+        "spike wheel",
+        "колесо 56"
+      ],
+      "url": "https://brickset.com/parts/design-39367",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-49295",
+      "brand": "LEGO Education",
+      "name": "Wheel 88 mm (88×14) with integral tyre",
+      "sku": "49295",
+      "category": "wheels",
+      "aliases": [
+        "wheel 88",
+        "big wheel",
+        "колесо 88"
+      ],
+      "url": "https://brickset.com/parts/design-49295",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-56903",
+      "brand": "LEGO Education",
+      "name": "Wheel rim 18×8 with axle hole",
+      "sku": "56903",
+      "category": "wheels",
+      "aliases": [
+        "small rim",
+        "диск 18"
+      ],
+      "url": "https://brickset.com/parts/design-56903",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32013",
+      "brand": "LEGO Education",
+      "name": "Technic angle connector #1 (0°)",
+      "sku": "32013",
+      "category": "hardware",
+      "aliases": [
+        "angle connector 1",
+        "угловой соединитель 1"
+      ],
+      "url": "https://brickset.com/parts/design-32013",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32034",
+      "brand": "LEGO Education",
+      "name": "Technic angle connector #2 (180°)",
+      "sku": "32034",
+      "category": "hardware",
+      "aliases": [
+        "angle connector 2",
+        "угловой соединитель 2"
+      ],
+      "url": "https://brickset.com/parts/design-32034",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32016",
+      "brand": "LEGO Education",
+      "name": "Technic angle connector #3 (157.5°)",
+      "sku": "32016",
+      "category": "hardware",
+      "aliases": [
+        "angle connector 3",
+        "угловой соединитель 3"
+      ],
+      "url": "https://brickset.com/parts/design-32016",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32192",
+      "brand": "LEGO Education",
+      "name": "Technic angle connector #4 (135°)",
+      "sku": "32192",
+      "category": "hardware",
+      "aliases": [
+        "angle connector 4",
+        "угловой соединитель 4"
+      ],
+      "url": "https://brickset.com/parts/design-32192",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32015",
+      "brand": "LEGO Education",
+      "name": "Technic angle connector #5 (112.5°)",
+      "sku": "32015",
+      "category": "hardware",
+      "aliases": [
+        "angle connector 5",
+        "угловой соединитель 5"
+      ],
+      "url": "https://brickset.com/parts/design-32015",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32014",
+      "brand": "LEGO Education",
+      "name": "Technic angle connector #6 (90°)",
+      "sku": "32014",
+      "category": "hardware",
+      "aliases": [
+        "angle connector 6",
+        "угловой соединитель 6"
+      ],
+      "url": "https://brickset.com/parts/design-32014",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-6536",
+      "brand": "LEGO Education",
+      "name": "Technic axle and pin connector perpendicular",
+      "sku": "6536",
+      "category": "hardware",
+      "aliases": [
+        "cross block",
+        "perpendicular connector",
+        "соединитель"
+      ],
+      "url": "https://brickset.com/parts/design-6536",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-42003",
+      "brand": "LEGO Education",
+      "name": "Technic axle and pin connector perpendicular 3L with 2 pin holes",
+      "sku": "42003",
+      "category": "hardware",
+      "aliases": [
+        "cross block 3",
+        "соединитель 3"
+      ],
+      "url": "https://brickset.com/parts/design-42003",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32184",
+      "brand": "LEGO Education",
+      "name": "Technic axle and pin connector perpendicular 3L with centre pin hole",
+      "sku": "32184",
+      "category": "hardware",
+      "aliases": [
+        "double cross block",
+        "соединитель 3"
+      ],
+      "url": "https://brickset.com/parts/design-32184",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32291",
+      "brand": "LEGO Education",
+      "name": "Technic axle and pin connector perpendicular double",
+      "sku": "32291",
+      "category": "hardware",
+      "aliases": [
+        "cross block 2x1",
+        "double cross block",
+        "соединитель двойной"
+      ],
+      "url": "https://brickset.com/parts/design-32291",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-41678",
+      "brand": "LEGO Education",
+      "name": "Technic axle and pin connector perpendicular double split",
+      "sku": "41678",
+      "category": "hardware",
+      "aliases": [
+        "split cross block",
+        "cross block fork 2x2",
+        "соединитель"
+      ],
+      "url": "https://brickset.com/parts/design-41678",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-63869",
+      "brand": "LEGO Education",
+      "name": "Technic axle and pin connector perpendicular triple",
+      "sku": "63869",
+      "category": "hardware",
+      "aliases": [
+        "cross block 3x2",
+        "triple cross block",
+        "соединитель тройной"
+      ],
+      "url": "https://brickset.com/parts/design-63869",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-59443",
+      "brand": "LEGO Education",
+      "name": "Technic axle connector 2L (smooth)",
+      "sku": "59443",
+      "category": "hardware",
+      "aliases": [
+        "axle joiner",
+        "axle extender",
+        "соединитель осей"
+      ],
+      "url": "https://brickset.com/parts/design-59443",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-42135",
+      "brand": "LEGO Education",
+      "name": "Technic axle connector with axle hole (reinforced)",
+      "sku": "42135",
+      "category": "hardware",
+      "aliases": [
+        "axle connector",
+        "catch with cross hole",
+        "соединитель осей"
+      ],
+      "url": "https://brickset.com/parts/design-42135",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-11214",
+      "brand": "LEGO Education",
+      "name": "Technic axle pin 3L with friction and 1L axle",
+      "sku": "11214",
+      "category": "hardware",
+      "aliases": [
+        "long axle pin 1",
+        "пин-ось"
+      ],
+      "url": "https://brickset.com/parts/design-11214",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-18651",
+      "brand": "LEGO Education",
+      "name": "Technic axle pin 3L with friction and 2L axle",
+      "sku": "18651",
+      "category": "hardware",
+      "aliases": [
+        "long axle pin 2",
+        "пин-ось длинный"
+      ],
+      "url": "https://brickset.com/parts/design-18651",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-43093",
+      "brand": "LEGO Education",
+      "name": "Technic axle pin with friction (blue axle pin)",
+      "sku": "43093",
+      "category": "hardware",
+      "aliases": [
+        "blue axle pin",
+        "axle pin",
+        "пин-ось"
+      ],
+      "url": "https://brickset.com/parts/design-43093",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-3749",
+      "brand": "LEGO Education",
+      "name": "Technic axle pin without friction (tan axle pin)",
+      "sku": "3749",
+      "category": "hardware",
+      "aliases": [
+        "tan axle pin",
+        "smooth axle pin",
+        "пин-ось"
+      ],
+      "url": "https://brickset.com/parts/design-6562",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-3713",
+      "brand": "LEGO Education",
+      "name": "Technic bush (full bushing)",
+      "sku": "3713",
+      "category": "hardware",
+      "aliases": [
+        "bush",
+        "bushing",
+        "втулка"
+      ],
+      "url": "https://brickset.com/parts/design-42798",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32123",
+      "brand": "LEGO Education",
+      "name": "Technic half bush",
+      "sku": "32123",
+      "category": "hardware",
+      "aliases": [
+        "half bush",
+        "полувтулка"
+      ],
+      "url": "https://brickset.com/parts/design-32123",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-4274",
+      "brand": "LEGO Education",
+      "name": "Technic half pin 1/2",
+      "sku": "4274",
+      "category": "hardware",
+      "aliases": [
+        "half pin",
+        "short pin",
+        "полупин"
+      ],
+      "url": "https://brickset.com/parts/design-4274",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-32054",
+      "brand": "LEGO Education",
+      "name": "Technic long pin with bushing (stop bush)",
+      "sku": "32054",
+      "category": "hardware",
+      "aliases": [
+        "pin with bush",
+        "пин с втулкой"
+      ],
+      "url": "https://brickset.com/parts/design-32054",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-6558",
+      "brand": "LEGO Education",
+      "name": "Technic long pin with friction 3L (blue pin)",
+      "sku": "6558",
+      "category": "hardware",
+      "aliases": [
+        "blue pin",
+        "long pin",
+        "пин длинный синий"
+      ],
+      "url": "https://brickset.com/parts/design-6558",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-39888",
+      "brand": "LEGO Education",
+      "name": "Technic long pin without friction 3L",
+      "sku": "39888",
+      "category": "hardware",
+      "aliases": [
+        "long smooth pin",
+        "tan long pin",
+        "пин длинный"
+      ],
+      "url": "https://brickset.com/parts/design-39888",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-55615",
+      "brand": "LEGO Education",
+      "name": "Technic pin connector 3×3 bent with 4 pins (ridges across)",
+      "sku": "55615",
+      "category": "hardware",
+      "aliases": [
+        "bent 4-pin connector",
+        "угловой соединитель с 4 пинами"
+      ],
+      "url": "https://brickset.com/parts/design-55615",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-48989",
+      "brand": "LEGO Education",
+      "name": "Technic pin connector perpendicular 3L with 4 pins",
+      "sku": "48989",
+      "category": "hardware",
+      "aliases": [
+        "4-pin connector",
+        "соединитель с 4 пинами"
+      ],
+      "url": "https://brickset.com/parts/design-48989",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-2780",
+      "brand": "LEGO Education",
+      "name": "Technic pin with friction (black pin)",
+      "sku": "2780",
+      "category": "hardware",
+      "aliases": [
+        "black pin",
+        "friction pin",
+        "пин черный",
+        "пин"
+      ],
+      "url": "https://brickset.com/parts/design-2780",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-3673",
+      "brand": "LEGO Education",
+      "name": "Technic pin without friction (grey pin)",
+      "sku": "3673",
+      "category": "hardware",
+      "aliases": [
+        "grey pin",
+        "smooth pin",
+        "пин серый"
+      ],
+      "url": "https://brickset.com/parts/design-3673",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45514",
+      "brand": "LEGO Education",
+      "name": "EV3 Cable Pack",
+      "sku": "45514",
+      "category": "cables",
+      "aliases": [
+        "ev3 cables",
+        "кабели ev3",
+        "провода ev3"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
       "id": "lego-45611",
       "brand": "LEGO Education",
       "name": "SPIKE Micro USB Connector Cable",
@@ -3233,6 +4814,35 @@
       ],
       "url": "https://education.lego.com/en-us/products/lego-technic-micro-usb-connector-cable/45611/",
       "image": "https://assets.education.lego.com/v3/assets/blt293eea581807678a/bltbea9886ff4b89fa2/5f50d0b890c20c26dd8802aa/45611_prod_01.jpg?locale=en-us&width=640",
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45508",
+      "brand": "LEGO Education",
+      "name": "EV3 Infrared Beacon",
+      "sku": "45508",
+      "category": "other",
+      "aliases": [
+        "ir beacon",
+        "инфракрасный маяк ev3",
+        "пульт ev3"
+      ],
+      "url": "https://education.lego.com/en-us/support/product-images/",
+      "image": null,
+      "program": "FLL"
+    },
+    {
+      "id": "lego-45570",
+      "brand": "LEGO Education",
+      "name": "LEGO MINDSTORMS Education EV3 Space Challenge Set",
+      "sku": "45570",
+      "category": "other",
+      "aliases": [
+        "ev3 space challenge",
+        "космические проекты ev3"
+      ],
+      "url": "https://education.lego.com/en-us/product-resources/mindstorms-ev3/downloads/whats-in-the-box/",
+      "image": null,
       "program": "FLL"
     },
     {

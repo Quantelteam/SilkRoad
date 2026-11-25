@@ -163,6 +163,8 @@ const BOT_CATEGORIES = {
   'Game & Field': 'other',
   // FLL (LEGO) categories from seed_parts_fll.sql
   Hubs: 'control', Sets: 'sets', Cables: 'cables', Other: 'other',
+  'Field & Missions': 'field', 'Beams & Frames': 'structure', 'Axles & Gears': 'motion',
+  'Pins & Connectors': 'hardware',
 };
 
 export const PROGRAMS = ['FTC', 'FLL'];

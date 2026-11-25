@@ -73,7 +73,8 @@ export const CATEGORY_KEYWORDS = {
   linear: 'slide rail слайдер направляющая',
   hardware: 'screw nut винт гайка болт',
   cables: 'cable wire кабель провод',
-  sets: 'set kit набор комплект lego spike',
+  sets: 'set kit набор комплект lego spike ev3',
+  field: 'field mat mission table поле миссии мат стол',
   other: '',
 };
 
