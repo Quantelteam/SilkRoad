@@ -158,6 +158,41 @@ async def update_username(tg_id: int, username: str | None) -> None:
     await asyncio.to_thread(run)
 
 
+# --- language preference (table user_prefs, see supabase/user_prefs.sql) ----
+# Kept apart from `users`: those rows only exist after team registration and
+# are deleted when data is wiped, but the language is chosen before that.
+
+async def get_lang(tg_id: int) -> str | None:
+    """The language this user picked, or None if they never picked one."""
+    def run():
+        res = _client.table("user_prefs").select("lang").eq("tg_id", tg_id).limit(1).execute()
+        return res.data[0]["lang"] if res.data else None
+
+    return await asyncio.to_thread(run)
+
+
+async def get_langs(tg_ids: list[int]) -> dict[int, str]:
+    """Picked languages for several users at once (for messages to moderators)."""
+    ids = list(tg_ids)
+    if not ids:
+        return {}
+
+    def run():
+        res = _client.table("user_prefs").select("tg_id, lang").in_("tg_id", ids).execute()
+        return {row["tg_id"]: row["lang"] for row in res.data}
+
+    return await asyncio.to_thread(run)
+
+
+async def set_lang(tg_id: int, lang: str) -> None:
+    now = datetime.now(timezone.utc).isoformat()
+
+    def run():
+        _client.table("user_prefs").upsert({"tg_id": tg_id, "lang": lang, "updated_at": now}).execute()
+
+    await asyncio.to_thread(run)
+
+
 # --- parts catalog ---------------------------------------------------------
 
 async def search_parts(query: str, program: str = "FTC", limit: int = 10) -> list[dict]:
