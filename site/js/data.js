@@ -36,6 +36,7 @@ export const PART_IMAGE_HOSTS = [
   'resource.logitech.com',
   'resource.logitechg.com',
   'gmedia.playstation.com',
+  'assets.education.lego.com', // LEGO Education (SPIKE)
 ];
 
 // Self-hosted copies live in site/photos/. Use them only for makers who gave written
@@ -145,7 +146,7 @@ export function normalizeListing(row, ctx) {
     category,
     notes: cleanText(row.notes, 500),
     city,
-    team: { number: teamNumber, name: teamName },
+    team: { number: teamNumber, name: teamName, program: row.team_program === 'FLL' ? 'FLL' : 'FTC' },
     username: safeUsername(row.tg_username),
     photos: /** @type {string[]} */ (photos),
     createdAt,
@@ -160,25 +161,37 @@ const BOT_CATEGORIES = {
   Motors: 'motors', Servos: 'servos', 'Control & Electronics': 'control', Sensors: 'sensors',
   Power: 'batteries', Structure: 'structure', Motion: 'motion', Wheels: 'wheels', Hardware: 'hardware',
   'Game & Field': 'other',
+  // FLL (LEGO) categories from seed_parts_fll.sql
+  Hubs: 'control', Sets: 'sets', Cables: 'cables', Other: 'other',
 };
 
+export const PROGRAMS = ['FTC', 'FLL'];
+
+/** Key for matching a bot part to the site catalog by brand and name. */
+export function partKey(brand, name) {
+  return `${brand ?? ''}|${name ?? ''}`.toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
 /**
- * One side of a bot listing. A catalog part (it has a brand) becomes a part with no id,
- * since the bot's catalog ids don't match the site's; free text stays text.
+ * One side of a bot listing. A part whose brand and name match the site catalog
+ * becomes that catalog part (photo, part number). Any other catalog part from the
+ * bot becomes a part with no id; free text stays text.
  */
-function botSide(name, brand, category) {
+function botSide(name, brand, category, partsByKey) {
   const text = cleanText(name);
   if (!text) return null;
   const b = cleanText(brand, 40);
   if (!b) return { part: null, text };
-  return { part: { id: null, name: text, brand: b, sku: null, category: BOT_CATEGORIES[category] ?? 'other', aliases: [], image: null, url: null }, text: null };
+  const known = partsByKey?.get(partKey(b, text));
+  if (known) return { part: known, text: null };
+  return { part: { id: null, name: text, brand: b, sku: null, category: BOT_CATEGORIES[category] ?? 'other', aliases: [], image: null, url: null, program: null }, text: null };
 }
 
 /**
  * Turns one row of the bot's listings_public view into a listing, or null if it fails
  * validation or isn't active.
  * @param {Record<string, unknown>} row
- * @param {{ supabaseUrl?: string }} ctx
+ * @param {{ supabaseUrl?: string, partsByKey?: Map<string, Part> }} ctx
  * @returns {Listing | null}
  */
 export function normalizeBotRow(row, ctx) {
@@ -190,8 +203,8 @@ export function normalizeBotRow(row, ctx) {
   const city = cleanText(row.city, 40);
   if (!id || !type || !createdAt || !teamName || !city) return null;
 
-  const have = type === 'wanted' ? null : botSide(row.have, row.have_brand, row.have_category);
-  let want = botSide(row.want, row.want_brand, row.want_category);
+  const have = type === 'wanted' ? null : botSide(row.have, row.have_brand, row.have_category, ctx.partsByKey);
+  let want = botSide(row.want, row.want_brand, row.want_category, ctx.partsByKey);
   const price = cleanPrice(row.price_kzt);
   if (type === 'sell') want = { part: null, text: price === null ? 'Price negotiable' : null, priceKzt: price };
   else if (want) want = { ...want, priceKzt: null };
@@ -246,9 +259,14 @@ export function normalizeCatalog(raw) {
           aliases: Array.isArray(p.aliases) ? p.aliases.filter((a) => typeof a === 'string') : [],
           image: safePartImage(p.image),
           url: safeHttpsUrl(p.url),
+          program: p.program === 'FLL' ? 'FLL' : 'FTC',
         }))
     : [];
-  return { brands, categories, parts, partsById: new Map(parts.map((p) => [p.id, p])) };
+  return {
+    brands, categories, parts,
+    partsById: new Map(parts.map((p) => [p.id, p])),
+    partsByKey: new Map(parts.map((p) => [partKey(p.brand, p.name), p])),
+  };
 }
 
 /**
@@ -276,7 +294,7 @@ export async function loadListings(catalog, config) {
     rows = await res.json();
   }
   if (!Array.isArray(rows)) throw new Error('Listings: expected an array');
-  const ctx = { partsById: catalog.partsById, supabaseUrl: live ? config.supabaseUrl : undefined };
+  const ctx = { partsById: catalog.partsById, partsByKey: catalog.partsByKey, supabaseUrl: live ? config.supabaseUrl : undefined };
   // Live rows come from the bot's view; the bundled examples use the site's own shape.
   const listings = rows.map((row) => (live ? normalizeBotRow(row, ctx) : normalizeListing(row, ctx))).filter(Boolean);
   return { listings: /** @type {Listing[]} */ (listings), demo: !live };
@@ -285,8 +303,8 @@ export async function loadListings(catalog, config) {
 /**
  * @typedef {'trade'|'sell'|'wanted'|'giveaway'} ListingType
  * @typedef {'new'|'like_new'|'used'|'for_parts'} Condition
- * @typedef {{ id: string, name: string, brand: string, sku: string|null, category: string, aliases: string[], image: string|null, url: string|null }} Part
- * @typedef {{ brands: string[], categories: {id: string, name: string}[], parts: Part[], partsById: Map<string, Part> }} Catalog
+ * @typedef {{ id: string, name: string, brand: string, sku: string|null, category: string, aliases: string[], image: string|null, url: string|null, program: 'FTC'|'FLL'|null }} Part
+ * @typedef {{ brands: string[], categories: {id: string, name: string}[], parts: Part[], partsById: Map<string, Part>, partsByKey: Map<string, Part> }} Catalog
  * @typedef {{
  *   id: string, type: ListingType,
  *   have: { part: Part|null, text: string|null } | null,

@@ -30,6 +30,8 @@ export const CATEGORY_ICONS = {
   hardware: ['M16 8h16v8H16z', 'M22 12h4', 'M20 16v22l4 4 4-4V16', 'M20 22l8 3M20 28l8 3'],
   // Connector with cable
   cables: ['M14 18h12v12H14z', 'M26 22h6M26 26h6', 'M14 24H8c-4 0-4 10 4 10h20'],
+  // A kit: a storage box with a sorting tray and its lid
+  sets: ['M6 18h36v22H6z', 'M4 12h40v6H4z', 'M18 24h12', 'M6 30h36', 'M18 30v10M30 30v10'],
   // Box
   other: ['M8 16l16-8 16 8v18l-16 8-16-8z', 'M8 16l16 8 16-8', 'M24 24v18'],
 };

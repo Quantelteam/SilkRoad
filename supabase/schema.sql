@@ -138,3 +138,10 @@ create unique index if not exists team_requests_pending_team
 
 -- Only the bot (service key) reads or writes requests.
 alter table team_requests enable row level security;
+
+-- ---------------------------------------------------------------------------
+-- FTC and FLL parts are separate catalogs: FTC teams pick from FTC parts,
+-- FLL teams from LEGO Education SPIKE parts (seed_parts_fll.sql).
+alter table parts add column if not exists program text not null default 'FTC'
+    check (program in ('FTC', 'FLL'));
+create index if not exists parts_program_idx on parts (program, category);
