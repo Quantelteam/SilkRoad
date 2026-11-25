@@ -1,11 +1,10 @@
 // The 30-second intro video in the header. Nothing shows until assets/intro.mp4
 // actually loads, so the page looks finished before the video is exported.
-// Wide screens play it muted in the header; narrow screens get a button that opens it.
+// It plays muted while on screen, at every width, with its own Pause and Sound buttons.
 import { byId } from './dom.js';
 
 const SRC = 'assets/intro.mp4';
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
-const wide = matchMedia('(min-width: 1040px)');
 
 const figure = byId('intro');
 const video = /** @type {HTMLVideoElement} */ (byId('intro-video'));
@@ -16,6 +15,8 @@ const dialog = /** @type {HTMLDialogElement} */ (byId('intro-dialog'));
 const dialogVideo = /** @type {HTMLVideoElement} */ (byId('intro-dialog-video'));
 
 let userPaused = reduceMotion.matches; // people who asked for less motion start it themselves
+// Phones on a data saver don't autoplay the 2 MB clip; the Play button still works.
+const saveData = Boolean(/** @type {any} */ (navigator).connection?.saveData);
 
 video.addEventListener('loadeddata', () => {
   figure.hidden = false;
@@ -27,14 +28,14 @@ video.addEventListener('loadeddata', () => {
 video.addEventListener('error', () => { figure.hidden = true; openBtn.hidden = true; }, { once: true });
 video.src = SRC;
 
-/** Plays only while the header video is on screen and wide enough to show. */
+/** Plays only while the video is on screen. */
 function watchVisibility() {
   if (!('IntersectionObserver' in window)) return playIfAllowed(true);
   new IntersectionObserver(([entry]) => playIfAllowed(entry.isIntersecting), { threshold: 0.4 }).observe(video);
 }
 
 function playIfAllowed(visible) {
-  if (visible && wide.matches && !userPaused) video.play().catch(() => { userPaused = true; sync(); });
+  if (visible && !userPaused && !saveData) video.play().catch(() => { userPaused = true; sync(); });
   else video.pause();
 }
 
@@ -61,7 +62,6 @@ sound.addEventListener('click', () => {
   sync();
 });
 
-wide.addEventListener('change', () => playIfAllowed(wide.matches));
 
 // Narrow screens: open the video in a dialog, with sound and the browser's own controls.
 openBtn.addEventListener('click', () => {

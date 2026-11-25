@@ -9,7 +9,7 @@ import {
   searchText, activeFilterCount,
 } from './filter.js';
 import {
-  TYPE_LABELS, CONDITION_LABELS, formatAge, haveLabel, wantLabel, budgetLabel, teamLabel, partLabel, plural,
+  TYPE_LABELS, CONDITION_LABELS, formatAge, formatPrice, haveLabel, wantLabel, budgetLabel, teamLabel, partLabel, plural,
 } from './format.js';
 
 /** @type {import('./data.js').Catalog} */
@@ -294,31 +294,36 @@ function contact(listing) {
  * On a card the title is the part on offer, or for a wanted listing the part sought.
  * Under it, in saffron, is what the team asks in return (or a wanted listing's budget).
  */
+/**
+ * The bold line under a card's title, like a classifieds price: the asking price,
+ * "Free", a wanted listing's budget, or what a trade asks for.
+ */
+function priceLine(listing) {
+  switch (listing.type) {
+    case 'sell': return listing.want?.priceKzt != null ? formatPrice(listing.want.priceKzt) : 'Price negotiable';
+    case 'giveaway': return 'Free';
+    case 'wanted': return budgetLabel(listing) ? `Budget ${budgetLabel(listing)}` : 'Wanted';
+    default: {
+      const want = haveLabel(listing) ? wantLabel(listing) : null;
+      return want ? `For ${want}` : 'Open to offers';
+    }
+  }
+}
+
+/** A classifieds-style card: photo on top, title, bold price, condition, place and time. */
 function card(listing) {
-  const have = haveLabel(listing);
-  const want = wantLabel(listing);
   const isWanted = listing.type === 'wanted';
-  const title = isWanted ? want ?? have : have ?? want;
-  const kicker = isWanted ? 'Looking for' : have ? 'Has' : 'Wants';
-  // A sale asks a price; a trade asks for a part (or a price).
-  const sellLabel = listing.type === 'sell' && !listing.want?.part && !listing.want?.text ? 'Price' : 'Wants';
-  const [askLabel, askValue] = isWanted ? ['Budget', budgetLabel(listing)] : [sellLabel, have ? want : null];
-  const ask = askValue
-    ? h('div', { class: 'card-ask' }, svg(UI_ICONS.swap, { size: 16 }), h('span', null, h('span', { class: 'ask-label' }, `${askLabel} `), askValue))
-    : null;
-  return h('li', { class: 'card' },
-    h('div', { class: 'card-media' }, media(listing)),
+  const title = isWanted ? wantLabel(listing) ?? haveLabel(listing) : haveLabel(listing) ?? wantLabel(listing);
+  return h('li', { class: `card card-${listing.type}` },
+    h('div', { class: 'card-media' }, media(listing), typeChip(listing.type)),
     h('div', { class: 'card-body' },
-      typeChip(listing.type),
-      h('div', null,
-        h('p', { class: 'card-kicker' }, kicker),
-        h('h3', { class: 'card-title' },
-          h('button', { type: 'button', class: 'card-open', dataset: { open: listing.id } }, title))),
-      ask,
+      h('h3', { class: 'card-title' },
+        h('button', { type: 'button', class: 'card-open', dataset: { open: listing.id } }, title)),
+      h('p', { class: 'card-price' }, priceLine(listing)),
+      listing.condition ? h('span', { class: 'card-cond' }, CONDITION_LABELS[listing.condition]) : null,
       h('p', { class: 'card-meta' },
-        h('span', { class: 'team' }, teamLabel(listing.team)),
-        h('span', null, `${listing.city}, ${formatAge(listing.createdAt)}`),
-        listing.condition ? h('span', null, CONDITION_LABELS[listing.condition]) : null),
+        h('span', null, `${listing.city} · ${formatAge(listing.createdAt)}`),
+        h('span', { class: 'team' }, teamLabel(listing.team))),
     ),
     h('div', { class: 'card-foot' }, contact(listing)),
   );
