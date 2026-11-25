@@ -977,6 +977,7 @@ select {
 }
 .footer p { max-width: var(--page); margin: 0 auto; }
 .footer p + p { margin-top: 6px; }
+.footer .footer-credit { margin-top: 16px; color: var(--ink); font-weight: 600; }
 
 /* ---- Catalog page ------------------------------------------------------- */
 
