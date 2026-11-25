@@ -140,9 +140,12 @@ function bindEvents() {
   });
   $('clear-filters').addEventListener('click', clearFilters);
   $('empty-clear').addEventListener('click', clearFilters);
-  $('filters-toggle').addEventListener('click', () => {
-    const open = $('filters').classList.toggle('is-open');
-    $('filters-toggle').setAttribute('aria-expanded', String(open));
+  $('filters-toggle').addEventListener('click', () => setFiltersOpen(!$('filters').classList.contains('is-open')));
+  $('filters-close').addEventListener('click', () => setFiltersOpen(false));
+  $('filters-done').addEventListener('click', () => setFiltersOpen(false));
+  $('filters-backdrop').addEventListener('click', () => setFiltersOpen(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && $('filters').classList.contains('is-open')) setFiltersOpen(false);
   });
   $('cards').addEventListener('click', (e) => {
     const btn = /** @type {HTMLElement} */ (e.target).closest('[data-open]');
@@ -182,6 +185,19 @@ function setUrl(listingId) {
 
 // ---- Results -------------------------------------------------------------
 
+/**
+ * Phones: the filters slide up from the bottom over the list, with a backdrop.
+ * Wide screens show them as a column, so the sheet state does nothing there.
+ */
+function setFiltersOpen(open) {
+  $('filters').classList.toggle('is-open', open);
+  $('filters-backdrop').hidden = !open;
+  document.body.classList.toggle('sheet-open', open);
+  $('filters-toggle').setAttribute('aria-expanded', String(open));
+  if (open) $('filters-close').focus();
+  else if (document.activeElement && $('filters').contains(document.activeElement)) $('filters-toggle').focus();
+}
+
 function render() {
   const shown = applyFilters(listings, state, textIndex);
   const total = listings.length;
@@ -192,6 +208,7 @@ function render() {
   const active = activeFilterCount(state);
   $('clear-filters').hidden = active === 0;
   $('filters-toggle-label').textContent = active ? `Filters (${active})` : 'Filters';
+  $('filters-done').textContent = shown.length ? `Show ${plural(shown.length, 'listing', 'listings')}` : 'No listings match';
   renderActivePart();
 
   $('cards').replaceChildren(...shown.map(card));

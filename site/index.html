@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.supabase.co https://cdn11.bigcommerce.com https://andymark.com https://www.pitsco.com https://limelightvision.io https://resource.logitech.com https://resource.logitechg.com https://gmedia.playstation.com https://assets.education.lego.com; connect-src 'self' https://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
   <title>Almasu: spare FTC and FLL parts in Kazakhstan</title>
   <meta name="description" content="Find spare robot parts from FTC and FLL teams across Kazakhstan: goBILDA, REV, Studica, LEGO SPIKE and more. Message the team on Telegram to trade, buy or pick up for free.">
@@ -11,6 +11,12 @@
   <meta name="theme-color" content="#E9EDF0" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0F171D" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <meta name="apple-mobile-web-app-title" content="Almasu">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;700&display=swap">
@@ -69,6 +75,7 @@
       <div class="filters-head">
         <h2>Filters</h2>
         <button type="button" class="link-button" id="clear-filters" hidden>Clear all</button>
+        <button type="button" class="filters-close" id="filters-close" aria-label="Close filters">×</button>
       </div>
 
       <fieldset class="filter-group">
@@ -96,7 +103,11 @@
         <label for="f-team">Team</label>
         <select id="f-team" data-filter="team"><option value="">Any team</option></select>
       </div>
+      <div class="filters-foot">
+        <button type="button" class="button filters-done" id="filters-done">Show listings</button>
+      </div>
     </aside>
+    <div class="filters-backdrop" id="filters-backdrop" hidden></div>
 
     <section class="results" id="results" aria-labelledby="results-count" tabindex="-1">
       <div class="program-switch" role="group" aria-label="Program">
