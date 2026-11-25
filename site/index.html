@@ -61,7 +61,7 @@
 
         <!-- Intro video: shown only once assets/intro.mp4 loads (export it from the Motion film). -->
         <figure class="intro" id="intro" hidden>
-          <video class="intro-video" id="intro-video" muted loop playsinline preload="metadata" aria-label="Almasu intro video"></video>
+          <video class="intro-video" id="intro-video" poster="assets/intro-poster.jpg" muted loop playsinline preload="metadata" aria-label="Almasu intro video"></video>
           <div class="intro-controls">
             <button type="button" class="intro-btn" id="intro-toggle" aria-pressed="false">Pause</button>
             <button type="button" class="intro-btn" id="intro-sound" aria-pressed="false">Sound on</button>
@@ -140,7 +140,7 @@
   </footer>
 
   <dialog class="intro-dialog" id="intro-dialog" aria-label="Almasu intro video">
-    <video class="intro-video" id="intro-dialog-video" controls playsinline preload="none"></video>
+    <video class="intro-video" id="intro-dialog-video" poster="assets/intro-poster.jpg" controls playsinline preload="none"></video>
     <button type="button" class="detail-close" id="intro-close" aria-label="Close">
       <span data-icon="close"></span>
     </button>
