@@ -724,6 +724,53 @@ _TEXTS: dict[str, dict[str, str]] = {
         "kk": "Бөлшекті хабарландыруда қалай көрінсін десеңіз, солай жазыңыз, {max} таңбаға дейін. "
               "Мысалы: LEGO Technic арқалығы 15, сұр, 20 дана.",
     },
+
+    # --- team: leave and pick another -----------------------------------------
+    "btn_team": {
+        "en": "👥 My team",
+        "ru": "👥 Моя команда",
+        "kk": "👥 Менің командам",
+    },
+    "cmd_team": {
+        "en": "Your team, or switch to another",
+        "ru": "Ваша команда или смена команды",
+        "kk": "Командаңыз немесе басқа командаға ауысу",
+    },
+    "team_info": {
+        "en": "Your team: <b>{team}</b> · {city}\n\nIn the wrong team, or moved to another? Switch below.",
+        "ru": "Ваша команда: <b>{team}</b> · {city}\n\nОшиблись командой или перешли в другую? Смените ниже.",
+        "kk": "Сіздің командаңыз: <b>{team}</b> · {city}\n\nКомандаңызды қате таңдадыңыз ба, әлде басқаға ауыстыңыз ба? Төменнен ауыстырыңыз.",
+    },
+    "btn_switch_team": {
+        "en": "🔁 Switch team",
+        "ru": "🔁 Сменить команду",
+        "kk": "🔁 Команданы ауыстыру",
+    },
+    "switch_confirm": {
+        "en": "Leave <b>{team}</b> and pick another team?\n\nYour active listings ({count}) will be closed, because they were posted for this team.",
+        "ru": "Выйти из <b>{team}</b> и выбрать другую команду?\n\nВаши активные объявления ({count}) закроются, потому что они опубликованы от этой команды.",
+        "kk": "<b>{team}</b> командасынан шығып, басқа команданы таңдайсыз ба?\n\nБелсенді хабарландыруларыңыз ({count}) жабылады, себебі олар осы команда атынан жарияланған.",
+    },
+    "btn_switch_yes": {
+        "en": "Yes, leave the team",
+        "ru": "Да, выйти из команды",
+        "kk": "Иә, командадан шығу",
+    },
+    "btn_switch_no": {
+        "en": "No, stay",
+        "ru": "Нет, остаться",
+        "kk": "Жоқ, қалу",
+    },
+    "switch_stay": {
+        "en": "You stay in {team}.",
+        "ru": "Вы остаётесь в {team}.",
+        "kk": "Сіз {team} командасында қаласыз.",
+    },
+    "switch_done": {
+        "en": "You left {team}. Now pick your new team.",
+        "ru": "Вы вышли из {team}. Теперь выберите новую команду.",
+        "kk": "Сіз {team} командасынан шықтыңыз. Енді жаңа команданы таңдаңыз.",
+    },
 }
 
 STRINGS: dict[str, dict[str, str]] = {

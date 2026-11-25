@@ -151,6 +151,20 @@ async def save_user(tg_id: int, username: str | None, full_name: str, team_id: i
     return await asyncio.to_thread(run)
 
 
+async def leave_team(tg_id: int) -> int:
+    """Closes the user's active listings and takes them off their team. Returns how
+    many listings were closed. The user row stays, so their history keeps its owner."""
+    now = datetime.now(timezone.utc).isoformat()
+
+    def run():
+        closed = (_client.table("listings").update({"status": "closed", "updated_at": now})
+                  .eq("user_tg_id", tg_id).eq("status", "active").execute())
+        _client.table("users").update({"team_id": None}).eq("tg_id", tg_id).execute()
+        return len(closed.data or [])
+
+    return await asyncio.to_thread(run)
+
+
 async def update_username(tg_id: int, username: str | None) -> None:
     def run():
         _client.table("users").update({"username": username}).eq("tg_id", tg_id).execute()

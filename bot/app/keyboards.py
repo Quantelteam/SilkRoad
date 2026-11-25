@@ -13,11 +13,12 @@ NEW_LISTING = all_translations("btn_new_listing")
 MY_LISTINGS = all_translations("btn_my_listings")
 WEBSITE = all_translations("btn_website")
 LANGUAGE = all_translations("btn_language")
+TEAM = all_translations("btn_team")
 
 
 def main_menu(lang: str) -> ReplyKeyboardMarkup:
     rows = [[KeyboardButton(text=t("btn_new_listing", lang))],
-            [KeyboardButton(text=t("btn_my_listings", lang))]]
+            [KeyboardButton(text=t("btn_my_listings", lang)), KeyboardButton(text=t("btn_team", lang))]]
     last = [KeyboardButton(text=t("btn_language", lang))]
     if settings.site_url:
         last.insert(0, KeyboardButton(text=t("btn_website", lang)))
@@ -61,6 +62,14 @@ def moderation_kb(request_id: int, lang: str) -> InlineKeyboardMarkup:
 
 def verify_team_kb(team_id: int, lang: str) -> InlineKeyboardMarkup:
     return inline([[(t("btn_verify_team", lang), f"vt:on:{team_id}")]])
+
+
+def team_kb(lang: str) -> InlineKeyboardMarkup:
+    return inline([[(t("btn_switch_team", lang), "team:switch")]])
+
+
+def switch_confirm_kb(lang: str) -> InlineKeyboardMarkup:
+    return inline([[(t("btn_switch_yes", lang), "team:leave")], [(t("btn_switch_no", lang), "team:stay")]])
 
 
 def program_kb() -> InlineKeyboardMarkup:
